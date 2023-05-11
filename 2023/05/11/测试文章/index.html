@@ -16,16 +16,16 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="$\int f(x) dx$">
+    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cstring&gt;using namespace std;const int N &#x3D; 3;typedef long lon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="测试文章">
 <meta property="og:url" content="http://example.com/2023/05/11/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
 <meta property="og:site_name" content="金冠小熊猫">
-<meta property="og:description" content="$\int f(x) dx$">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cstring&gt;using namespace std;const int N &#x3D; 3;typedef long lon">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/05/11/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
 <meta property="article:published_time" content="2023-05-11T04:30:37.000Z">
-<meta property="article:modified_time" content="2023-05-11T05:24:33.345Z">
+<meta property="article:modified_time" content="2023-05-11T05:36:11.884Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/05/11/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12 字
+          761 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -300,7 +300,8 @@
             
               <div class="markdown-body">
                 
-                <p>$\int f(x) dx$</p>
+                <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3</span>;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> LL;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">mul</span><span class="hljs-params">(<span class="hljs-type">int</span> c[][N],<span class="hljs-type">int</span> a[][N],<span class="hljs-type">int</span> b[][N])</span><span class="hljs-comment">//这里直接是传引用的形式进来</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">static</span> <span class="hljs-type">int</span> temp[N][N];<br>    <span class="hljs-built_in">memset</span>(temp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> temp);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i &lt; N;i ++)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;j &lt; N;j ++)<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">0</span>;k &lt; N;k ++)<br>                temp[i][j] = (temp[i][j] + (LL)a[i][k] * b[k][j]) % m;<br><br>    <span class="hljs-built_in">memcpy</span>(c,temp,<span class="hljs-keyword">sizeof</span> temp);        <br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m;<br>    <span class="hljs-comment">/*f1[3][3] 是一个矩阵；写成二维使得我们只需要写一个乘法</span><br><span class="hljs-comment">    1 1 1</span><br><span class="hljs-comment">    0 0 0</span><br><span class="hljs-comment">    0 0 0</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-type">int</span> f1[<span class="hljs-number">3</span>][<span class="hljs-number">3</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> A[<span class="hljs-number">3</span>][<span class="hljs-number">3</span>] = &#123;<br>        &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>&#125;,<br>        &#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,<br>        &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;<br>    &#125;;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n;i;i &gt;&gt;= <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (i &amp; <span class="hljs-number">1</span>) <span class="hljs-built_in">mul</span>(f1,f1,A);<span class="hljs-comment">//F1 = F1 * A;</span><br>        <span class="hljs-built_in">mul</span>(A,A,A);<span class="hljs-comment">//A = A * A;</span><br>    &#125;<br>    cout &lt;&lt; f1[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <img src="/2023/05/11/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" srcset="/img/loading.gif" lazyload class="" title="图片引用方法一">
 
                 
