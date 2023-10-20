@@ -761,7 +761,7 @@ c = 0
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ffa2c4">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
         </span>
         
     </div>
@@ -1184,9 +1184,17 @@ int main()
 <h4>样例2解释</h4>
 <p>投入 $20$ 单位资源，恰好可将所有区域开垦耗时均缩短为 $k=2$ 天；受限于 $k$，剩余的 $10$ 单位资源无法使耗时进一步缩短。</p>
 
+<blockquote>
+$思路：二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。$
+这种，从答案开始出发的思考角度还是挺有趣的
+二分答案，一般是检验条件是否合理
+    计数性,枚举某个物品 出现/使用 的数量 <=限制
+    可行性,某个条件是否能够达到
+一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小
+当然，在二分前。我们要想一想答案的最大值以及最小值
+</blockquote>
 
-<p>$思路：二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。$<br>这种，从答案开始出发的思考角度还是挺有趣的<br>二分答案，一般是检验条件是否合理<br>    计数性,枚举某个物品 出现&#x2F;使用 的数量 &lt;&#x3D;限制<br>    可行性,某个条件是否能够达到<br>一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小<br>当然，在二分前。我们要想一想答案的最大值以及最小值</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 using namespace std;
 const int N  = 100010;
@@ -1239,7 +1247,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
@@ -1633,7 +1641,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
         </span>
         
     </div>
@@ -1841,7 +1849,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
         </span>
         
     </div>
@@ -2016,7 +2024,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
         </span>
         
     </div>
@@ -2117,7 +2125,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00bcd4">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
         </span>
         
     </div>
@@ -2320,7 +2328,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ffa2c4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
         </span>
         
     </div>
@@ -2355,7 +2363,7 @@ int main()
         <div class="content" v-pre>
             
             <p>这个实例正好很完美的展现了，<strong>逻辑运算符与加法运算符之间，有着某种深刻的等价性。</strong></p>
-<pre><code>//逻辑运算和加法之间有某种很巧妙的联系,甚至逻辑运算可以代替加法的一部分
+<pre><code class="C++">//逻辑运算和加法之间有某种很巧妙的联系,甚至逻辑运算可以代替加法的一部分
 //对于实现一个加法运算符来讲，我们要用AND,OR,XOR,Shift等逻辑运算
 //加法，如101 + 111，可以分成两部分算，一部分算“进位”，一部分算非进位部分。
 //如57 + 44，个位7 + 4 &gt;= 10，进位1，十位5 + 4 &lt; 10 ，进位0
@@ -2399,7 +2407,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">硬件知识</a>
+            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #00bcd4">硬件知识</a>
         </span>
         
     </div>
@@ -2446,7 +2454,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#x31;&#55;&#53;&#50;&#x35;&#x31;&#56;&#x38;&#56;&#48;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#x31;&#55;&#53;&#50;&#x35;&#x31;&#56;&#x38;&#56;&#48;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#x31;&#55;&#53;&#50;&#x35;&#x31;&#x38;&#56;&#56;&#x30;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;">&#x31;&#55;&#53;&#50;&#x35;&#x31;&#x38;&#56;&#56;&#x30;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;</a><br>…</p>
 
         </div>
         
