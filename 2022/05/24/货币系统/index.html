@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Dijkstra求最短路 | 金冠小熊猫</title>
+        <title>货币系统 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="温故而知新" />
         <meta name="keywords" content="菜狗大学生" />
@@ -152,14 +152,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>Dijkstra求最短路</h1>
+        <h1>货币系统</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2022/11/19
+            2022/5/24
         </span>
         
         
@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
             </span>
             
         </span>
@@ -178,128 +178,129 @@
     </div>
     
     <div class="content" v-pre>
-         <p>给定一个 $n$ 个点 $m$ 条边的有向图，图中可能存在重边和自环，所有边权均为正值。</p>
-<p>请你求出 $1$ 号点到 $n$ 号点的最短距离，如果无法从 $1$ 号点走到 $n$ 号点，则输出 $-1$。</p>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/3512573/">https://www.acwing.com/activity/content/code/content/3512573/</a></p>
+<p>在网友的国度中共有 $n$ 种不同面额的货币，第 $i$ 种货币的面额为 $a[i]$，你可以假设每一种货币都有无穷多张。</p>
+<p>为了方便，我们把货币种数为 $n$、面额数组为 $a[1..n]$ 的货币系统记作 $(n,a)$。 </p>
+<p>在一个完善的货币系统中，每一个非负整数的金额 $x$ 都应该可以被表示出，即对每一个非负整数 $x$，都存在 $n$ 个非负整数 $t[i]$ 满足 $a[i] × t[i]$ 的和为 $x$。</p>
+<p>然而，在网友的国度中，货币系统可能是不完善的，即可能存在金额 $x$ 不能被该货币系统表示出。</p>
+<p>例如在货币系统 $n=3, a=[2,5,9]$ 中，金额 $1,3$ 就无法被表示出来。 </p>
+<p>两个货币系统 $(n,a)$ 和 $(m,b)$ 是等价的，当且仅当对于任意非负整数 $x$，它要么均可以被两个货币系统表出，要么不能被其中任何一个表出。 </p>
+<p>现在网友们打算简化一下货币系统。</p>
+<p>他们希望找到一个货币系统 $(m,b)$，满足 $(m,b)$ 与原来的货币系统 $(n,a)$ 等价，且 $m$ 尽可能的小。</p>
+<p>他们希望你来协助完成这个艰巨的任务：找到最小的 $m$。</p>
 <h4>输入格式</h4>
-<p>第一行包含整数 $n$ 和 $m$。</p>
-<p>接下来 $m$ 行每行包含三个整数 $x,y,z$，表示存在一条从点 $x$ 到点 $y$ 的有向边，边长为 $z$。</p>
+<p>输入文件的第一行包含一个整数 $T$，表示数据的组数。</p>
+<p>接下来按照如下格式分别给出 $T$ 组数据。 </p>
+<p>每组数据的第一行包含一个正整数 $n$。</p>
+<p>接下来一行包含 $n$ 个由空格隔开的正整数 $a[i]$。</p>
 <h4>输出格式</h4>
-<p>输出一个整数，表示 $1$ 号点到 $n$ 号点的最短距离。</p>
-<p>如果路径不存在，则输出 $-1$。</p>
+<p>输出文件共有 $T$ 行，对于每组数据，输出一行一个正整数，表示所有与 $(n,a)$ 等价的货币系统 $(m,b)$ 中，最小的 $m$。</p>
 <h4>数据范围</h4>
-<p>$1 \le n \le 500$,<br />
-$1 \le m \le 10^5$,<br />
-图中涉及边长均不超过10000。</p>
+<p>$1 \le n \le 100$,<br />
+$1 \le a[i] \le 25000$,<br />
+$1 \le T \le 20$</p>
 <h4>输入样例：</h4>
-<pre><code>3 3
-1 2 2
-2 3 1
-1 3 4
+<pre><code>2 
+4 
+3 19 10 6 
+5 
+11 29 13 19 17 
 </code></pre>
 
 <h4>输出样例：</h4>
-<pre><code>3
+<pre><code>2
+5
 </code></pre>
 
-<p>DFS暴力求最短路。如果加上一个Depth参数，可以限制深度。<br>DFS求最短路是在遍历到每一个点的时候做更新。而dijkstra求最短路，是在扩展每个点的时候做。两者的流程有些不同<br>不过核心思想都是一样的，<strong>只要一个点被多次更新的时候，遇到更小的，就去更新它。</strong><br>如题目：<a href="https://">https://www.acwing.com/file_system&#x2F;file&#x2F;content&#x2F;whole&#x2F;index&#x2F;content&#x2F;7299482&#x2F;</a><br><strong>在遍历每个点的时候做：</strong></p>
+<p>本题是在寻找<strong>最大线性无关组</strong>，基本思路就是<strong>从小到大，看每一个数是否能被比较小的数线性表示</strong><br>那么对于每一个数的线性表示前的系数都会对应它的一个选法，系数可以无限大，这是一个完全背包问题</p>
+<p><strong>朴素版</strong></p>
 <pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
 #include &lt;cstring&gt;
+#include &lt;algorithm&gt;
 using namespace std;
-const int N = 510,M = 100010;
-int g[N][N];
-int n,m;
-int dist[N];
-bool st[N];
-void dfs(int u,int curlen)
+const int N = 110,M = 25010;
+bool f[N][M];//考虑前i个货币，凑起来的面值恰好为j
+int T,n,m;//可行性背包问题
+int v[N];
+int main()
 &#123;
-    //cout &lt;&lt; u &lt;&lt; endl;
-    if(dist[u] &lt;= curlen) return;
-    if(u == n)
+    cin &gt;&gt; T;
+    while(T --)
     &#123;
-        if(dist[n] &gt; curlen) dist[n] = curlen;
-    &#125;
-    else
-    &#123;
-        if(dist[u] &gt; curlen) dist[u] = curlen;
+        cin &gt;&gt; n;
+        for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i];
+        sort(v + 1,v + n + 1);
+        memset(f, 0, sizeof f);//初始化表示所有数字还没有被线性表示
+        //DP的起点是f[0][0]，如果没有初始化起点，f的矩阵是不会变的
+        f[0][0] = true;
         for(int i = 1;i &lt;= n;i ++)
         &#123;
-            if(g[u][i] != 0x3f3f3f3f) dfs(i,curlen + g[u][i]);
+            for(int j = 0;j &lt;= v[n];j ++)//对于每一个数字，尝试进行线性表示以筛掉后面的数字，所以最大j要看到v[n]，这是一个完全背包问题。
+            &#123;
+                for(int k = 0;k * v[i] &lt;= j;k ++)
+                &#123;
+                    f[i][j] |= f[i - 1][j - k * v[i]];
+                &#125;
+            &#125;
         &#125;
-    &#125;
-    return;
-&#125;
-
-int main()
-&#123;
-    memset(dist,0x3f,sizeof dist);
-    memset(g,0x3f,sizeof g);
-    cin &gt;&gt; n &gt;&gt; m;
-    while(m --)
-    &#123;
-        int a,b,c;
-        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
-        g[a][b] = min(g[a][b],c);
-    &#125;
-    dfs(1,0);
-    if(dist[n] == 0x3f3f3f3f) printf(&quot;-1&quot;);
-    else cout &lt;&lt; dist[n];
+        //构造完矩阵后看一下每一个数是否能被前面的数表示
+        int res = 1;
+        for(int i = 2;i &lt;= n;i ++)
+        &#123;
+            bool flag = false;
+            int t = v[i];
+            for(int row = 1;row &lt; i;row ++)//row &lt; i从第二个数开始看，第一个数一定是无法被前面的数线性表示的
+            &#123;
+                if(f[row][t] == true)//如果这个数字可以被前面的数表示
+                &#123;
+                     flag = true;
+                     break;
+                &#125;
+            &#125;
+            if(flag == false)//如果这个数不能被前面的数字线性表示，那么res ++
+            &#123;
+                res ++;
+            &#125;
+        &#125;
+        printf(&quot;%d\n&quot;,res);
+     &#125;
     return 0;
 &#125;
 </code></pre>
-<hr>
-<p><strong>在扩展的时候做：</strong></p>
+<p><strong>优化版</strong></p>
 <pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
 #include &lt;cstring&gt;
+#include &lt;algorithm&gt;
 using namespace std;
-const int N = 510;
-int n,m;
-int g[N][N],d[N];
-bool st[N];
-int dijkstra()
-&#123;
-    memset(d,0x3f,sizeof d);
-    d[1] = 0;
-    for(int i = 0;i &lt; n - 1;i ++)
-    &#123;
-        int t = -1;
-        for(int j = 1;j &lt;= n;j ++)
-        &#123;
-            if(!st[j] &amp;&amp; (t == -1 || d[t] &gt; d[j]))
-            &#123;
-                t = j;
-            &#125;
-        &#125;
-        st[t] = true;
-        for(int j = 1;j &lt;= n;j ++)
-        &#123;
-            if(d[j] &gt; d[t])
-            &#123;
-                d[j] = min(d[j],d[t] + g[t][j]);
-            &#125;
-        &#125;
-    &#125;
-    if (d[n] == 0x3f3f3f3f) return -1;
-    return d[n];
-&#125;
-
+const int N = 110,M = 25010;
+bool f[M];//考虑前i个货币，凑起来的面值恰好为j
+int T,n,m;//可行性背包问题
+int v[N];
 int main()
 &#123;
-    memset(g,0x3f,sizeof g);
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-    while(m --)
+    cin &gt;&gt; T;
+    while(T --)
     &#123;
-        int a,b,w;
-        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;w);
-        g[a][b] = min(g[a][b],w);
+        cin &gt;&gt; n;
+        for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i];
+        sort(v + 1,v + n + 1);
+        memset(f, 0, sizeof f);
+        f[0] = true;
+        int res = 0;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            if(f[v[i]]) continue;//如果当前货币被前面的凑出来了直接continue
+            res ++;//否则答案加1，即当前数字不能被前面线性表示
+            for(int j = v[i];j &lt;= v[n];j ++)//对于每一个数字，尝试进行线性表示以筛掉后面的数字，所以最大j要看到v[n]，这是一个完全背包问题。
+            &#123;
+                f[j] |= f[j - v[i]];
+            &#125;
+        &#125;
+        printf(&quot;%d\n&quot;,res);
     &#125;
-    int res = dijkstra();
-    printf(&quot;%d&quot;,res);
     return 0;
 &#125;
 </code></pre>
-<p>在扩展更新的模式下，为了保证扩展的正确性，都会先把“起点”处理一下。而直接对那个点做dfs，就事先不需要做什么处理，因为我们会在递归的每个点里去做。这是两种流程的特点</p>
 
     </div>
     

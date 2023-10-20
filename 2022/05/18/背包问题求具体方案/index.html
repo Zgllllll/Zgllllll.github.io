@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Dijkstra求最短路 | 金冠小熊猫</title>
+        <title>背包问题求具体方案 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="温故而知新" />
         <meta name="keywords" content="菜狗大学生" />
@@ -152,14 +152,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>Dijkstra求最短路</h1>
+        <h1>背包问题求具体方案</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2022/11/19
+            2022/5/18
         </span>
         
         
@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
             </span>
             
         </span>
@@ -178,128 +178,66 @@
     </div>
     
     <div class="content" v-pre>
-         <p>给定一个 $n$ 个点 $m$ 条边的有向图，图中可能存在重边和自环，所有边权均为正值。</p>
-<p>请你求出 $1$ 号点到 $n$ 号点的最短距离，如果无法从 $1$ 号点走到 $n$ 号点，则输出 $-1$。</p>
+         <p>有 $N$ 件物品和一个容量是 $V$ 的背包。每件物品只能使用一次。</p>
+<p>第 $i$ 件物品的体积是 $v_i$，价值是 $w_i$。</p>
+<p>求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。</p>
+<p>输出 <strong>字典序最小的方案</strong>。这里的字典序是指：所选物品的编号所构成的序列。物品的编号范围是 $1 &hellip; N$。</p>
 <h4>输入格式</h4>
-<p>第一行包含整数 $n$ 和 $m$。</p>
-<p>接下来 $m$ 行每行包含三个整数 $x,y,z$，表示存在一条从点 $x$ 到点 $y$ 的有向边，边长为 $z$。</p>
+<p>第一行两个整数，$N，V$，用空格隔开，分别表示物品数量和背包容积。</p>
+<p>接下来有 $N$ 行，每行两个整数 $v_i, w_i$，用空格隔开，分别表示第 $i$ 件物品的体积和价值。</p>
 <h4>输出格式</h4>
-<p>输出一个整数，表示 $1$ 号点到 $n$ 号点的最短距离。</p>
-<p>如果路径不存在，则输出 $-1$。</p>
+<p>输出一行，包含若干个用空格隔开的整数，表示最优解中所选物品的编号序列，且该编号序列的字典序最小。</p>
+<p>物品编号范围是 $1 &hellip; N$。</p>
 <h4>数据范围</h4>
-<p>$1 \le n \le 500$,<br />
-$1 \le m \le 10^5$,<br />
-图中涉及边长均不超过10000。</p>
-<h4>输入样例：</h4>
-<pre><code>3 3
-1 2 2
-2 3 1
-1 3 4
+<p>$0 \lt N, V \le 1000$<br />
+$0\lt v_i, w_i \le 1000$</p>
+<h4>输入样例</h4>
+<pre><code>4 5
+1 2
+2 4
+3 4
+4 6
 </code></pre>
 
 <h4>输出样例：</h4>
-<pre><code>3
+<pre><code>1 4
 </code></pre>
 
-<p>DFS暴力求最短路。如果加上一个Depth参数，可以限制深度。<br>DFS求最短路是在遍历到每一个点的时候做更新。而dijkstra求最短路，是在扩展每个点的时候做。两者的流程有些不同<br>不过核心思想都是一样的，<strong>只要一个点被多次更新的时候，遇到更小的，就去更新它。</strong><br>如题目：<a href="https://">https://www.acwing.com/file_system&#x2F;file&#x2F;content&#x2F;whole&#x2F;index&#x2F;content&#x2F;7299482&#x2F;</a><br><strong>在遍历每个点的时候做：</strong></p>
+<p><strong>本题是求具体方案，求方案的思路根据图的转移过程从后往前倒推一遍，看一下每一个状态由哪一个状态转移而来</strong><br>如图所示:<br><img src="https://cdn.acwing.com/media/article/image/2022/05/18/142088_efcc3465d6-%E8%83%8C%E5%8C%85%E5%80%92%E6%8E%A8%E6%B1%82%E6%96%B9%E6%A1%88.png" alt="背包倒推求方案.png"><br>看<strong>f[i][j]与f[i - 1][j]和f[i - 1][j - v[i]] + w[i]在数值上与哪一个相等</strong>，从而决定是由哪一个转移过来，从而判断第i个物品选没选<br>但是本题要求字典序输出，那么我们使用贪心的思想。<strong>从前往后对于任意一个物品x，有三种选择S : {(只能选,必选)，(只能不选，必不选),(可选可不选，一定要选)}</strong><br>一个朴素的想法就是我们<strong>先从后往前进行物品的决策</strong>，然后这样的“倒推”就是从前往后的正序了。(体现在图上就是边的方向要改变一下)</p>
 <pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
 #include &lt;cstring&gt;
+#include &lt;algorithm&gt;
 using namespace std;
-const int N = 510,M = 100010;
-int g[N][N];
+const int N = 1010;
+int v[N],w[N];
+int f[N][N];
 int n,m;
-int dist[N];
-bool st[N];
-void dfs(int u,int curlen)
-&#123;
-    //cout &lt;&lt; u &lt;&lt; endl;
-    if(dist[u] &lt;= curlen) return;
-    if(u == n)
-    &#123;
-        if(dist[n] &gt; curlen) dist[n] = curlen;
-    &#125;
-    else
-    &#123;
-        if(dist[u] &gt; curlen) dist[u] = curlen;
-        for(int i = 1;i &lt;= n;i ++)
-        &#123;
-            if(g[u][i] != 0x3f3f3f3f) dfs(i,curlen + g[u][i]);
-        &#125;
-    &#125;
-    return;
-&#125;
 
 int main()
 &#123;
-    memset(dist,0x3f,sizeof dist);
-    memset(g,0x3f,sizeof g);
     cin &gt;&gt; n &gt;&gt; m;
-    while(m --)
+    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i] &gt;&gt; w[i];
+    
+    for(int i = n;i &gt;= 1;i --)//从后往前进行决策
     &#123;
-        int a,b,c;
-        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
-        g[a][b] = min(g[a][b],c);
+        for(int j = 0;j &lt;= m;j ++)
+        &#123;
+            f[i][j] = f[i + 1][j];
+            if(j &gt;= v[i]) f[i][j] = max(f[i][j],f[i + 1][j - v[i]] + w[i]);
+        &#125;
     &#125;
-    dfs(1,0);
-    if(dist[n] == 0x3f3f3f3f) printf(&quot;-1&quot;);
-    else cout &lt;&lt; dist[n];
+    int t = m;
+    for(int i = 1;i &lt;= n;i ++)//求具体方案是一个图上的倒推的过程
+    &#123;
+        if(t &gt;= v[i] &amp;&amp; f[i][t] == f[i + 1][t - v[i]] + w[i])//如果能转移过来并且选了这个物品的话
+        &#123;
+            printf(&quot;%d &quot;,i);
+            t -= v[i];//选完这个物品后剩下的背包体积
+        &#125;
+    &#125;
     return 0;
 &#125;
 </code></pre>
-<hr>
-<p><strong>在扩展的时候做：</strong></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-using namespace std;
-const int N = 510;
-int n,m;
-int g[N][N],d[N];
-bool st[N];
-int dijkstra()
-&#123;
-    memset(d,0x3f,sizeof d);
-    d[1] = 0;
-    for(int i = 0;i &lt; n - 1;i ++)
-    &#123;
-        int t = -1;
-        for(int j = 1;j &lt;= n;j ++)
-        &#123;
-            if(!st[j] &amp;&amp; (t == -1 || d[t] &gt; d[j]))
-            &#123;
-                t = j;
-            &#125;
-        &#125;
-        st[t] = true;
-        for(int j = 1;j &lt;= n;j ++)
-        &#123;
-            if(d[j] &gt; d[t])
-            &#123;
-                d[j] = min(d[j],d[t] + g[t][j]);
-            &#125;
-        &#125;
-    &#125;
-    if (d[n] == 0x3f3f3f3f) return -1;
-    return d[n];
-&#125;
-
-int main()
-&#123;
-    memset(g,0x3f,sizeof g);
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-    while(m --)
-    &#123;
-        int a,b,w;
-        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;w);
-        g[a][b] = min(g[a][b],w);
-    &#125;
-    int res = dijkstra();
-    printf(&quot;%d&quot;,res);
-    return 0;
-&#125;
-</code></pre>
-<p>在扩展更新的模式下，为了保证扩展的正确性，都会先把“起点”处理一下。而直接对那个点做dfs，就事先不需要做什么处理，因为我们会在递归的每个点里去做。这是两种流程的特点</p>
 
     </div>
     
