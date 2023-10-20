@@ -155,6 +155,89 @@
         
 
 <div class="post">
+    <a href="/2022/09/27/%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">
+        <h2 class="post-title">对称的二叉树</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/9/27
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/38/">https://www.acwing.com/problem/content/38/</a><br> <p>请实现一个函数，用来判断一棵二叉树是不是对称的。</p></p>
+<p>如果一棵二叉树和它的镜像一样，那么它是对称的。</p>
+<h4>数据范围</h4>
+<p>树中节点数量 $[0,100]$。</p>
+<h4>样例</h4>
+<pre><code>如下图所示二叉树[1,2,2,3,4,4,3,null,null,null,null,null,null,null,null]为对称二叉树：
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+<p>如下图所示二叉树[1,2,2,null,4,4,3,null,null,null,null,null,null]不是对称二叉树：<br>    1<br>   &#x2F; <br>  2   2<br>   \ &#x2F; <br>   4 4  3<br></code></pre></p>
+<p>$O(n)递归写法$<br>一棵树是对称二叉树，<strong>当且仅当</strong>，两颗子树的根节点相等，第一棵子树的左子树和第二棵子树的右子树互相对称，且第一棵子树的右子树和第二棵子树的左子树互相对称。<br><strong>递归是一个很巧妙的思路，感觉对于很多问题的处理，只要是存在子集的结构，都可以使用递归的思想（注：空集的子集是它本身，所以只要是一个集合，都会有子集的概念，这也就使得递归和分治成为一种很普遍的思想）</strong><br>本题看了y总写的，比较妙的一点是对于状态的判断的处理，省下了很多if()语句，但是直接理解起来有点难，遂加上注释以助于理解(核心在于返回的对象可以是一个表达式)</p>
+<pre><code>/**
+ * Definition for a binary tree node.
+ * struct TreeNode &#123;
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;
+ * &#125;;
+ */
+class Solution &#123;
+public:
+    bool isSymmetric(TreeNode* root) &#123;
+        return !root || dfs(root-&gt;left,root-&gt;right);//如果根是空节点返回true，如果不空，递归到左右子树，如果对称也返回true。
+    &#125;
+    bool dfs(TreeNode* p,TreeNode* q)&#123;
+        if(!p || !q) return !p &amp;&amp; !q;//如果两个节点有一个为空，那么两个节点都为空才返回true
+        //否则
+        return p-&gt;val == q-&gt;val &amp;&amp; dfs(p-&gt;left,q-&gt;right) &amp;&amp; dfs(p-&gt;right,q-&gt;left);//只有两个根节点值相等，且子树对称，才返回true。
+    &#125;
+    
+&#125;;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/LeetCode/" style="color: #ffa2c4">LeetCode</a>
+        </span>
+        
+    </div>
+    <a href="/2022/09/27/%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/09/26/%E9%80%9A%E4%BF%A1%E7%BA%BF%E8%B7%AF/">
         <h2 class="post-title">通信线路</h2>
     </a>
@@ -293,7 +376,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ff7d73">图论</a>
         </span>
         
     </div>
@@ -428,7 +511,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
         
         <span class="tag">
             
-            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #00bcd4">语言知识</a>
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #00a596">语言知识</a>
         </span>
         
     </div>
@@ -723,7 +806,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #00bcd4">枚举</a>
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #03a9f4">枚举</a>
         </span>
         
     </div>
@@ -893,7 +976,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
@@ -1016,7 +1099,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #ffa2c4">思维题</a>
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #00bcd4">思维题</a>
         </span>
         
     </div>
@@ -1123,7 +1206,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1215,7 +1298,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
         </span>
         
     </div>
@@ -1353,139 +1436,6 @@ int main()
     <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/" class="go-post">阅读全文</a>
 </div>
 
-<div class="post">
-    <a href="/2022/05/01/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">
-        <h2 class="post-title">最长公共上升子序列</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E7%AE%97%E6%B3%95/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                算法
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/5/1
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/274/">https://www.acwing.com/problem/content/description/274/</a></p>
-<p>熊大妈的奶牛在小沐沐的熏陶下开始研究信息题目。</p>
-<p>小沐沐先让奶牛研究了最长上升子序列，再让他们研究了最长公共子序列，现在又让他们研究最长公共上升子序列了。</p>
-<p>小沐沐说，对于两个数列 $A$ 和 $B$，如果它们都包含一段位置不一定连续的数，且数值是严格递增的，那么称这一段数是两个数列的公共上升子序列，而所有的公共上升子序列中最长的就是最长公共上升子序列了。</p>
-<p>奶牛半懂不懂，小沐沐要你来告诉奶牛什么是最长公共上升子序列。</p>
-<p>不过，只要告诉奶牛它的长度就可以了。</p>
-<p>数列 $A$ 和 $B$ 的长度均不超过 $3000$。</p>
-<h4>输入格式</h4>
-<p>第一行包含一个整数 $N$，表示数列 $A，B$ 的长度。</p>
-<p>第二行包含 $N$ 个整数，表示数列 $A$。</p>
-<p>第三行包含 $N$ 个整数，表示数列 $B$。</p>
-<h4>输出格式</h4>
-<p>输出一个整数，表示最长公共上升子序列的长度。</p>
-<h4>数据范围</h4>
-<p>$1 \le N \le 3000$,序列中的数字均不超过 $2^{31}-1$。</p>
-<h4>输入样例：</h4>
-<pre><code>4
-2 2 1 3
-2 1 2 3
-</code></pre>
-
-<h4>输出样例：</h4>
-<pre><code>2
-</code></pre>
-
-<p>此题为最长上升子序列和最长公共子序列的合体版本<br>先想一下最长公共子序列<br><strong>先假设一个方案看看，假设第一个序列选择到了i,第二个序列选择到了j,我们可以画出一个方案集合</strong><br> <strong>并且依据最后一个选择的不同划分为四个子集</strong><br><img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_e52fb71bc8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共子序列.png"><br>而最长公共上升子序列的集合划分，就是在此基础之上做了进一步的合并，即：<img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_86bad0d8c8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共上升子序列.png"> </p>
-<p>我们将这个<strong>大方案的集合</strong>表示为f[i][j]<br>即：所有由第一个序列的前i个字母，和第二个序列的前j个字母，<strong>且以b[j]结尾</strong>的公共上升子序列<br>那么由3、4表示的<strong>不含a[i]子集就是f[i-1][j]<strong>， <strong>本题难点在于怎么算1、2这个子集</strong><br>  <strong>小Tip:</strong> 当没有一个状态可以很好的表示或者没办法转化的时候就继续把它分解，</strong>理论上来说一定是可以分解到能算为止的。最不济每一种方案都是一个状态(DP的核心就是能够用一个数表示并且处理一类状态，一次处理很多状态使得它的效率比较高)，那么我们直接用暴搜就可以做了</strong><br>所以我们继续尝试分解1、2，以<strong>倒数第二个位置不同</strong>分为，——b1，ai;——b2,ai;…..——bk,ai这些集合<br>而对于集合<strong>S：{—b1;—b2;—b3;…—bk}即等价于f[i-1][1],f[i-1][2]…f[i-1][k]</strong></p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int N = 3010;
-int n;
-int a[N];
-int b[N];
-int f[N][N];
-int main()
-&#123;
-    cin &gt;&gt; n;
-    for(int i = 1;i &lt;= n;i ++) scanf(&quot;%d&quot;, &amp;a[i]);
-    for(int i = 1;i &lt;= n;i ++) scanf(&quot;%d&quot;, &amp;b[i]);
-    
-    for(int i = 1;i &lt;= n;i ++)
-    &#123;
-        for(int j = 1;j &lt;= n;j ++)
-        &#123;
-            f[i][j] = f[i - 1][j];
-            if(a[i] == b[j])//集合1、2包含a[i]的情况
-            &#123;
-                for(int k = 0;k &lt; j;k ++)//k从0开始代表空集
-                &#123;
-                    if(b[k] &lt; b[j])
-                    &#123;
-                        f[i][j] = max(f[i][j],f[i - 1][k] + 1);
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-    int res = 0;
-    for(int i = 1;i &lt;= n;i ++) res = max(res,f[n][i]);
-    printf(&quot;%d\n&quot;,res);
-    return 0;
-&#125;
-</code></pre>
-<p><strong>优化：</strong></p>
-<pre><code>for(int k = 0;k &lt; j;k ++)
-    &#123;
-        if(b[k] &lt; b[j])//b[j] == a[i]所以条件等价于if(b[k] &lt; a[i])
-        &#123;
-            f[i][j] = max(f[i][j],f[i - 1][k] + 1);
-        &#125;
-    &#125;
-</code></pre>
-<p>对于这第三层循环，<strong>它的意义在于寻找f[i-1][0~j-1]的最大值</strong>，那么我们可以不需要循环一遍k，而是直接在i,j循环的时候就可以做好这件事<br>即将代码等价变形为：</p>
-<pre><code>for(int i = 1;i &lt;= n;i ++)
-&#123;
-    int maxv = 1;
-    for(int j = 1;j &lt;= n;j ++)
-    &#123;
-        f[i][j] = f[i - 1][j];
-        if(a[i] == b[j]) f[i][j] = max(f[i][j],maxv);
-        if(a[i] &gt; b[j]) maxv = max(maxv,f[i - 1][j] + 1);//等价于变形前b[k] &lt; a[i]的情况
-    &#125;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
-        </span>
-        
-    </div>
-    <a href="/2022/05/01/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" class="go-post">阅读全文</a>
-</div>
-
 
         <div class="page-current">
     <div class="prev">
@@ -1536,7 +1486,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#49;&#x37;&#53;&#50;&#53;&#x31;&#56;&#x38;&#x38;&#48;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;">&#49;&#x37;&#53;&#50;&#53;&#x31;&#56;&#x38;&#x38;&#48;&#x40;&#x71;&#113;&#x2e;&#99;&#x6f;&#x6d;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#49;&#x37;&#x35;&#50;&#x35;&#49;&#56;&#x38;&#x38;&#48;&#64;&#113;&#x71;&#46;&#99;&#111;&#109;">&#49;&#x37;&#x35;&#50;&#x35;&#49;&#56;&#x38;&#x38;&#48;&#64;&#113;&#x71;&#46;&#99;&#111;&#109;</a><br>…</p>
 
         </div>
         
