@@ -169,6 +169,132 @@
         
 
 <div class="post">
+    <a href="/2022/08/01/pointer/">
+        <h2 class="post-title">What is a pointer?</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/8/1
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>先贴一个解释指针很好的博客<a href="https://">https://www.cnblogs.com/zhangrxiang/articles/8465678.html</a> </p>
+<hr>
+<p>再分享一篇看到的文章：<br><strong>本文从编译器的角度解释了变量即对象，解析了变量的rvalue和lvalue，从lvalue的角度引出了对指针的看法</strong></p>
+<hr>
+<p><strong><em>One of those things beginners in C find difficult is the concept of pointers. The purpose of this tutorial is to provide an introduction to pointers and their use to these beginners.One of those things beginners in C find difficult is the concept of pointers. The purpose of this tutorial is to provide an introduction to pointers and their use to these beginners.</em></strong></p>
+<p><strong><em>I have found that often the main reason beginners have a problem with pointers is that they have a weak or minimal feeling for variables, (as they are used in C). Thus we start with a discussion of C variables in general.</em></strong></p>
+<p><strong><em>A variable in a program is something with a name, the value of which can vary. The way the compiler and linker handles this is that it assigns a specific block of memory within the computer to hold the value of that variable. The size of that block depends on the range over which the variable is allowed to vary. For example, on 32 bit PC’s the size of an integer variable is 4 bytes. On older 16 bit PCs integers were 2 bytes.  In C the size of a variable type such as an integer need not be the same on all types of machines.  Further more there is more than one type of integer variable in C.  We have integers, long integers and short integers which you can read up on in any basic text on C.  This document assumes the use of a 32 bit system with 4 byte integers.</em></strong></p>
+<p><strong><em>If you want to know the size of the various types of integers on your system, running the following code will give you that information.</em></strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+&#123;
+printf(&quot;size of a short is %d\n&quot;, sizeof(short));
+printf(&quot;size of a int is %d\n&quot;, sizeof(int));
+printf(&quot;size of a long is %d\n&quot;, sizeof(long));
+&#125;
+</code></pre>
+<hr>
+<p><strong><em>When we declare a variable we inform the compiler of two things, the name of the variable and the type of the variable. For example, we declare a variable of type integer with the name k by writing:</em></strong></p>
+<pre><code>int k; 
+</code></pre>
+<p>**<em>On seeing the “int” part of this statement the compiler sets aside 4 bytes of memory (on a PC) to hold the value of the integer. It also sets up a symbol table. In that table it adds the symbol k and the relative address in memory where those 4 bytes were set aside.</em>**（变量的构成）</p>
+<p><strong><em>Thus, later if we write:</em></strong></p>
+<pre><code>k = 2; 
+</code></pre>
+<p>**<em>we expect that, at run time when this statement is executed, the value 2 will be placed in that memory location reserved for the storage of the value of k. In C we refer to a variable such as the integer k as an “object”.</em> **（在C中，变量，即可以看作一个对象）</p>
+<hr>
+<p>对于一个对象的加深理解：一个对象具有两个值(“are value” 和 “lvalue”)<br><strong><em>In a sense there are two “values” associated with the object k. One is the value of the integer stored there (2 in the above example) and the other the “value” of the memory location, i.e., the address of k. Some texts refer to these two values with the nomenclature rvalue (right value, pronounced “are value”) and lvalue (left value, pronounced “el value”) respectively.</em></strong></p>
+<p><strong><em>In some languages, the lvalue is the value permitted on the left side of the assignment operator ‘&#x3D;’ (i.e. the address where the result of evaluation of the right side ends up). The rvalue is that which is on the right side of the assignment statement, the 2 above. Rvalues cannot be used on the left side of the assignment statement. Thus: 2 &#x3D; k; is illegal.</em></strong></p>
+<p><strong><em>Actually, the above definition of “lvalue” is somewhat modified for C. According to K&amp;R II (page 197): [1]</em></strong></p>
+<p><strong><em>“An object is a named region of storage; an lvalue is an expression referring to an object.”</em></strong><br>(对象是命名的存储区域；左值是对“对象引用”的表达)<br><strong><em>However, at this point, the definition originally cited above is sufficient. As we become more familiar with pointers we will go into more detail on this.</em></strong></p>
+<p><strong><em>Okay, now consider:</em></strong></p>
+<pre><code>   int j, k; 
+
+    k = 2; 
+    j = 7;    &lt;-- line 1 
+    k = j;    &lt;-- line 2 
+</code></pre>
+<p>（从编译器的角度解释变量(object)，提出address的必要性）<br><strong><em>In the above, the compiler interprets the j in line 1 as the address of the variable j (its lvalue) and creates code to copy the value 7 to that address. In line 2, however, the j is interpreted as its rvalue (since it is on the right hand side of the assignment operator ‘&#x3D;’). That is, here the j refers to the value stored at the memory location set aside for j, in this case 7. So, the 7 is copied to the address designated by the lvalue of k.</em></strong></p>
+<p><strong><em>In all of these examples, we are using 4 byte integers so all copying of rvalues from one storage location to the other is done by copying 4 bytes. Had we been using two byte integers, we would be copying 2 bytes.</em></strong></p>
+<hr>
+<p>（引出了指针的概念）：得到对象的左值</p>
+<p><strong><em>Now, let’s say that we have a reason for wanting a variable designed to hold an lvalue (an address). The size required to hold such a value depends on the system. On older desk top computers with 64K of memory total, the address of any point in memory can be contained in 2 bytes. Computers with more memory would require more bytes to hold an address.  The actual size required is not too important so long as we have a way of informing the compiler that what we want to store is an address.</em></strong></p>
+<p><strong><em>Such a variable is called a pointer variable (for reasons which hopefully will become clearer a little later). In C when we define a pointer variable we do so by preceding its name with an asterisk. In C we also give our pointer a type which, in this case, refers to the type of data stored at the address we will be storing in our pointer. For example, consider the variable declaration:</em></strong></p>
+<pre><code>int *ptr;
+</code></pre>
+<p>(核心句：However many bytes is required to store an address in memory)<br><strong><em>ptr is the name of our variable (just as k was the name of our integer variable). The ‘*’ informs the compiler that we want a pointer variable, i.e. to set aside however many bytes is required to store an address in memory. 《The int says that we intend to “use our pointer variable（工具人）” to store the address of an integer. Such a pointer is said to “point to” an integer.（打工人） 》However, note that when we wrote int k; we did not give k a value. If this definition is made outside of any function ANSI compliant compilers will initialize it to zero. Similarly, ptr has no value, that is we haven’t stored an address in it in the above declaration. In this case, again if the declaration is outside of any function, it is initialized to a value guaranteed in such a way that it is guaranteed to not point to any C object or function. A pointer initialized in this manner is called a “null” pointer.</em></strong></p>
+<hr>
+<p>（对于空指针的定义不同系统是不一样的，不一定都是“0”，但是无论如何我们把<strong>空指针用宏写成NULL</strong>，就可以方便代码做移植，这里做了一层抽象）</p>
+<p><strong><em>The actual bit pattern used for a null pointer may or may not evaluate to zero since it depends on the specific system on which the code is developed. To make the source code compatible between various compilers on various systems, a macro is used to represent a null pointer. That macro goes under the name NULL. Thus, setting the value of a pointer using the NULL macro, as with an assignment statement such as ptr &#x3D; NULL, guarantees that the pointer has become a null pointer. Similarly, just as one can test for an integer value of zero, as in if(k &#x3D;&#x3D; 0), we can test for a null pointer using if (ptr &#x3D;&#x3D; NULL).</em></strong></p>
+<p><strong><em>But, back to using our new variable ptr. Suppose now that we want to store in ptr the address of our integer variable k. To do this we use the unary（单元运算符） &amp; operator and write:</em></strong></p>
+<pre><code>ptr = &amp;k; 
+</code></pre>
+<p><strong><em>What the &amp; operator does is retrieve the lvalue (address) of k, even though k is on the right hand side of the assignment operator ‘&#x3D;’, and copies that to the contents of our pointer ptr. Now, ptr is said to “point to” k. Bear with us now, there is only one more operator we need to discuss.</em></strong></p>
+<p><strong><em>The “dereferencing operator”(解引用) is the asterisk and it is used as follows:</em></strong></p>
+<pre><code>*ptr = 7; 
+</code></pre>
+<p><strong><em>will copy 7 to the address pointed to by ptr. Thus if ptr “points to” (contains the address of) k, the above statement will set the value of k to 7. That is, when we use the ‘*’ this way we are referring to the value of that which ptr is pointing to, not the value of the pointer itself.</em></strong></p>
+<p><strong><em>Similarly, we could write:</em></strong></p>
+<pre><code> printf(&quot;%d\n&quot;,*ptr); 
+</code></pre>
+<p><strong><em>to print to the screen the integer value stored at the address pointed to by ptr;.</em></strong></p>
+<p><strong><em>One way to see how all this stuff fits together would be to run the following program and then review the code and the output carefully.</em></strong></p>
+<p>———— Program 1.1 ———————————</p>
+<pre><code> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
+ 2 
+ 3 #include &lt;stdio.h&gt;
+ 4 
+ 5 int j, k;
+ 6 int *ptr;
+ 7 
+ 8 int main(void)
+ 9 &#123;
+10     j = 1;
+11     k = 2;
+12     ptr = &amp;k;
+13     printf(&quot;\n&quot;);
+14     printf(&quot;j has the value %d and is stored at %p\n&quot;, j, (void *)&amp;j);
+15     printf(&quot;k has the value %d and is stored at %p\n&quot;, k, (void *)&amp;k);
+16     printf(&quot;ptr has the value %p and is stored at %p\n&quot;, ptr, (void *)&amp;ptr);
+17     printf(&quot;The value of the integer pointed to by ptr is %d\n&quot;, *ptr);
+18 
+19     return 0;
+20 &#125;
+</code></pre>
+<p>**<em>Note: We have yet to discuss those aspects of C which require the use of the (void *) expression used here. For now, include it in your test code. We’ll explain the reason behind this expression later.</em>**</p>
+<p><strong><em>To review:</em></strong></p>
+<p><strong><em>A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br>**<em>A pointer variable is declared by giving it a type and a name (e.g. int *ptr) where the asterisk tells the compiler that the variable named ptr is a pointer variable and the type tells the compiler what type the pointer is to point to (integer in this case).</em>**<br><strong><em>Once a variable is declared, we can get its address by preceding its name with the unary &amp; operator, as in &amp;k.</em></strong><br>**<em>We can “dereference” a pointer, i.e. refer to the value of that which it points to, by using the unary ‘*’ operator as in *ptr.</em>**<br><strong><em>An “lvalue” of a variable is the value of its address, i.e. where it is stored in memory. The “rvalue” of a variable is the value stored in that variable (at that address).</em></strong><br><strong><em>References for Chapter 1:</em></strong><br><strong><em>“The C Programming Language” 2nd Edition</em></strong><br><strong>_B. Kernighan and D. Ritchie _</strong><br><strong>_Prentice Hall _</strong><br><strong><em>ISBN 0-13-110362-8 A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br><strong><em>A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br>**<em>A pointer variable is declared by giving it a type and a name (e.g. int *ptr) where the asterisk tells the compiler that the variable named ptr is a pointer variable and the type tells the compiler what type the pointer is to point to (integer in this case).</em>**</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #00a596">语言知识</a>
+        </span>
+        
+    </div>
+    <a href="/2022/08/01/pointer/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/">
         <h2 class="post-title">能量石</h2>
     </a>
@@ -316,7 +442,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
         </span>
         
     </div>
@@ -438,7 +564,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #ff7d73">枚举</a>
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #ffa2c4">枚举</a>
         </span>
         
     </div>
@@ -599,7 +725,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
         </span>
         
     </div>
@@ -713,7 +839,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #00a596">思维题</a>
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #03a9f4">思维题</a>
         </span>
         
     </div>
@@ -811,7 +937,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1016,7 +1142,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
         </span>
         
     </div>
@@ -1140,7 +1266,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1239,117 +1365,11 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
         </span>
         
     </div>
     <a href="/2022/04/28/%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/04/16/%E7%8E%A9%E6%B8%B8%E6%88%8F/">
-        <h2 class="post-title">玩游戏</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/4/16
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/4403/">https://www.acwing.com/problem/content/4403/</a></p>
- <p>$n$ 个小朋友围成一圈，玩数数游戏。</p>
-<p>小朋友们按顺时针顺序，依次编号为 $1 \sim n$。</p>
-<p>初始时，$1$ 号小朋友被指定为领头人。</p>
-<p>游戏一共会行进 $k$ 轮。</p>
-<p>在第 $i$ 轮中，领头人会从他的顺时针方向的下一个人开始，按顺时针顺序数 $a_i$ 个人。</p>
-<p>其中，最后一个被领头人数到的人被淘汰出局，这也意味着该轮游戏结束。</p>
-<p>出局者的顺时针方向的下一个人被指定为新领头人，引领新一轮游戏。</p>
-<p>例如，假设当游戏即将开始第 $i$ 轮时，还剩下 $5$ 个小朋友，编号按顺时针顺序依次为 $8,10,13,14,16$，并且当前领头人为 $13$ 号小朋友，$a_i = 12$，则第 $i$ 轮游戏结束后，最后一个被数到的小朋友为 $16$ 号小朋友，他将被淘汰出局，并且处于其下一位的第 $8$ 号小朋友将被指定为新领头人。</p>
-<p>现在，请你求出每一轮次被淘汰的小朋友的编号。</p>
-<h4>输入格式</h4>
-<p>第一行包含两个整数 $n,k$。</p>
-<p>第二行包含 $k$ 个整数 $a_1,a_2,&hellip;,a_k$。</p>
-<h4>输出格式</h4>
-<p>一行，$k$ 个整数，其中第 $i$ 个整数表示在第 $i$ 轮中被淘汰的小朋友的编号。</p>
-<h4>数据范围</h4>
-<p>前三个测试点满足 $2 \le n \le 10$。<br />
-所有测试点满足 $2 \le n \le 100$，$1 \le k \le n-1$，$1 \le a_i \le 10^9$。</p>
-<h4>输入样例1：</h4>
-<pre><code>7 5
-10 4 11 4 1
-</code></pre>
-
-<h4>输出样例1：</h4>
-<pre><code>4 2 5 6 1
-</code></pre>
-
-<h4>输入样例2：</h4>
-<pre><code>3 2
-2 5
-</code></pre>
-
-<h4>输出样例2：</h4>
-<pre><code>3 2
-</code></pre>
-
-<p>约瑟夫环问题</p>
-<pre><code>//约瑟夫环问题，可以用队列解决，将数过的数放在加入到队尾，这样队头就是leader，然后从leader开始数
-//给定一个a的长度，每次有效长度只是a % size()
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;queue&gt;
-using namespace std;
-const int N = 110;
-int n,k;
-queue&lt;int&gt; q;
-
-int main()
-&#123;
-    cin &gt;&gt; n &gt;&gt; k;
-    for(int i = 1;i &lt;= n;i ++) q.push(i);
-    for(int i = 1;i &lt;= k;i ++)
-    &#123;
-        int a;
-        cin &gt;&gt; a;
-        a %= q.size();
-        for(int j = 1;j &lt;= a;j ++)
-        &#123;
-            int t = q.front();
-            q.push(t);
-            q.pop();
-        &#125;
-        printf(&quot;%d &quot;,q.front());
-        q.pop();
-    &#125;
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
-        </span>
-        
-    </div>
-    <a href="/2022/04/16/%E7%8E%A9%E6%B8%B8%E6%88%8F/" class="go-post">阅读全文</a>
 </div>
 
 
