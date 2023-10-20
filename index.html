@@ -969,81 +969,81 @@ A 99
 </li>
 </ol>
 <h1>以下为本题代码</h1>
-
-<pre><code class="#include">#include &lt;algorithm&gt;
+<pre>
+```#include <iostream>
+#include <algorithm>
 using namespace std;
 const int N = 200010;
 typedef long long LL;
 int m,p;
 struct Node
-&#123;
+{
     int l,r;
     int tmax;
-&#125;tr[N * 4];
+}tr[N * 4];
 void pushup(int u)
-&#123;
-    tr[u].tmax = max(tr[u &lt;&lt; 1].tmax,tr[u &lt;&lt; 1 | 1].tmax);
-&#125;
+{
+    tr[u].tmax = max(tr[u << 1].tmax,tr[u << 1 | 1].tmax);
+}
 void build(int u,int l,int r)//因为线段树不支持插入，所以我们直接初始化可能用到的最大长度的区间
-&#123;
-    tr[u] = &#123;l,r&#125;;
+{
+    tr[u] = {l,r};
     if(l == r) return;
-    int mid = l + r &gt;&gt; 1;
-    build(u &lt;&lt; 1,l,mid),build(u &lt;&lt; 1 | 1,mid + 1,r);//这里也是，不用套tr[ ]
-&#125;
+    int mid = l + r >> 1;
+    build(u << 1,l,mid),build(u << 1 | 1,mid + 1,r);//这里也是，不用套tr[ ]
+}
 int query(int u,int l,int r)
-&#123;
-    if(tr[u].l &gt;= l &amp;&amp; tr[u].r &lt;= r) return tr[u].tmax;//当前位置区间被查询区间完全覆盖
+{
+    if(tr[u].l >= l && tr[u].r <= r) return tr[u].tmax;//当前位置区间被查询区间完全覆盖
     //否则，分别看一下当前位置的左右半边区间有无被查询区间覆盖，如果有交集，则递归处理覆盖所在半部的区间
-    int mid = tr[u].l + tr[u].r &gt;&gt; 1;
+    int mid = tr[u].l + tr[u].r >> 1;
     int v = 0;
-    if (r &lt;= mid) return query(u &lt;&lt; 1, l, r);
-    else if (l &gt; mid) return query(u &lt;&lt; 1 | 1, l, r);
+    if (r <= mid) return query(u << 1, l, r);
+    else if (l > mid) return query(u << 1 | 1, l, r);
     else
-    &#123;
-        v = query(u &lt;&lt; 1,l,r);
-        v = max(v,query(u &lt;&lt; 1 | 1,l,r));
-    &#125;
+    {
+        v = query(u << 1,l,r);
+        v = max(v,query(u << 1 | 1,l,r));
+    }
     return v;
-&#125;
+}
 void modify(int u,int x,int v)
-&#123;
-    if(tr[u].l == x &amp;&amp; tr[u].r == x) tr[u].tmax = v;
+{
+    if(tr[u].l == x && tr[u].r == x) tr[u].tmax = v;
     else
-    &#123;
-        int mid = tr[u].l + tr[u].r &gt;&gt; 1;
+    {
+        int mid = tr[u].l + tr[u].r >> 1;
         //单点修改并不需要两边都递归
-        if(x &lt;= mid) modify(u &lt;&lt; 1,x,v);//这里不用套tr[u &lt;&lt; 1]; 传进来的就是节点编号，相当于索引位置的指针，表示位置信息
-        else modify(u &lt;&lt; 1 | 1,x,v);//在逻辑上递归的时候，只需要告诉你它在哪里(递归到哪里了)，而不需要告诉你它是什么
+        if(x <= mid) modify(u << 1,x,v);//这里不用套tr[u << 1]; 传进来的就是节点编号，相当于索引位置的指针，表示位置信息
+        else modify(u << 1 | 1,x,v);//在逻辑上递归的时候，只需要告诉你它在哪里(递归到哪里了)，而不需要告诉你它是什么
         pushup(u);
-    &#125;
-&#125;
+    }
+}
 int main()      
-&#123;
-    cin &gt;&gt; m &gt;&gt; p;
+{
+    cin >> m >> p;
     build(1,1,m);//比较有趣的一点是我不用for循环把数列读到数组里了就可以直接做,好好看一看取而代之的build函数做了什么
     //build函数其实建立了一个空线段
     int n = 0,last = 0;
     char op[2];
     int x;
     while(m --)
-    &#123;
-        scanf(&quot;%s%d&quot;,op,&amp;x);        
-        if(*op == &#39;Q&#39;)
-        &#123;
+    {
+        scanf("%s%d",op,&x);        
+        if(*op == 'Q')
+        {
             last = query(1,n - x + 1,n);
-            printf(&quot;%d\n&quot;,last);
-        &#125;
+            printf("%d\n",last);
+        }
         else
-        &#123;
+        {
             modify(1,n + 1,((LL)last + x) % p);
             n ++;
-        &#125;
-    &#125;
+        }
+    }
     return 0;
-&#125;```
-</code></pre>
-
+}```
+</pre>
             
         </div>
     </div>
@@ -1056,7 +1056,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #03a9f4">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
         </span>
         
     </div>
@@ -1238,7 +1238,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
@@ -1518,7 +1518,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -2015,7 +2015,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00a596">数据结构</a>
         </span>
         
     </div>
@@ -2116,7 +2116,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00a596">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
         </span>
         
     </div>
@@ -2319,7 +2319,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ffa2c4">大模拟</a>
         </span>
         
     </div>
@@ -2445,7 +2445,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#49;&#55;&#x35;&#50;&#x35;&#49;&#56;&#x38;&#x38;&#x30;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#x6d;">&#49;&#55;&#x35;&#50;&#x35;&#49;&#56;&#x38;&#x38;&#x30;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#x6d;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#x31;&#55;&#x35;&#x32;&#x35;&#49;&#x38;&#56;&#x38;&#48;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;">&#x31;&#55;&#x35;&#x32;&#x35;&#49;&#x38;&#56;&#x38;&#48;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;</a><br>…</p>
 
         </div>
         
