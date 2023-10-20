@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
             </span>
             
         </span>
@@ -200,7 +200,7 @@
 
 <p>此题为最长上升子序列和最长公共子序列的合体版本<br>先想一下最长公共子序列<br><strong>先假设一个方案看看，假设第一个序列选择到了i,第二个序列选择到了j,我们可以画出一个方案集合</strong><br> <strong>并且依据最后一个选择的不同划分为四个子集</strong><br><img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_e52fb71bc8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共子序列.png"><br>而最长公共上升子序列的集合划分，就是在此基础之上做了进一步的合并，即：<img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_86bad0d8c8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共上升子序列.png"> </p>
 <p>我们将这个<strong>大方案的集合</strong>表示为f[i][j]<br>即：所有由第一个序列的前i个字母，和第二个序列的前j个字母，<strong>且以b[j]结尾</strong>的公共上升子序列<br>那么由3、4表示的<strong>不含a[i]子集就是f[i-1][j]<strong>， <strong>本题难点在于怎么算1、2这个子集</strong><br>  <strong>小Tip:</strong> 当没有一个状态可以很好的表示或者没办法转化的时候就继续把它分解，</strong>理论上来说一定是可以分解到能算为止的。最不济每一种方案都是一个状态(DP的核心就是能够用一个数表示并且处理一类状态，一次处理很多状态使得它的效率比较高)，那么我们直接用暴搜就可以做了</strong><br>所以我们继续尝试分解1、2，以<strong>倒数第二个位置不同</strong>分为，——b1，ai;——b2,ai;…..——bk,ai这些集合<br>而对于集合<strong>S：{—b1;—b2;—b3;…—bk}即等价于f[i-1][1],f[i-1][2]…f[i-1][k]</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -239,7 +239,7 @@ int main()
 &#125;
 </code></pre>
 <p><strong>优化：</strong></p>
-<pre><code>for(int k = 0;k &lt; j;k ++)
+<pre><code class="C++">for(int k = 0;k &lt; j;k ++)
     &#123;
         if(b[k] &lt; b[j])//b[j] == a[i]所以条件等价于if(b[k] &lt; a[i])
         &#123;
@@ -248,7 +248,7 @@ int main()
     &#125;
 </code></pre>
 <p>对于这第三层循环，<strong>它的意义在于寻找f[i-1][0~j-1]的最大值</strong>，那么我们可以不需要循环一遍k，而是直接在i,j循环的时候就可以做好这件事<br>即将代码等价变形为：</p>
-<pre><code>for(int i = 1;i &lt;= n;i ++)
+<pre><code class="C++">for(int i = 1;i &lt;= n;i ++)
 &#123;
     int maxv = 1;
     for(int j = 1;j &lt;= n;j ++)

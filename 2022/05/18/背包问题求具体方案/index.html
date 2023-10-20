@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
             </span>
             
         </span>
@@ -199,7 +199,7 @@ $0\lt v_i, w_i \le 1000$</p>
 </code></pre>
 
 <p><strong>本题是求具体方案，求方案的思路根据图的转移过程从后往前倒推一遍，看一下每一个状态由哪一个状态转移而来</strong><br>如图所示:<br><img src="https://cdn.acwing.com/media/article/image/2022/05/18/142088_efcc3465d6-%E8%83%8C%E5%8C%85%E5%80%92%E6%8E%A8%E6%B1%82%E6%96%B9%E6%A1%88.png" alt="背包倒推求方案.png"><br>看<strong>f[i][j]与f[i - 1][j]和f[i - 1][j - v[i]] + w[i]在数值上与哪一个相等</strong>，从而决定是由哪一个转移过来，从而判断第i个物品选没选<br>但是本题要求字典序输出，那么我们使用贪心的思想。<strong>从前往后对于任意一个物品x，有三种选择S : {(只能选,必选)，(只能不选，必不选),(可选可不选，一定要选)}</strong><br>一个朴素的想法就是我们<strong>先从后往前进行物品的决策</strong>，然后这样的“倒推”就是从前往后的正序了。(体现在图上就是边的方向要改变一下)</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;

@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ff7d73">图论</a>
+                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
             </span>
             
         </span>
@@ -226,7 +226,7 @@ G3 G2 2
 <pre><code>No Solution
 </code></pre>
 
-<pre><code>/*
+<pre><code class="C++">/*
 本来我的设计是想让函数返回很多值的，一个距离，一个总和，一个是否合法(这样就要搞一个结构体存，有些麻烦)
 然后发现其实“可以把多个参数传引用进去”，以达到同样的效果。
 printf(&quot;%.1lf %.1lf&quot;,(double)maxD,(double)sumD / n + 1e-8);
@@ -257,7 +257,7 @@ printf(&quot;%lf\n&quot;,3.24999999 / 3);  ------&gt; 1.083333
 </code></pre>
 <p>关于输出的问题解答：<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759629334">https://www.zhihu.com/question/447078607/answer/1759629334</a><br>根据 c printf 的文档：<strong>If a conversion specification is invalid, the behavior is undefined.</strong><br>所以这种代码的行为完全取决于编译器的实现，发生什么都不奇怪。做实验测试 c&#x2F;cpp 的行为是完全不可靠的，因为 c&#x2F;cpp 的 UB 实在太多了。拿实验结果&#x2F;汇编代码来倒推语言标准更是本末倒置。遇到问题最好还是查文档，实验仅用于验证。</p>
 <p>作者：lljbash<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759667992">https://www.zhihu.com/question/447078607/answer/1759667992</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 using namespace std;

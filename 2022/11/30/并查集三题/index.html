@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #00a596">并查集</a>
+                <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #ff7d73">并查集</a>
             </span>
             
         </span>
@@ -216,13 +216,13 @@ $K_i &gt; 0$,<br />
 <li>$1$ 人集群 $\lbrace 1 \rbrace$。</li>
 
 <p>本质上就是处理连通性的问题<br>超简单合并模板。（不包含按秩合并，递归回来会进行路径压缩）</p>
-<pre><code>int find(int x)
+<pre><code class="C++">int find(int x)
 &#123;
     if(p[x] != x) p[x] = find(p[x]);
     return p[x];
 &#125;
 </code></pre>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;vector&gt;
 using namespace std;

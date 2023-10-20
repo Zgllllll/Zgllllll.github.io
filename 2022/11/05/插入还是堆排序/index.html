@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #ff7d73">排序</a>
+                <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #00bcd4">排序</a>
             </span>
             
         </span>
@@ -222,7 +222,7 @@
 </code></pre>
 
 <p>复习一下堆排序，堆是一个递归定义的结构<strong>：父亲节点是整颗子树的最值</strong>。这样，对于根节点来说，根节点的左右儿子是左右子树的最值，而<strong>根节点又是{左儿子、右儿子、根节点}之中的最值</strong>，所以<strong>根节点是整颗树的最值</strong>。<br>存储的时候用一个<strong>一维数组</strong>就可以存储<strong>一个完全二叉树</strong>。<br>初始化堆的时候当然一个一个插入也是可以的这是nlogn的，但是有o(n)的建堆方式，即：从n &#x2F; 2的位置一步步down到1；<br>在用一维数组维护堆的时候，通常要维护一个<strong>int size;<strong>方便O(1)插入，快速删除。<br>在</strong>删除</strong>的时候用heap[size]的元素“覆盖掉”h[1]就好了，然后<strong>down()<strong>一遍</strong>(看似是删除，实际是“覆盖”，达到删除的效果，而且用末尾元素也是我们维护size的原因)</strong><br>在<strong>插入</strong>的时候直接插入到h[size];然后**up()**一遍</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 using namespace std;
 const int N = 110;

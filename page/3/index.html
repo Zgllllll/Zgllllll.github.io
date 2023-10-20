@@ -155,6 +155,151 @@
         
 
 <div class="post">
+    <a href="/2022/11/05/%E6%8F%92%E5%85%A5%E8%BF%98%E6%98%AF%E5%A0%86%E6%8E%92%E5%BA%8F/">
+        <h2 class="post-title">插入还是堆排序</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1590/">https://www.acwing.com/problem/content/1590/</a><br> <p>根据维基百科：</p></p>
+<p>插入排序迭代，每次将一个插入元素插入到排好序的输出序列中，每次迭代插入排序都会从输入数据中移除一个元素，并在已排好序的序列中找到它所属的位置，然后将其插入。直到没有输入元素剩余为止。</p>
+<p>堆排序将其输入分为已排序和未排序两个区域，并通过提取未排序区域中的最大元素并将其移至已排序的区域来迭代地缩小未排序的区域。它通过使用堆数据结构而非线性时间搜索来找到最大值。</p>
+<p>现在，给定初始序列，以及经过某种排序方法多次迭代后的序列，请你判断我们使用的哪一种排序方法。</p>
+<h4>注意</h4>
+<p>本题题目描述中曾提到保证答案唯一。</p>
+<p>不应该出现诸如下列的样例情况：</p>
+<pre><code>9
+3 1 2 8 7 9 4 6 0
+1 2 3 7 8 9 4 6 0
+</code></pre>
+
+<p>这种样例情况，无法确定插入排序进行到了第五项还是第六项。</p>
+<p>在本网站提供的数据中，并不涉及这种情况。</p>
+<p>但是 PAT 官网给出了类似样例，因而可能会出现一些代码在本网站能够 AC，但在 PAT 官网 WA 的情况，特此加以声明。</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $N$，表示序列中整数个数。</p>
+<p>第二行包含 $N$ 个整数表示初始序列。</p>
+<p>第三行包含 $N$ 个整数表示经过若干次迭代后的序列。</p>
+<p>假定排序的目标序列总是递增的。</p>
+<h4>输出格式</h4>
+<p>第一行输出 <code>Insertion Sort</code> 或 <code>Heap Sort</code>，以指明所采用的具体排序方法。</p>
+<p>运用此方法再进行一次迭代，并在第二行输出本次迭代后的序列。</p>
+<p>数据保证答案唯一。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 100$</p>
+<h4>输入样例1：</h4>
+<pre><code>10
+3 1 2 8 7 5 9 4 6 0
+1 2 3 7 8 5 9 4 6 0
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>Insertion Sort
+1 2 3 5 7 8 9 4 6 0
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>10
+3 1 2 8 7 5 9 4 6 0
+6 4 5 1 0 3 2 7 8 9
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>Heap Sort
+5 4 3 1 0 2 6 7 8 9
+</code></pre>
+
+<p>复习一下堆排序，堆是一个递归定义的结构<strong>：父亲节点是整颗子树的最值</strong>。这样，对于根节点来说，根节点的左右儿子是左右子树的最值，而<strong>根节点又是{左儿子、右儿子、根节点}之中的最值</strong>，所以<strong>根节点是整颗树的最值</strong>。<br>存储的时候用一个<strong>一维数组</strong>就可以存储<strong>一个完全二叉树</strong>。<br>初始化堆的时候当然一个一个插入也是可以的这是nlogn的，但是有o(n)的建堆方式，即：从n &#x2F; 2的位置一步步down到1；<br>在用一维数组维护堆的时候，通常要维护一个<strong>int size;<strong>方便O(1)插入，快速删除。<br>在</strong>删除</strong>的时候用heap[size]的元素“覆盖掉”h[1]就好了，然后<strong>down()<strong>一遍</strong>(看似是删除，实际是“覆盖”，达到删除的效果，而且用末尾元素也是我们维护size的原因)</strong><br>在<strong>插入</strong>的时候直接插入到h[size];然后**up()**一遍</p>
+<pre><code class="C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 110;
+int a[N],b[N],n;
+void down(int u,int size)
+&#123;
+    int t = u;
+    if(b[u * 2] &gt; b[t] &amp;&amp; u * 2 &lt;= size) t = u * 2;
+    if(b[u * 2 + 1] &gt; b[t] &amp;&amp; u * 2 + 1 &lt;= size) t = u * 2 + 1;
+    if(t != u)
+    &#123;
+        swap(b[t],b[u]);
+        down(t,size);
+    &#125;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; a[i];
+    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; b[i];
+    
+    int pos = 1;
+    while(pos + 1 &lt;= n &amp;&amp; b[pos] &lt;= b[pos + 1]) pos ++;
+    pos ++;
+    bool is_insert = true;
+    for(int i = pos;i &lt;= n;i ++)
+    &#123;
+        if(a[i] != b[i]) &#123;is_insert = false;break;&#125;
+    &#125;
+    if(is_insert)
+    &#123;
+        puts(&quot;Insertion Sort&quot;);
+        int i = pos;
+        while(i &gt; 1 &amp;&amp; b[i] &lt;= b[i - 1]) &#123;swap(b[i],b[i - 1]);i --;&#125;
+    &#125;
+    else
+    &#123;
+        puts(&quot;Heap Sort&quot;);
+        int size = n;
+        while(size &gt; 1 &amp;&amp; b[1] &lt;= b[size]) size --; 
+        swap(b[1],b[size --]);
+        down(1,size);
+    &#125;
+    cout &lt;&lt; b[1];
+    for(int i = 2;i &lt;= n;i ++) cout &lt;&lt; &#39; &#39; &lt;&lt; b[i];
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #ffa2c4">排序</a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/05/%E6%8F%92%E5%85%A5%E8%BF%98%E6%98%AF%E5%A0%86%E6%8E%92%E5%BA%8F/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/09/27/%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">
         <h2 class="post-title">对称的二叉树</h2>
     </a>
@@ -195,7 +340,7 @@
 
 <p>如下图所示二叉树[1,2,2,null,4,4,3,null,null,null,null,null,null]不是对称二叉树：<br>    1<br>   &#x2F; <br>  2   2<br>   \ &#x2F; <br>   4 4  3<br></code></pre></p>
 <p>$O(n)递归写法$<br>一棵树是对称二叉树，<strong>当且仅当</strong>，两颗子树的根节点相等，第一棵子树的左子树和第二棵子树的右子树互相对称，且第一棵子树的右子树和第二棵子树的左子树互相对称。<br><strong>递归是一个很巧妙的思路，感觉对于很多问题的处理，只要是存在子集的结构，都可以使用递归的思想（注：空集的子集是它本身，所以只要是一个集合，都会有子集的概念，这也就使得递归和分治成为一种很普遍的思想）</strong><br>本题看了y总写的，比较妙的一点是对于状态的判断的处理，省下了很多if()语句，但是直接理解起来有点难，遂加上注释以助于理解(核心在于返回的对象可以是一个表达式)</p>
-<pre><code>/**
+<pre><code class="C++">/**
  * Definition for a binary tree node.
  * struct TreeNode &#123;
  *     int val;
@@ -230,7 +375,7 @@ public:
         
         <span class="tag">
             
-            <a href="/tags/LeetCode/" style="color: #03a9f4">LeetCode</a>
+            <a href="/tags/LeetCode/" style="color: #ff7d73">LeetCode</a>
         </span>
         
     </div>
@@ -300,7 +445,7 @@ $1 \le L_i \le 1000000$</p>
 <p><strong>1：</strong>这里一条路径的权值定义为路径当中的第k + 1大值。<br>    我们要求第k + 1大值最小，求一个什么什么最小，<strong>可以很自然想到二分</strong>。<br>    想用二分要证明，看是否能找到一个性质满足以答案为基点划分，使得区间左右一个命题为真，一个命题为假。<br>    这里我们分析限制条件，来用作命题：<strong>是否存在一个x，<em>使得存在这样一条路径_：_从1走到n，经过大于等于x的边的数量小于等于k</em></strong></p>
 <p><strong>2：</strong>接下来我们的问题变成了：**<em>给定一个权值x，如何测得是否存在一条路径，使得路径中边权值大于等于x的边的数量小于等于K。</em>**<br>    直接在图里面跑一遍最短路，重新**<em>记边权大于等于x的边的边权为1，否则为0</em><strong>.求一个</strong>最少<strong>大于等于边权x的边的数量。<br>    求出来之后，就算是</strong>求出来了一条1~n的路径**。满足该路径下，边权大于等于x的边的数量小于等于k。</p>
 <p><strong>3：</strong>一点疑惑：同样都是<strong>“要求出来一条路径”</strong>，为什么我们挑选<strong>“这样的边最少的路径”</strong>也符合答案呢？（毕竟跑的是最短路径）如果稍微扰动一下，考虑另外一条路径B，这里的大于x的边的数量稍微多一些，会怎么样？<br>我们刚才求出来的是“最少的边数”小于等于k，稍微大一点了，可能仍然小于等于k啊。<br><strong>3.1</strong>解答：确实是这样。但是回头看看<strong>我们要证明的是一个存在性性质</strong>。<strong>只要说明有一条就好了</strong>，这样的话我们就找最短路径就OK。</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;
@@ -376,7 +521,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -418,7 +563,7 @@ int main()
 <p><strong><em>I have found that often the main reason beginners have a problem with pointers is that they have a weak or minimal feeling for variables, (as they are used in C). Thus we start with a discussion of C variables in general.</em></strong></p>
 <p><strong><em>A variable in a program is something with a name, the value of which can vary. The way the compiler and linker handles this is that it assigns a specific block of memory within the computer to hold the value of that variable. The size of that block depends on the range over which the variable is allowed to vary. For example, on 32 bit PC’s the size of an integer variable is 4 bytes. On older 16 bit PCs integers were 2 bytes.  In C the size of a variable type such as an integer need not be the same on all types of machines.  Further more there is more than one type of integer variable in C.  We have integers, long integers and short integers which you can read up on in any basic text on C.  This document assumes the use of a 32 bit system with 4 byte integers.</em></strong></p>
 <p><strong><em>If you want to know the size of the various types of integers on your system, running the following code will give you that information.</em></strong></p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C++">#include &lt;stdio.h&gt;
 
 int main()
 &#123;
@@ -442,7 +587,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
 <p><strong><em>Actually, the above definition of “lvalue” is somewhat modified for C. According to K&amp;R II (page 197): [1]</em></strong></p>
 <p><strong><em>“An object is a named region of storage; an lvalue is an expression referring to an object.”</em></strong><br>(对象是命名的存储区域；左值是对“对象引用”的表达)<br><strong><em>However, at this point, the definition originally cited above is sufficient. As we become more familiar with pointers we will go into more detail on this.</em></strong></p>
 <p><strong><em>Okay, now consider:</em></strong></p>
-<pre><code>   int j, k; 
+<pre><code class="C++">   int j, k; 
 
     k = 2; 
     j = 7;    &lt;-- line 1 
@@ -474,7 +619,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
 <p><strong><em>to print to the screen the integer value stored at the address pointed to by ptr;.</em></strong></p>
 <p><strong><em>One way to see how all this stuff fits together would be to run the following program and then review the code and the output carefully.</em></strong></p>
 <p>———— Program 1.1 ———————————</p>
-<pre><code> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
+<pre><code class="C++"> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
  2 
  3 #include &lt;stdio.h&gt;
  4 
@@ -511,7 +656,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
         
         <span class="tag">
             
-            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #00a596">语言知识</a>
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #ff7d73">语言知识</a>
         </span>
         
     </div>
@@ -612,7 +757,7 @@ Case #3: 500
 <p>所以答案是 $500$。</p>
 
 <p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -675,7 +820,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
@@ -755,7 +900,7 @@ int main()
 </code></pre>
 
 <p>这题还是挺难想的…..朴素的想法是枚举一下r1，枚举一下r2，然后再循环一遍看是否所有点都被覆盖。这是$O(n^3)$(TLE)<br>但是我们可以发现：1、圆的边界一定是至少有一个点的(假设没有，那么我们可以缩小圆的面积而不会使得结果变差)<br>2、我们可以通过更改枚举顺序进行优化。我们<strong>从大到小</strong>枚举r1距离，“从大到小保证了，每次只会从r1覆盖的点集中一次<strong>只抛出一个点</strong>，而在r2的点集中<strong>只加入一个点</strong>”。这样我们就可以<strong>在线性的时间内完成枚举所有r1和r2的选法</strong><br>顺带一提这题不需要用堆进行优化，因为它在处理集合的最值过程中，对于一个集合只有“加入”而没有“删除”操作，所以用一个变量动态维护一下就可以了</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -806,7 +951,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #ff7d73">枚举</a>
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #00a596">枚举</a>
         </span>
         
     </div>
@@ -876,7 +1021,7 @@ $1 \le T \le 20$</p>
 
 <p>本题是在寻找<strong>最大线性无关组</strong>，基本思路就是<strong>从小到大，看每一个数是否能被比较小的数线性表示</strong><br>那么对于每一个数的线性表示前的系数都会对应它的一个选法，系数可以无限大，这是一个完全背包问题</p>
 <p><strong>朴素版</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -930,7 +1075,7 @@ int main()
 &#125;
 </code></pre>
 <p><strong>优化版</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -976,7 +1121,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1043,7 +1188,7 @@ $0 \le x_i,y_i \le 10^9$</p>
 <p>$y = 0,x = 1,y = 4$ 可满足将所有奶牛位置覆盖。</p>
 
 <p>暴力枚举思路是枚举每一条线，这样就是Cn3种情况，三层for循环复杂度立方级别(TLE)。<br>更精巧的想法是换了一个枚举思路。类似于“最小圆覆盖”问题<br>先枚举每一个点，然后每个点其实只有两种情况(被横线覆盖或者被竖线覆盖)，这样就是一个DFS问题了<br>搜索深度是三(只有三条线)，所以复杂度为O(8n)可以过</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 #include &lt;unordered_set&gt;
@@ -1099,7 +1244,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #ff7d73">思维题</a>
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #00a596">思维题</a>
         </span>
         
     </div>
@@ -1159,7 +1304,7 @@ $0\lt v_i, w_i \le 1000$</p>
 </code></pre>
 
 <p><strong>本题是求具体方案，求方案的思路根据图的转移过程从后往前倒推一遍，看一下每一个状态由哪一个状态转移而来</strong><br>如图所示:<br><img src="https://cdn.acwing.com/media/article/image/2022/05/18/142088_efcc3465d6-%E8%83%8C%E5%8C%85%E5%80%92%E6%8E%A8%E6%B1%82%E6%96%B9%E6%A1%88.png" alt="背包倒推求方案.png"><br>看<strong>f[i][j]与f[i - 1][j]和f[i - 1][j - v[i]] + w[i]在数值上与哪一个相等</strong>，从而决定是由哪一个转移过来，从而判断第i个物品选没选<br>但是本题要求字典序输出，那么我们使用贪心的思想。<strong>从前往后对于任意一个物品x，有三种选择S : {(只能选,必选)，(只能不选，必不选),(可选可不选，一定要选)}</strong><br>一个朴素的想法就是我们<strong>先从后往前进行物品的决策</strong>，然后这样的“倒推”就是从前往后的正序了。(体现在图上就是边的方向要改变一下)</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -1206,7 +1351,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1261,7 +1406,7 @@ $1 \le A_i \le 1000$,<br />
 </code></pre>
 
 <p><strong>此题为背包问题求方案数</strong><br>f[i][j]表示：考虑前i个正整数，且当前总和<strong>恰好为j</strong>的方案数<br>别忘记给予了一个状态表示后进行初始化的处理(一般来说“不超过”和“恰好”之所以能表示它正确的涵义就是因为初始化写出的涵义不同 —— 即编码方式不同)<br>f[0] &#x3D; 1,即当总和<strong>恰好为0</strong>的时候算是一种方案</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -1303,137 +1448,6 @@ int main()
         
     </div>
     <a href="/2022/05/17/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/">
-        <h2 class="post-title">宠物小精灵之收服</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E7%AE%97%E6%B3%95/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                算法
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/5/17
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1024/">https://www.acwing.com/problem/content/1024/</a></p>
- <p>宠物小精灵是一部讲述小智和他的搭档皮卡丘一起冒险的故事。</p>
-<p>一天，小智和皮卡丘来到了小精灵狩猎场，里面有很多珍贵的野生宠物小精灵。</p>
-<p>小智也想收服其中的一些小精灵。</p>
-<p>然而，野生的小精灵并不那么容易被收服。</p>
-<p>对于每一个野生小精灵而言，小智可能需要使用很多个精灵球才能收服它，而在收服过程中，野生小精灵也会对皮卡丘造成一定的伤害（从而减少皮卡丘的体力）。</p>
-<p>当皮卡丘的体力小于等于0时，小智就必须结束狩猎（因为他需要给皮卡丘疗伤），而使得皮卡丘体力小于等于0的野生小精灵也不会被小智收服。</p>
-<p>当小智的精灵球用完时，狩猎也宣告结束。</p>
-<p>我们假设小智遇到野生小精灵时有两个选择：收服它，或者离开它。</p>
-<p>如果小智选择了收服，那么一定会扔出能够收服该小精灵的精灵球，而皮卡丘也一定会受到相应的伤害；如果选择离开它，那么小智不会损失精灵球，皮卡丘也不会损失体力。</p>
-<p>小智的目标有两个：主要目标是收服尽可能多的野生小精灵；如果可以收服的小精灵数量一样，小智希望皮卡丘受到的伤害越小（剩余体力越大），因为他们还要继续冒险。</p>
-<p>现在已知小智的精灵球数量和皮卡丘的初始体力，已知每一个小精灵需要的用于收服的精灵球数目和它在被收服过程中会对皮卡丘造成的伤害数目。</p>
-<p>请问，小智该如何选择收服哪些小精灵以达到他的目标呢？</p>
-<h4>输入格式</h4>
-<p>输入数据的第一行包含三个整数：N，M，K，分别代表小智的精灵球数量、皮卡丘初始的体力值、野生小精灵的数量。</p>
-<p>之后的K行，每一行代表一个野生小精灵，包括两个整数：收服该小精灵需要的精灵球的数量，以及收服过程中对皮卡丘造成的伤害。</p>
-<h4>输出格式</h4>
-<p>输出为一行，包含两个整数：C，R，分别表示最多收服C个小精灵，以及收服C个小精灵时皮卡丘的剩余体力值最多为R。</p>
-<h4>数据范围</h4>
-<p>$0 &lt; N \le 1000$,<br />
-$0 &lt; M \le 500$,<br />
-$0 &lt; K \le 100$</p>
-<h4>输入样例1：</h4>
-<pre><code>10 100 5
-7 10
-2 40
-2 50
-1 20
-4 20
-</code></pre>
-
-<h4>输出样例1：</h4>
-<pre><code>3 30
-</code></pre>
-
-<h4>输入样例2：</h4>
-<pre><code>10 100 5
-8 110
-12 10
-20 10
-5 200
-1 110
-</code></pre>
-
-<h4>输出样例2：</h4>
-<pre><code>0 100
-</code></pre>
-
-<p><strong>二维费用背包问题</strong><br>花费1：精灵球数量<br>花费2：皮卡丘体力值<br>价值：小精灵数量</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int N = 1010;
-int f[N][N];//精灵球数量不超过j，皮卡丘体力不超过k的方案
-int n,m,k;
-
-int main()
-&#123;
-    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
-    for(int i = 1;i &lt;= k;i ++)
-    &#123;
-        int v,h;
-        cin &gt;&gt; v &gt;&gt; h;
-        for(int j = n;j &gt;= v;j --)
-        &#123;
-            for(int l = m - 1;l &gt;= h;l --)//注意皮卡丘体力值不能为0，所以转移到m是不合法的，最多能转移到m - 1
-            &#123;
-                f[j][l] = max(f[j][l] , f[j - v][l - h] + 1);
-            &#125;
-        &#125;
-    &#125;
-    printf(&quot;%d&quot;,f[n][m - 1]);
-    int t = f[n][m - 1],res = 0;
-    for(int i = 0;i &lt;= m - 1;i ++)
-    &#123;
-        if(f[n][i] == t) res = max(res , m - i);//枚举一下所有的皮卡丘体力值，找一个最大的R(剩余值)
-    &#125;
-    //注意f[][]表示的是收服的小精灵的“个数”，第一维表示的是精灵球数量，第二维表示的是皮卡丘体力
-    
-    printf(&quot; %d&quot;,res);
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
-        </span>
-        
-    </div>
-    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1486,7 +1500,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#49;&#x37;&#53;&#50;&#53;&#49;&#56;&#x38;&#56;&#48;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;">&#49;&#x37;&#53;&#50;&#53;&#49;&#56;&#x38;&#56;&#48;&#x40;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#49;&#x37;&#x35;&#x32;&#53;&#49;&#56;&#56;&#x38;&#x30;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#49;&#x37;&#x35;&#x32;&#53;&#49;&#56;&#56;&#x38;&#x30;&#64;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a><br>…</p>
 
         </div>
         

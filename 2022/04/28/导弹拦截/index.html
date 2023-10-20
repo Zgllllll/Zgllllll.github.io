@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
             </span>
             
         </span>
@@ -196,7 +196,7 @@
 </code></pre>
 
 <p><strong>注意：贪心解与最优解并不是等价的，它们是对应着两种不同的方案的解</strong><br>本题难点在于第二问的贪心解，由于第一问的最长上升子序列，很容易想到第二问的“最优解”就是找能被几个最长上升子序列所覆盖<br> 但是<strong>“寻找一个序列最少能被几个最长上升子序列覆盖”</strong>这个问题并不好做。我们可以换思路，观察有没有别的解法。<br> <strong>一般来说贪心解法都可以被优先考虑</strong><br> 对于样例：389 207 155 300 299 170 158 65<br> 最优解为：子序列1：389 300 299 170 158 65 子序列2: 207 155<br> 贪心解为：子序列1 ：389 207 155 子序列2：300 299 170 158 65<br> <strong>通过调整法可以证明，经过交换，贪心解一定不会差于最优解，所以可以采用贪心来求解</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;

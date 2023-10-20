@@ -240,7 +240,7 @@ Case #3: 500
 <p>所以答案是 $500$。</p>
 
 <p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;

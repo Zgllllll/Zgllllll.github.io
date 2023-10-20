@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
+                <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
             </span>
             
         </span>
@@ -180,7 +180,7 @@
 <pre><code>◾ 寄存器、内存、地址...
 </code></pre>
 <h2 id="两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型"><a href="#两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型" class="headerlink" title="两个视角共同之处： 内存◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）◾ 内存 &#x3D; 代码 + 数据 + 堆栈 因此理解C程序执行最重要的就是内存模型 "></a>两个视角共同之处： <strong>内存</strong><br>◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）<br>◾ 内存 &#x3D; 代码 + 数据 + 堆栈<br> <strong>因此理解C程序执行最重要的就是内存模型</strong> </h2><p><strong>C语言中一切皆是地址</strong><br> <strong>指针都是纯粹的，类型声明只不过是对一段内存的解读方式</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C">#include &lt;stdio.h&gt;
 void printptr(void *p)//空指针是非常纯粹的，它就是一个纯粹的地址，强制类型转换更改了内存的解读方式
 &#123;
     printf(&quot;*p = %p       *p = %016lx\n&quot;,p,*(long *)p);//对于p来说，首先它是一个指针，剩下的那个long代表对指针指向的内存的一个解读
@@ -200,7 +200,7 @@ int main(int argc,char *argv[])
 <p>Linux系统下执行结果如图<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_e9e0953dbb-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果.png"><br> <strong>可以看出数据的存放位置是比代码还要高的，而且数据和代码距离堆栈都有一定的距离</strong><br>然后将 <strong>a.o文件</strong>进行反汇编之后<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_1cbec4f3bb-%E5%8F%8D%E6%B1%87%E7%BC%96.png" alt="反汇编.png"><br> <strong>惊奇的可以发现当我们用一个指针指向代码之后，它就真的把那个二进制代码直接读出来了</strong> </p>
 <hr>
 <p> <strong>C Type System</strong><br> <strong>类型：对一段内存的解读方式。C里所有的数据都可以理解成是地址（指针）+ 类型（对地址的解读）</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C">#include &lt;stdio.h&gt;
 #include &lt;assert.h&gt;
 int main(int argc,char *argv[])
 &#123;

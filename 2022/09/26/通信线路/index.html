@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ff7d73">图论</a>
+                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
             </span>
             
         </span>
@@ -209,7 +209,7 @@ $1 \le L_i \le 1000000$</p>
 <p><strong>1：</strong>这里一条路径的权值定义为路径当中的第k + 1大值。<br>    我们要求第k + 1大值最小，求一个什么什么最小，<strong>可以很自然想到二分</strong>。<br>    想用二分要证明，看是否能找到一个性质满足以答案为基点划分，使得区间左右一个命题为真，一个命题为假。<br>    这里我们分析限制条件，来用作命题：<strong>是否存在一个x，<em>使得存在这样一条路径_：_从1走到n，经过大于等于x的边的数量小于等于k</em></strong></p>
 <p><strong>2：</strong>接下来我们的问题变成了：**<em>给定一个权值x，如何测得是否存在一条路径，使得路径中边权值大于等于x的边的数量小于等于K。</em>**<br>    直接在图里面跑一遍最短路，重新**<em>记边权大于等于x的边的边权为1，否则为0</em><strong>.求一个</strong>最少<strong>大于等于边权x的边的数量。<br>    求出来之后，就算是</strong>求出来了一条1~n的路径**。满足该路径下，边权大于等于x的边的数量小于等于k。</p>
 <p><strong>3：</strong>一点疑惑：同样都是<strong>“要求出来一条路径”</strong>，为什么我们挑选<strong>“这样的边最少的路径”</strong>也符合答案呢？（毕竟跑的是最短路径）如果稍微扰动一下，考虑另外一条路径B，这里的大于x的边的数量稍微多一些，会怎么样？<br>我们刚才求出来的是“最少的边数”小于等于k，稍微大一点了，可能仍然小于等于k啊。<br><strong>3.1</strong>解答：确实是这样。但是回头看看<strong>我们要证明的是一个存在性性质</strong>。<strong>只要说明有一条就好了</strong>，这样的话我们就找最短路径就OK。</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;queue&gt;
 #include &lt;cstring&gt;

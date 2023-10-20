@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
             </span>
             
         </span>
@@ -194,7 +194,7 @@ $1 \le A_i \le 1000$,<br />
 </code></pre>
 
 <p><strong>此题为背包问题求方案数</strong><br>f[i][j]表示：考虑前i个正整数，且当前总和<strong>恰好为j</strong>的方案数<br>别忘记给予了一个状态表示后进行初始化的处理(一般来说“不超过”和“恰好”之所以能表示它正确的涵义就是因为初始化写出的涵义不同 —— 即编码方式不同)<br>f[0] &#x3D; 1,即当总和<strong>恰好为0</strong>的时候算是一种方案</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;

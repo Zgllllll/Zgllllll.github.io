@@ -267,6 +267,137 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/">
+        <h2 class="post-title">宠物小精灵之收服</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1024/">https://www.acwing.com/problem/content/1024/</a></p>
+ <p>宠物小精灵是一部讲述小智和他的搭档皮卡丘一起冒险的故事。</p>
+<p>一天，小智和皮卡丘来到了小精灵狩猎场，里面有很多珍贵的野生宠物小精灵。</p>
+<p>小智也想收服其中的一些小精灵。</p>
+<p>然而，野生的小精灵并不那么容易被收服。</p>
+<p>对于每一个野生小精灵而言，小智可能需要使用很多个精灵球才能收服它，而在收服过程中，野生小精灵也会对皮卡丘造成一定的伤害（从而减少皮卡丘的体力）。</p>
+<p>当皮卡丘的体力小于等于0时，小智就必须结束狩猎（因为他需要给皮卡丘疗伤），而使得皮卡丘体力小于等于0的野生小精灵也不会被小智收服。</p>
+<p>当小智的精灵球用完时，狩猎也宣告结束。</p>
+<p>我们假设小智遇到野生小精灵时有两个选择：收服它，或者离开它。</p>
+<p>如果小智选择了收服，那么一定会扔出能够收服该小精灵的精灵球，而皮卡丘也一定会受到相应的伤害；如果选择离开它，那么小智不会损失精灵球，皮卡丘也不会损失体力。</p>
+<p>小智的目标有两个：主要目标是收服尽可能多的野生小精灵；如果可以收服的小精灵数量一样，小智希望皮卡丘受到的伤害越小（剩余体力越大），因为他们还要继续冒险。</p>
+<p>现在已知小智的精灵球数量和皮卡丘的初始体力，已知每一个小精灵需要的用于收服的精灵球数目和它在被收服过程中会对皮卡丘造成的伤害数目。</p>
+<p>请问，小智该如何选择收服哪些小精灵以达到他的目标呢？</p>
+<h4>输入格式</h4>
+<p>输入数据的第一行包含三个整数：N，M，K，分别代表小智的精灵球数量、皮卡丘初始的体力值、野生小精灵的数量。</p>
+<p>之后的K行，每一行代表一个野生小精灵，包括两个整数：收服该小精灵需要的精灵球的数量，以及收服过程中对皮卡丘造成的伤害。</p>
+<h4>输出格式</h4>
+<p>输出为一行，包含两个整数：C，R，分别表示最多收服C个小精灵，以及收服C个小精灵时皮卡丘的剩余体力值最多为R。</p>
+<h4>数据范围</h4>
+<p>$0 &lt; N \le 1000$,<br />
+$0 &lt; M \le 500$,<br />
+$0 &lt; K \le 100$</p>
+<h4>输入样例1：</h4>
+<pre><code>10 100 5
+7 10
+2 40
+2 50
+1 20
+4 20
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>3 30
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>10 100 5
+8 110
+12 10
+20 10
+5 200
+1 110
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>0 100
+</code></pre>
+
+<p><strong>二维费用背包问题</strong><br>花费1：精灵球数量<br>花费2：皮卡丘体力值<br>价值：小精灵数量</p>
+<pre><code class="C++">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 1010;
+int f[N][N];//精灵球数量不超过j，皮卡丘体力不超过k的方案
+int n,m,k;
+
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    for(int i = 1;i &lt;= k;i ++)
+    &#123;
+        int v,h;
+        cin &gt;&gt; v &gt;&gt; h;
+        for(int j = n;j &gt;= v;j --)
+        &#123;
+            for(int l = m - 1;l &gt;= h;l --)//注意皮卡丘体力值不能为0，所以转移到m是不合法的，最多能转移到m - 1
+            &#123;
+                f[j][l] = max(f[j][l] , f[j - v][l - h] + 1);
+            &#125;
+        &#125;
+    &#125;
+    printf(&quot;%d&quot;,f[n][m - 1]);
+    int t = f[n][m - 1],res = 0;
+    for(int i = 0;i &lt;= m - 1;i ++)
+    &#123;
+        if(f[n][i] == t) res = max(res , m - i);//枚举一下所有的皮卡丘体力值，找一个最大的R(剩余值)
+    &#125;
+    //注意f[][]表示的是收服的小精灵的“个数”，第一维表示的是精灵球数量，第二维表示的是皮卡丘体力
+    
+    printf(&quot; %d&quot;,res);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/05/01/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">
         <h2 class="post-title">最长公共上升子序列</h2>
     </a>
@@ -320,7 +451,7 @@ mjx-container[display="true"] + br {
 
 <p>此题为最长上升子序列和最长公共子序列的合体版本<br>先想一下最长公共子序列<br><strong>先假设一个方案看看，假设第一个序列选择到了i,第二个序列选择到了j,我们可以画出一个方案集合</strong><br> <strong>并且依据最后一个选择的不同划分为四个子集</strong><br><img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_e52fb71bc8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共子序列.png"><br>而最长公共上升子序列的集合划分，就是在此基础之上做了进一步的合并，即：<img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_86bad0d8c8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共上升子序列.png"> </p>
 <p>我们将这个<strong>大方案的集合</strong>表示为f[i][j]<br>即：所有由第一个序列的前i个字母，和第二个序列的前j个字母，<strong>且以b[j]结尾</strong>的公共上升子序列<br>那么由3、4表示的<strong>不含a[i]子集就是f[i-1][j]<strong>， <strong>本题难点在于怎么算1、2这个子集</strong><br>  <strong>小Tip:</strong> 当没有一个状态可以很好的表示或者没办法转化的时候就继续把它分解，</strong>理论上来说一定是可以分解到能算为止的。最不济每一种方案都是一个状态(DP的核心就是能够用一个数表示并且处理一类状态，一次处理很多状态使得它的效率比较高)，那么我们直接用暴搜就可以做了</strong><br>所以我们继续尝试分解1、2，以<strong>倒数第二个位置不同</strong>分为，——b1，ai;——b2,ai;…..——bk,ai这些集合<br>而对于集合<strong>S：{—b1;—b2;—b3;…—bk}即等价于f[i-1][1],f[i-1][2]…f[i-1][k]</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -359,7 +490,7 @@ int main()
 &#125;
 </code></pre>
 <p><strong>优化：</strong></p>
-<pre><code>for(int k = 0;k &lt; j;k ++)
+<pre><code class="C++">for(int k = 0;k &lt; j;k ++)
     &#123;
         if(b[k] &lt; b[j])//b[j] == a[i]所以条件等价于if(b[k] &lt; a[i])
         &#123;
@@ -368,7 +499,7 @@ int main()
     &#125;
 </code></pre>
 <p>对于这第三层循环，<strong>它的意义在于寻找f[i-1][0~j-1]的最大值</strong>，那么我们可以不需要循环一遍k，而是直接在i,j循环的时候就可以做好这件事<br>即将代码等价变形为：</p>
-<pre><code>for(int i = 1;i &lt;= n;i ++)
+<pre><code class="C++">for(int i = 1;i &lt;= n;i ++)
 &#123;
     int maxv = 1;
     for(int j = 1;j &lt;= n;j ++)
@@ -392,7 +523,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
@@ -449,7 +580,7 @@ int main()
 </code></pre>
 
 <p><strong>注意：贪心解与最优解并不是等价的，它们是对应着两种不同的方案的解</strong><br>本题难点在于第二问的贪心解，由于第一问的最长上升子序列，很容易想到第二问的“最优解”就是找能被几个最长上升子序列所覆盖<br> 但是<strong>“寻找一个序列最少能被几个最长上升子序列覆盖”</strong>这个问题并不好做。我们可以换思路，观察有没有别的解法。<br> <strong>一般来说贪心解法都可以被优先考虑</strong><br> 对于样例：389 207 155 300 299 170 158 65<br> 最优解为：子序列1：389 300 299 170 158 65 子序列2: 207 155<br> 贪心解为：子序列1 ：389 207 155 子序列2：300 299 170 158 65<br> <strong>通过调整法可以证明，经过交换，贪心解一定不会差于最优解，所以可以采用贪心来求解</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
@@ -500,7 +631,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
         </span>
         
     </div>
@@ -571,7 +702,7 @@ int main()
 </code></pre>
 
 <p>约瑟夫环问题</p>
-<pre><code>//约瑟夫环问题，可以用队列解决，将数过的数放在加入到队尾，这样队头就是leader，然后从leader开始数
+<pre><code class="C++">//约瑟夫环问题，可以用队列解决，将数过的数放在加入到队尾，这样队头就是leader，然后从leader开始数
 //给定一个a的长度，每次有效长度只是a % size()
 #include &lt;iostream&gt;
 #include &lt;algorithm&gt;
@@ -615,7 +746,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00a596">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
         </span>
         
     </div>
@@ -656,7 +787,7 @@ int main()
 <pre><code>◾ 寄存器、内存、地址...
 </code></pre>
 <h2 id="两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型"><a href="#两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型" class="headerlink" title="两个视角共同之处： 内存◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）◾ 内存 &#x3D; 代码 + 数据 + 堆栈 因此理解C程序执行最重要的就是内存模型 "></a>两个视角共同之处： <strong>内存</strong><br>◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）<br>◾ 内存 &#x3D; 代码 + 数据 + 堆栈<br> <strong>因此理解C程序执行最重要的就是内存模型</strong> </h2><p><strong>C语言中一切皆是地址</strong><br> <strong>指针都是纯粹的，类型声明只不过是对一段内存的解读方式</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C">#include &lt;stdio.h&gt;
 void printptr(void *p)//空指针是非常纯粹的，它就是一个纯粹的地址，强制类型转换更改了内存的解读方式
 &#123;
     printf(&quot;*p = %p       *p = %016lx\n&quot;,p,*(long *)p);//对于p来说，首先它是一个指针，剩下的那个long代表对指针指向的内存的一个解读
@@ -676,7 +807,7 @@ int main(int argc,char *argv[])
 <p>Linux系统下执行结果如图<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_e9e0953dbb-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果.png"><br> <strong>可以看出数据的存放位置是比代码还要高的，而且数据和代码距离堆栈都有一定的距离</strong><br>然后将 <strong>a.o文件</strong>进行反汇编之后<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_1cbec4f3bb-%E5%8F%8D%E6%B1%87%E7%BC%96.png" alt="反汇编.png"><br> <strong>惊奇的可以发现当我们用一个指针指向代码之后，它就真的把那个二进制代码直接读出来了</strong> </p>
 <hr>
 <p> <strong>C Type System</strong><br> <strong>类型：对一段内存的解读方式。C里所有的数据都可以理解成是地址（指针）+ 类型（对地址的解读）</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C">#include &lt;stdio.h&gt;
 #include &lt;assert.h&gt;
 int main(int argc,char *argv[])
 &#123;
@@ -810,7 +941,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ffa2c4">小Tips</a>
         </span>
         
     </div>
@@ -860,7 +991,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#49;&#55;&#x35;&#x32;&#x35;&#x31;&#x38;&#x38;&#x38;&#48;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#49;&#55;&#x35;&#x32;&#x35;&#x31;&#x38;&#x38;&#x38;&#48;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#49;&#x37;&#53;&#50;&#53;&#49;&#56;&#x38;&#x38;&#48;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#109;">&#49;&#x37;&#53;&#50;&#53;&#49;&#56;&#x38;&#x38;&#48;&#64;&#x71;&#113;&#x2e;&#x63;&#111;&#109;</a><br>…</p>
 
         </div>
         

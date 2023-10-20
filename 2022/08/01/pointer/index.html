@@ -181,7 +181,7 @@
 <p><strong><em>I have found that often the main reason beginners have a problem with pointers is that they have a weak or minimal feeling for variables, (as they are used in C). Thus we start with a discussion of C variables in general.</em></strong></p>
 <p><strong><em>A variable in a program is something with a name, the value of which can vary. The way the compiler and linker handles this is that it assigns a specific block of memory within the computer to hold the value of that variable. The size of that block depends on the range over which the variable is allowed to vary. For example, on 32 bit PC’s the size of an integer variable is 4 bytes. On older 16 bit PCs integers were 2 bytes.  In C the size of a variable type such as an integer need not be the same on all types of machines.  Further more there is more than one type of integer variable in C.  We have integers, long integers and short integers which you can read up on in any basic text on C.  This document assumes the use of a 32 bit system with 4 byte integers.</em></strong></p>
 <p><strong><em>If you want to know the size of the various types of integers on your system, running the following code will give you that information.</em></strong></p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class="C++">#include &lt;stdio.h&gt;
 
 int main()
 &#123;
@@ -205,7 +205,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
 <p><strong><em>Actually, the above definition of “lvalue” is somewhat modified for C. According to K&amp;R II (page 197): [1]</em></strong></p>
 <p><strong><em>“An object is a named region of storage; an lvalue is an expression referring to an object.”</em></strong><br>(对象是命名的存储区域；左值是对“对象引用”的表达)<br><strong><em>However, at this point, the definition originally cited above is sufficient. As we become more familiar with pointers we will go into more detail on this.</em></strong></p>
 <p><strong><em>Okay, now consider:</em></strong></p>
-<pre><code>   int j, k; 
+<pre><code class="C++">   int j, k; 
 
     k = 2; 
     j = 7;    &lt;-- line 1 
@@ -237,7 +237,7 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
 <p><strong><em>to print to the screen the integer value stored at the address pointed to by ptr;.</em></strong></p>
 <p><strong><em>One way to see how all this stuff fits together would be to run the following program and then review the code and the output carefully.</em></strong></p>
 <p>———— Program 1.1 ———————————</p>
-<pre><code> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
+<pre><code class="C++"> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
  2 
  3 #include &lt;stdio.h&gt;
  4 

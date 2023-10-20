@@ -155,6 +155,85 @@
         
 
 <div class="post">
+    <a href="/2022/12/26/A+B%E7%A1%AC%E4%BB%B6%E8%A7%A3%E9%87%8A/">
+        <h2 class="post-title">A+B硬件解释</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                计算机知识
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/12/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>这个实例正好很完美的展现了，<strong>逻辑运算符与加法运算符之间，有着某种深刻的等价性。</strong></p>
+<pre><code class="C++">//逻辑运算和加法之间有某种很巧妙的联系,甚至逻辑运算可以代替加法的一部分
+//对于实现一个加法运算符来讲，我们要用AND,OR,XOR,Shift等逻辑运算
+//加法，如101 + 111，可以分成两部分算，一部分算“进位”，一部分算非进位部分。
+//如57 + 44，个位7 + 4 &gt;= 10，进位1，十位5 + 4 &lt; 10 ，进位0
+//那么进位的部分就是10(本来就是向高进位，故需要左移一位)
+//非进位部分，个位为1，十位为9，所以就是91，那么res = 91 + 10;
+//重复之前的操作，91 + 10，进位的部分是100，非进位的部分是1，所以res = 100 + 1;
+//100 + 1，进位部分为0，非进位部分为101，至此，检测到进位部分为0，则计算结束。
+//那么对于二进制来讲，计算非进位的部分我们发现其实XOR就能解决(因为1和1相加，0和0相加，结果都是0,1和0相加结果是1)
+//而进位的部分，用AND操作符就能解决(当且仅当1和1都存在时，进位才为1)
+//1011 + 11，非进位1011 XOR 11 = 1000 进位(1011 AND 11) &lt;&lt; 1 = 110;
+//1000 + 110,非进位1000 XOR 110 = 1110 进位(1000 AND 110) &lt;&lt; 1 = 0;
+//检测到进位部分为0，所以结果就是1110；
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+int getSum(int a,int b)
+&#123;
+    return b == 0 ? a : getSum(a ^ b , (a &amp; b) &lt;&lt; 1);
+&#125;
+
+int main()
+&#123;
+    int a,b;
+    cin &gt;&gt; a &gt;&gt; b;
+    int res = getSum(a,b);
+    cout &lt;&lt; res;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">硬件知识</a>
+        </span>
+        
+    </div>
+    <a href="/2022/12/26/A+B%E7%A1%AC%E4%BB%B6%E8%A7%A3%E9%87%8A/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/12/02/%E6%8E%92%E9%98%9F%E7%AD%89%E5%80%99/">
         <h2 class="post-title">排队等候</h2>
     </a>
@@ -225,7 +304,7 @@ Sorry
 </code></pre>
 
 <p>讨厌大模拟QAQ<br>自己的最初的思路：</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;queue&gt;
 using namespace std;
@@ -305,7 +384,7 @@ int main()
 &#125;
 </code></pre>
 <p>y总的思路：简洁且正确。队列里存的是时间，比较难想到<br>sum代表做完整个队列所需要的时间</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;queue&gt;
 #include &lt;unordered_map&gt;
@@ -370,7 +449,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00a596">大模拟</a>
         </span>
         
     </div>
@@ -447,13 +526,13 @@ $K_i &gt; 0$,<br />
 <li>$1$ 人集群 $\lbrace 1 \rbrace$。</li>
 
 <p>本质上就是处理连通性的问题<br>超简单合并模板。（不包含按秩合并，递归回来会进行路径压缩）</p>
-<pre><code>int find(int x)
+<pre><code class="C++">int find(int x)
 &#123;
     if(p[x] != x) p[x] = find(p[x]);
     return p[x];
 &#125;
 </code></pre>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;vector&gt;
 using namespace std;
@@ -580,7 +659,7 @@ int main()
 </code></pre>
 
 <p><strong>编译原理，利用状态机处理字符串问题(语言判定相关问题)</strong><br><img src="https://cdn.acwing.com/media/article/image/2022/11/28/142088_212dad436e-QQ%E5%9B%BE%E7%89%8720221128132503.png" alt="QQ图片20221128132503.png"> </p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 
 using namespace std;
@@ -732,7 +811,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ffa2c4">数学</a>
         </span>
         
     </div>
@@ -790,7 +869,7 @@ $1 \le m \le 10^5$,<br />
 </code></pre>
 
 <p>DFS暴力求最短路。如果加上一个Depth参数，可以限制深度。<br>DFS求最短路是在遍历到每一个点的时候做更新。而dijkstra求最短路，是在扩展每个点的时候做。两者的流程有些不同<br>不过核心思想都是一样的，<strong>只要一个点被多次更新的时候，遇到更小的，就去更新它。</strong><br>如题目：<a href="https://">https://www.acwing.com/file_system&#x2F;file&#x2F;content&#x2F;whole&#x2F;index&#x2F;content&#x2F;7299482&#x2F;</a><br><strong>在遍历每个点的时候做：</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 using namespace std;
@@ -837,7 +916,7 @@ int main()
 </code></pre>
 <hr>
 <p><strong>在扩展的时候做：</strong></p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 using namespace std;
@@ -901,7 +980,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -978,7 +1057,7 @@ $1 \le K \le N$</p>
 </code></pre>
 
 <p><img src="https://cdn.acwing.com/media/article/image/2022/11/19/142088_dfadffd167-QQ%E5%9B%BE%E7%89%8720221119152150.png" alt="QQ图片20221119152150.png"><br>这道题就可以深刻体会到，BFS能够直接求边权为1的最短路的好处了。<br>这道题也要走最短的一条路，怪不得DFS半天过不去，在DFS的过程当中还要<strong>维护一个每个点的最短路径</strong><br>当然，最好直接用BFS做就行了….</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 #include &lt;vector&gt;
@@ -1044,7 +1123,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
         </span>
         
     </div>
@@ -1131,7 +1210,7 @@ G3 G2 2
 <pre><code>No Solution
 </code></pre>
 
-<pre><code>/*
+<pre><code class="C++">/*
 本来我的设计是想让函数返回很多值的，一个距离，一个总和，一个是否合法(这样就要搞一个结构体存，有些麻烦)
 然后发现其实“可以把多个参数传引用进去”，以达到同样的效果。
 printf(&quot;%.1lf %.1lf&quot;,(double)maxD,(double)sumD / n + 1e-8);
@@ -1162,7 +1241,7 @@ printf(&quot;%lf\n&quot;,3.24999999 / 3);  ------&gt; 1.083333
 </code></pre>
 <p>关于输出的问题解答：<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759629334">https://www.zhihu.com/question/447078607/answer/1759629334</a><br>根据 c printf 的文档：<strong>If a conversion specification is invalid, the behavior is undefined.</strong><br>所以这种代码的行为完全取决于编译器的实现，发生什么都不奇怪。做实验测试 c&#x2F;cpp 的行为是完全不可靠的，因为 c&#x2F;cpp 的 UB 实在太多了。拿实验结果&#x2F;汇编代码来倒推语言标准更是本末倒置。遇到问题最好还是查文档，实验仅用于验证。</p>
 <p>作者：lljbash<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759667992">https://www.zhihu.com/question/447078607/answer/1759667992</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 using namespace std;
@@ -1265,7 +1344,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -1332,7 +1411,7 @@ $1 \le L_i \le 200$,<br />
 </code></pre>
 
 <p><img src="https://cdn.acwing.com/media/article/image/2022/11/15/142088_fcb4b3af64-QQ%E5%9B%BE%E7%89%8720221115152721.png" alt="QQ图片20221115152721.png"><br>对于一个点，可能会被多次更新</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cstring&gt;
 using namespace std;
@@ -1402,7 +1481,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
         </span>
         
     </div>
@@ -1549,156 +1628,11 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
         </span>
         
     </div>
     <a href="/2022/11/09/AVL%E6%A0%91%E7%9A%84%E6%A0%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/11/05/%E6%8F%92%E5%85%A5%E8%BF%98%E6%98%AF%E5%A0%86%E6%8E%92%E5%BA%8F/">
-        <h2 class="post-title">插入还是堆排序</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E7%AE%97%E6%B3%95/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                算法
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/11/5
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1590/">https://www.acwing.com/problem/content/1590/</a><br> <p>根据维基百科：</p></p>
-<p>插入排序迭代，每次将一个插入元素插入到排好序的输出序列中，每次迭代插入排序都会从输入数据中移除一个元素，并在已排好序的序列中找到它所属的位置，然后将其插入。直到没有输入元素剩余为止。</p>
-<p>堆排序将其输入分为已排序和未排序两个区域，并通过提取未排序区域中的最大元素并将其移至已排序的区域来迭代地缩小未排序的区域。它通过使用堆数据结构而非线性时间搜索来找到最大值。</p>
-<p>现在，给定初始序列，以及经过某种排序方法多次迭代后的序列，请你判断我们使用的哪一种排序方法。</p>
-<h4>注意</h4>
-<p>本题题目描述中曾提到保证答案唯一。</p>
-<p>不应该出现诸如下列的样例情况：</p>
-<pre><code>9
-3 1 2 8 7 9 4 6 0
-1 2 3 7 8 9 4 6 0
-</code></pre>
-
-<p>这种样例情况，无法确定插入排序进行到了第五项还是第六项。</p>
-<p>在本网站提供的数据中，并不涉及这种情况。</p>
-<p>但是 PAT 官网给出了类似样例，因而可能会出现一些代码在本网站能够 AC，但在 PAT 官网 WA 的情况，特此加以声明。</p>
-<h4>输入格式</h4>
-<p>第一行包含整数 $N$，表示序列中整数个数。</p>
-<p>第二行包含 $N$ 个整数表示初始序列。</p>
-<p>第三行包含 $N$ 个整数表示经过若干次迭代后的序列。</p>
-<p>假定排序的目标序列总是递增的。</p>
-<h4>输出格式</h4>
-<p>第一行输出 <code>Insertion Sort</code> 或 <code>Heap Sort</code>，以指明所采用的具体排序方法。</p>
-<p>运用此方法再进行一次迭代，并在第二行输出本次迭代后的序列。</p>
-<p>数据保证答案唯一。</p>
-<h4>数据范围</h4>
-<p>$1 \le N \le 100$</p>
-<h4>输入样例1：</h4>
-<pre><code>10
-3 1 2 8 7 5 9 4 6 0
-1 2 3 7 8 5 9 4 6 0
-</code></pre>
-
-<h4>输出样例1：</h4>
-<pre><code>Insertion Sort
-1 2 3 5 7 8 9 4 6 0
-</code></pre>
-
-<h4>输入样例2：</h4>
-<pre><code>10
-3 1 2 8 7 5 9 4 6 0
-6 4 5 1 0 3 2 7 8 9
-</code></pre>
-
-<h4>输出样例2：</h4>
-<pre><code>Heap Sort
-5 4 3 1 0 2 6 7 8 9
-</code></pre>
-
-<p>复习一下堆排序，堆是一个递归定义的结构<strong>：父亲节点是整颗子树的最值</strong>。这样，对于根节点来说，根节点的左右儿子是左右子树的最值，而<strong>根节点又是{左儿子、右儿子、根节点}之中的最值</strong>，所以<strong>根节点是整颗树的最值</strong>。<br>存储的时候用一个<strong>一维数组</strong>就可以存储<strong>一个完全二叉树</strong>。<br>初始化堆的时候当然一个一个插入也是可以的这是nlogn的，但是有o(n)的建堆方式，即：从n &#x2F; 2的位置一步步down到1；<br>在用一维数组维护堆的时候，通常要维护一个<strong>int size;<strong>方便O(1)插入，快速删除。<br>在</strong>删除</strong>的时候用heap[size]的元素“覆盖掉”h[1]就好了，然后<strong>down()<strong>一遍</strong>(看似是删除，实际是“覆盖”，达到删除的效果，而且用末尾元素也是我们维护size的原因)</strong><br>在<strong>插入</strong>的时候直接插入到h[size];然后**up()**一遍</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int N = 110;
-int a[N],b[N],n;
-void down(int u,int size)
-&#123;
-    int t = u;
-    if(b[u * 2] &gt; b[t] &amp;&amp; u * 2 &lt;= size) t = u * 2;
-    if(b[u * 2 + 1] &gt; b[t] &amp;&amp; u * 2 + 1 &lt;= size) t = u * 2 + 1;
-    if(t != u)
-    &#123;
-        swap(b[t],b[u]);
-        down(t,size);
-    &#125;
-&#125;
-int main()
-&#123;
-    cin &gt;&gt; n;
-    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; a[i];
-    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; b[i];
-    
-    int pos = 1;
-    while(pos + 1 &lt;= n &amp;&amp; b[pos] &lt;= b[pos + 1]) pos ++;
-    pos ++;
-    bool is_insert = true;
-    for(int i = pos;i &lt;= n;i ++)
-    &#123;
-        if(a[i] != b[i]) &#123;is_insert = false;break;&#125;
-    &#125;
-    if(is_insert)
-    &#123;
-        puts(&quot;Insertion Sort&quot;);
-        int i = pos;
-        while(i &gt; 1 &amp;&amp; b[i] &lt;= b[i - 1]) &#123;swap(b[i],b[i - 1]);i --;&#125;
-    &#125;
-    else
-    &#123;
-        puts(&quot;Heap Sort&quot;);
-        int size = n;
-        while(size &gt; 1 &amp;&amp; b[1] &lt;= b[size]) size --; 
-        swap(b[1],b[size --]);
-        down(1,size);
-    &#125;
-    cout &lt;&lt; b[1];
-    for(int i = 2;i &lt;= n;i ++) cout &lt;&lt; &#39; &#39; &lt;&lt; b[i];
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #ff7d73">排序</a>
-        </span>
-        
-    </div>
-    <a href="/2022/11/05/%E6%8F%92%E5%85%A5%E8%BF%98%E6%98%AF%E5%A0%86%E6%8E%92%E5%BA%8F/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1748,7 +1682,7 @@ int main()
         </div>
         <div class="name">金冠小熊猫</div>
         <div class="description">
-            <p>Emailme:<a href="mailto:&#49;&#55;&#x35;&#x32;&#x35;&#49;&#56;&#56;&#56;&#x30;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;">&#49;&#55;&#x35;&#x32;&#x35;&#49;&#56;&#56;&#56;&#x30;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;</a><br>…</p>
+            <p>Emailme:<a href="mailto:&#x31;&#x37;&#53;&#x32;&#x35;&#x31;&#56;&#56;&#56;&#x30;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;">&#x31;&#x37;&#53;&#x32;&#x35;&#x31;&#56;&#56;&#56;&#x30;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;</a><br>…</p>
 
         </div>
         

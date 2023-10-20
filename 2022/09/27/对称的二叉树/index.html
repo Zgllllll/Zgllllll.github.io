@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #00a596">LeetCode</a>
+                <a href="/tags/LeetCode/" style="color: #ff7d73">LeetCode</a>
             </span>
             
         </span>
@@ -187,7 +187,7 @@
 
 <p>如下图所示二叉树[1,2,2,null,4,4,3,null,null,null,null,null,null]不是对称二叉树：<br>    1<br>   &#x2F; <br>  2   2<br>   \ &#x2F; <br>   4 4  3<br></code></pre></p>
 <p>$O(n)递归写法$<br>一棵树是对称二叉树，<strong>当且仅当</strong>，两颗子树的根节点相等，第一棵子树的左子树和第二棵子树的右子树互相对称，且第一棵子树的右子树和第二棵子树的左子树互相对称。<br><strong>递归是一个很巧妙的思路，感觉对于很多问题的处理，只要是存在子集的结构，都可以使用递归的思想（注：空集的子集是它本身，所以只要是一个集合，都会有子集的概念，这也就使得递归和分治成为一种很普遍的思想）</strong><br>本题看了y总写的，比较妙的一点是对于状态的判断的处理，省下了很多if()语句，但是直接理解起来有点难，遂加上注释以助于理解(核心在于返回的对象可以是一个表达式)</p>
-<pre><code>/**
+<pre><code class="C++">/**
  * Definition for a binary tree node.
  * struct TreeNode &#123;
  *     int val;

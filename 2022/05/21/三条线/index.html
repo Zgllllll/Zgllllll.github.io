@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #ffa2c4">思维题</a>
+                <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #03a9f4">思维题</a>
             </span>
             
         </span>
@@ -206,7 +206,7 @@ $0 \le x_i,y_i \le 10^9$</p>
 <p>$y = 0,x = 1,y = 4$ 可满足将所有奶牛位置覆盖。</p>
 
 <p>暴力枚举思路是枚举每一条线，这样就是Cn3种情况，三层for循环复杂度立方级别(TLE)。<br>更精巧的想法是换了一个枚举思路。类似于“最小圆覆盖”问题<br>先枚举每一个点，然后每个点其实只有两种情况(被横线覆盖或者被竖线覆盖)，这样就是一个DFS问题了<br>搜索深度是三(只有三条线)，所以复杂度为O(8n)可以过</p>
-<pre><code>#include &lt;iostream&gt;
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 #include &lt;unordered_set&gt;
