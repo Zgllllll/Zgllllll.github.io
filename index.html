@@ -446,7 +446,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
         </span>
         
     </div>
@@ -822,7 +822,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
@@ -914,7 +914,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
         </span>
         
     </div>
@@ -1178,11 +1178,218 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #00a596">硬件知识</a>
+            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">硬件知识</a>
         </span>
         
     </div>
     <a href="/2022/12/26/A+B%E7%A1%AC%E4%BB%B6%E8%A7%A3%E9%87%8A/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/12/02/%E6%8E%92%E9%98%9F%E7%AD%89%E5%80%99/">
+        <h2 class="post-title">排队等候</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/12/2
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1488/">https://www.acwing.com/problem/content/1488/</a></p>
+<p>假设一家银行有 $N$ 个服务窗口。</p>
+<p>窗户前面有一条黄线，将等候区分为两部分。</p>
+<p>客户排队等候的规则是：</p>
+<ul>
+<li>在黄线以内的区域，每个窗口前都可以排一队人，每队最多可以排 $M$ 个人，当 $N$ 个窗口前的队伍都排满时，第 $NM+1$ 个顾客以及以后的顾客只能在黄线以外的区域等候。黄线外的所有客户统一排成一个长队。</li>
+<li>每当客户进入黄线以内时，他会选择到当前排队人数最少的窗口处排队等待办理业务。当多个窗口前排队人数最少时，客户会选择窗口编号更小的窗口处排队等待办理业务。</li>
+<li>第 $i$ 名客户的办理业务时长为 $T_i$。</li>
+<li>最开始的 $N$ 名客户将于早上 <code>08:00</code> 被受理业务。</li>
+</ul>
+<p>现在，给定所有客户办理业务所需的时间，并对你进行若干次询问，每次询问一名客户办理完自身业务时的确切时间。</p>
+<p>例如，假设银行共有 $2$ 个服务窗口，每个窗口内可以有两名客户排在黄线以内。</p>
+<p>现在共有 $5$ 名客户等待办理业务，他们的业务时长分别为 $1,2,6,4,3$ 分钟。</p>
+<p>早上 <code>08:00</code> 时，客户 $1$ 在窗口 $1$ 接受服务，客户 $2$ 在窗口 $2$ 接受服务，客户 $3$ 在窗口 $1$ 前等待，客户 $4$ 在窗口 $2$ 前等待，客户 $5$ 在黄线以外等待。</p>
+<p>在 <code>08:01</code>，客户 $1$ 办完业务，客户 $5$ 进入黄线以内，并于窗口 $1$ 前等待。</p>
+<p>客户 $2$ 将于 <code>08:02</code> 办完业务，客户 $4$ 将于 <code>08:06</code> 办完业务，客户 $3$ 将于 <code>08:07</code> 办完业务，客户 $5$ 将于 <code>08:10</code> 办完业务。</p>
+<h4>输入格式</h4>
+<p>第一行包含 $4$ 个整数，$N,M,K,Q$，分别表示窗口总数，黄线内每个队伍的最大长度，客户总数，询问次数。</p>
+<p>第二行包含 $K$ 个整数，表示每个客户办理业务的所需时长（单位：分钟）。</p>
+<p>第三行包含 $Q$ 个整数，表示询问的所有客户的编号。</p>
+<p>客户编号从 $1$ 到 $K$。</p>
+<h4>输出格式</h4>
+<p>对于每个询问的客户，输出其办理完业务的确切时间，格式为 <code>HH:MM</code>。</p>
+<p>注意，银行 <code>17:00</code> 就会停止受理新的业务，所以对于<strong>不能在 17:00 之前（即最晚可以开始服务的时间是16:59）</strong>开始办理业务的客户，要输出 <code>Sorry</code>。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 20$,<br />
+$1 \le M \le 10$,<br />
+$1 \le K \le 1000$,<br />
+$1 \le Q \le K$</p>
+<h4>输入样例：</h4>
+<pre><code>2 2 7 5
+1 2 6 4 3 534 2
+3 4 5 6 7
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>08:07
+08:06
+08:10
+17:00
+Sorry
+</code></pre>
+讨厌大模拟QAQ
+自己的最初的思路：
+```
+#include <iostream>
+#include <algorithm>
+#include <queue>
+using namespace std;
+const int N = 21,M = 1010,INF = 0x3f3f3f3f;
+int n,m,k,Q;
+struct Person
+{
+    int id,deal_time,end_time;
+}persons[M];
+queue<Person> q[N];
+int finish_time[N];//我们要记录一下每个队列队首元素的当前结束时间
+int main()
+{
+    cin >> n >> m >> k >> Q;
+    for(int i = 1;i <= k;i ++)
+    {
+        int time;
+        cin >> time;
+        persons[i] = {i,time,0};
+    }
+    //咱先把窗口前的队列填满喽，然后每次只需要找所有队列队首最早结束的那一位，让后面的人上去就好了。
+    //在更新的时候，我们队首元素的结束时间应该是前面的一个人的结束时间 + 他的deal_time
+    //那么如果队首就是第一个进来的人怎么办呢？
+    //所以我们还需要一个finish数组，来额外维护一下上一个元素结束的时间的时间，默认如果是第一位，则上一位的结束时间是8:00
+    int cnt = 1;
+    while(cnt <= n * m)
+    {
+        for(int i = 1;i <=  m;i ++) 
+        {
+            q[i].push({cnt,persons[cnt].deal_time,0});
+            cnt ++;
+        }
+    }
+    //cout << cnt - 1 << endl;
+    //先前一共加了cnt个人，如果再加正好编号正好从cnt开始，（因为末尾有一个+1）
+    for(int i = 1;i <= m;i ++) finish_time[i] = 8 * 60;//默认上一个对象的结束时间是8点
+    for(int i = 1;i <= k;i ++)//肯定要为k个人每个人都计算一次啊
+    {
+        int t = -1;
+        for(int j = 1;j <= n;j ++)
+        {
+            //这里改了，我们是想找到最先处理完的，一个先决条件就是队列不空
+            if(q[j].size() && (t == -1 || finish_time[j] + q[j].front().deal_time < finish_time[t] + q[t].front().deal_time))
+                t = j;
+        }
+        int id = q[t].front().id;
+        int hour = (finish_time[t] + q[t].front().deal_time) / 60;
+        int minutes = (finish_time[t] + q[t].front().deal_time) % 60;
+        
+<pre><code>    // cout &lt;&lt; t &lt;&lt; &#39; &#39; &lt;&lt; id &lt;&lt; endl;
+    // cout &lt;&lt; finish_time[t] &lt;&lt; &#39; &#39; &lt;&lt; q[t].front().deal_time &lt;&lt; endl;
+    // printf(&quot;当前队列%d 的时间为：%02d:%02d 容量为：%d\n&quot;,t,hour,minutes,q[t].size());
+    q[t].pop();
+    
+    persons[id].end_time =  finish_time[t] + persons[id].deal_time;
+    finish_time[t] = persons[id].end_time;
+    if(cnt &lt;= k)//相当于变相维护了一个黄线外的队列，只不过我们都存到数组里去了，所以拿一个cnt计数一下就好
+    &#123;
+         q[t].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
+         //printf(&quot;最小队列编号：%d 加入了一个：%d\n&quot;,t,cnt);
+         cnt ++;
+    &#125;
+&#125;
+int id;
+while(Q --)
+&#123;
+    cin &gt;&gt; id;
+    if(persons[id].end_time &gt; 17 * 60) puts(&quot;Sorry&quot;);
+    else 
+    &#123;
+        //cout &lt;&lt; persons[id].end_time &lt;&lt; endl;
+        int hour = persons[id].end_time / 60,minutes = persons[id].end_time % 60;
+        printf(&quot;%02d:%02d\n&quot;,hour,minutes);
+    &#125;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+<pre><code>y总的思路：简洁且正确。队列里存的是时间，比较难想到
+sum代表做完整个队列所需要的时间
+</code></pre>
+<p>#include <iostream><br>#include <cstring><br>#include <queue><br>#include <unordered_map></p>
+<p>using namespace std;</p>
+<p>const int N &#x3D; 20;</p>
+<p>int n, m, k, Q;<br>int sum[N];<br>queue<int> q[N];</p>
+<p>int main()<br>{<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;</p>
+<pre><code>unordered_map&lt;int, int&gt; hash;
+for (int i = 1; i &lt;= k; i ++ )
+&#123;
+    int s;
+    cin &gt;&gt; s;
+
+    int t = 0;
+    for (int j = 0; j &lt; n; j ++ )
+        if (i &lt;= n * m)
+        &#123;
+            if (q[j].size() &lt; q[t].size()) t = j;
+        &#125;
+        else
+        &#123;
+            if (q[j].front() &lt; q[t].front()) t = j;
+        &#125;
+
+    sum[t] += s;
+    if (i &gt; n * m) q[t].pop();
+    q[t].push(sum[t]);
+
+    if (sum[t] - s &lt; 540) hash[i] = sum[t];
+&#125;
+
+while (Q -- )
+&#123;
+    int id;
+    cin &gt;&gt; id;
+    if (hash.count(id)) printf(&quot;%02d:%02d\n&quot;, hash[id] / 60 + 8, hash[id] % 60);
+    else puts(&quot;Sorry&quot;);
+&#125;
+
+return 0;
+</code></pre>
+<p>}</p>
+<pre><code>
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
+        </span>
+        
+    </div>
+    <a href="/2022/12/02/%E6%8E%92%E9%98%9F%E7%AD%89%E5%80%99/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -1270,7 +1477,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
         </span>
         
     </div>
@@ -1347,7 +1554,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
         </span>
         
     </div>

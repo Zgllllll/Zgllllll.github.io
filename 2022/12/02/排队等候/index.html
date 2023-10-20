@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>岛 | 金冠小熊猫</title>
+        <title>排队等候 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="Hope be happy everyday" />
         <meta name="keywords" content="菜狗大学生" />
@@ -152,14 +152,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>岛</h1>
+        <h1>排队等候</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/5/22
+            2022/12/2
         </span>
         
         
@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
+                <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
             </span>
             
         </span>
@@ -178,72 +178,174 @@
     </div>
     
     <div class="content" v-pre>
-        <p>每当下雨时，农夫约翰的田地总是被洪水淹没。</p>
-<p>由于田地不是完全水平的，所以一些地方充满水后，留下了许多被水隔开的“岛”。</p>
-<p>约翰的田地被描述为由 $N$ 个连续高度值 $H_1,&hellip;,H_N$ 指定的一维场景。</p>
-<p>假设该场景被无限高的围墙包围着，请考虑暴雨期间发生的情况：</p>
-<p>最低处首先被水覆盖，形成一些不连贯的岛，随着水位的不断上升，这些岛最终都会被覆盖。</p>
-<p>一旦水位等于一块田地的高度，那块田地就被认为位于水下。</p>
-<p><img alt="fig_islands.png" src="https://cdn.acwing.com/media/article/image/2020/06/24/19_8c986a0cb5-fig_islands.png" /> </p>
-<p>上图显示了一个示例：在左图中，我们只加入了刚好超过 $1$ 单位的水，此时剩下 $4$ 个岛（最大岛屿剩余数量），而在右图中，我们共加入了 $7$ 单位的水，此时仅剩下 $2$ 个岛。</p>
-<p>请计算，暴风雨期间我们能在某个时间点看到的最大岛屿数量。</p>
-<p>水会一直上升到所有田地都在水下。</p>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1488/">https://www.acwing.com/problem/content/1488/</a></p>
+<p>假设一家银行有 $N$ 个服务窗口。</p>
+<p>窗户前面有一条黄线，将等候区分为两部分。</p>
+<p>客户排队等候的规则是：</p>
+<ul>
+<li>在黄线以内的区域，每个窗口前都可以排一队人，每队最多可以排 $M$ 个人，当 $N$ 个窗口前的队伍都排满时，第 $NM+1$ 个顾客以及以后的顾客只能在黄线以外的区域等候。黄线外的所有客户统一排成一个长队。</li>
+<li>每当客户进入黄线以内时，他会选择到当前排队人数最少的窗口处排队等待办理业务。当多个窗口前排队人数最少时，客户会选择窗口编号更小的窗口处排队等待办理业务。</li>
+<li>第 $i$ 名客户的办理业务时长为 $T_i$。</li>
+<li>最开始的 $N$ 名客户将于早上 <code>08:00</code> 被受理业务。</li>
+</ul>
+<p>现在，给定所有客户办理业务所需的时间，并对你进行若干次询问，每次询问一名客户办理完自身业务时的确切时间。</p>
+<p>例如，假设银行共有 $2$ 个服务窗口，每个窗口内可以有两名客户排在黄线以内。</p>
+<p>现在共有 $5$ 名客户等待办理业务，他们的业务时长分别为 $1,2,6,4,3$ 分钟。</p>
+<p>早上 <code>08:00</code> 时，客户 $1$ 在窗口 $1$ 接受服务，客户 $2$ 在窗口 $2$ 接受服务，客户 $3$ 在窗口 $1$ 前等待，客户 $4$ 在窗口 $2$ 前等待，客户 $5$ 在黄线以外等待。</p>
+<p>在 <code>08:01</code>，客户 $1$ 办完业务，客户 $5$ 进入黄线以内，并于窗口 $1$ 前等待。</p>
+<p>客户 $2$ 将于 <code>08:02</code> 办完业务，客户 $4$ 将于 <code>08:06</code> 办完业务，客户 $3$ 将于 <code>08:07</code> 办完业务，客户 $5$ 将于 <code>08:10</code> 办完业务。</p>
 <h4>输入格式</h4>
-<p>第一行包含整数 $N$。</p>
-<p>接下来 $N$ 行，每行包含一个整数表示 $H_i$。</p>
+<p>第一行包含 $4$ 个整数，$N,M,K,Q$，分别表示窗口总数，黄线内每个队伍的最大长度，客户总数，询问次数。</p>
+<p>第二行包含 $K$ 个整数，表示每个客户办理业务的所需时长（单位：分钟）。</p>
+<p>第三行包含 $Q$ 个整数，表示询问的所有客户的编号。</p>
+<p>客户编号从 $1$ 到 $K$。</p>
 <h4>输出格式</h4>
-<p>输出暴风雨期间我们能在某个时间点看到的最大岛屿数量。</p>
+<p>对于每个询问的客户，输出其办理完业务的确切时间，格式为 <code>HH:MM</code>。</p>
+<p>注意，银行 <code>17:00</code> 就会停止受理新的业务，所以对于<strong>不能在 17:00 之前（即最晚可以开始服务的时间是16:59）</strong>开始办理业务的客户，要输出 <code>Sorry</code>。</p>
 <h4>数据范围</h4>
-<p>$1 \le N \le 10^5$,<br />
-$1 \le H_i \le 10^9$</p>
+<p>$1 \le N \le 20$,<br />
+$1 \le M \le 10$,<br />
+$1 \le K \le 1000$,<br />
+$1 \le Q \le K$</p>
 <h4>输入样例：</h4>
-<pre><code>8
-3
-5
-2
-3
-1
-4
-2
-3
+<pre><code>2 2 7 5
+1 2 6 4 3 534 2
+3 4 5 6 7
 </code></pre>
 
 <h4>输出样例：</h4>
-<pre><code>4
+<pre><code>08:07
+08:06
+08:10
+17:00
+Sorry
 </code></pre>
-
-
-
-<p>此题和CSP：AcWing 4007. 非零段划分题目类似。不过看看那道题也可以感叹模型抽象的是真好啊<br>知识点1：离散化。一个存值，一个存下标。可以起到从中间的数，小的开始看起的效果。<br>思维1：眼睛从左向右数过去，等价于枚举的O(n)。_<strong>我们可以只看变化的部分，然后看变化的部分对答案产生的影响。</strong>_相信内部应该是存在一个数学式子在的。<br> <img src="https://cdn.acwing.com/media/article/image/2023/05/22/142088_c877f0faf8-QQ%E5%9B%BE%E7%89%8720230522161257.png" alt="QQ图片20230522161257.png"> </p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#define x first//井号define：定义x为first，即，把所有的first都替换为x。从右往左看更合理
-#define y second
+讨厌大模拟QAQ
+自己的最初的思路：
+```
+#include <iostream>
+#include <algorithm>
+#include <queue>
 using namespace std;
-const int N = 100010;
-int n;
-int h[N];
-pair&lt;int,int&gt; q[N];
+const int N = 21,M = 1010,INF = 0x3f3f3f3f;
+int n,m,k,Q;
+struct Person
+{
+    int id,deal_time,end_time;
+}persons[M];
+queue<Person> q[N];
+int finish_time[N];//我们要记录一下每个队列队首元素的当前结束时间
 int main()
-&#123;
-    cin &gt;&gt; n;
-    for (int i = 1;i &lt;= n;i ++) cin &gt;&gt; h[i];
-    n = unique(h + 1,h + n + 1) - h - 1;
-    h[n + 1] = 0;
-    for (int i = 1;i &lt;= n;i ++) q[i] = &#123;h[i],i&#125;;
-    sort(q + 1,q + n + 1);
-    int res = 1,cnt = 1;
-    for (int i = 1;i &lt;= n;i ++)
-    &#123;
-        int k = q[i].y;
-        if (h[k - 1] &lt; h[k] &amp;&amp; h[k + 1] &lt; h[k]) cnt --;
-        else if (h[k - 1] &gt; h[k] &amp;&amp; h[k + 1] &gt; h[k]) cnt ++;
+{
+    cin >> n >> m >> k >> Q;
+    for(int i = 1;i <= k;i ++)
+    {
+        int time;
+        cin >> time;
+        persons[i] = {i,time,0};
+    }
+    //咱先把窗口前的队列填满喽，然后每次只需要找所有队列队首最早结束的那一位，让后面的人上去就好了。
+    //在更新的时候，我们队首元素的结束时间应该是前面的一个人的结束时间 + 他的deal_time
+    //那么如果队首就是第一个进来的人怎么办呢？
+    //所以我们还需要一个finish数组，来额外维护一下上一个元素结束的时间的时间，默认如果是第一位，则上一位的结束时间是8:00
+    int cnt = 1;
+    while(cnt <= n * m)
+    {
+        for(int i = 1;i <=  m;i ++) 
+        {
+            q[i].push({cnt,persons[cnt].deal_time,0});
+            cnt ++;
+        }
+    }
+    //cout << cnt - 1 << endl;
+    //先前一共加了cnt个人，如果再加正好编号正好从cnt开始，（因为末尾有一个+1）
+    for(int i = 1;i <= m;i ++) finish_time[i] = 8 * 60;//默认上一个对象的结束时间是8点
+    for(int i = 1;i <= k;i ++)//肯定要为k个人每个人都计算一次啊
+    {
+        int t = -1;
+        for(int j = 1;j <= n;j ++)
+        {
+            //这里改了，我们是想找到最先处理完的，一个先决条件就是队列不空
+            if(q[j].size() && (t == -1 || finish_time[j] + q[j].front().deal_time < finish_time[t] + q[t].front().deal_time))
+                t = j;
+        }
+        int id = q[t].front().id;
+        int hour = (finish_time[t] + q[t].front().deal_time) / 60;
+        int minutes = (finish_time[t] + q[t].front().deal_time) % 60;
         
-        if (q[i].x != q[i + 1].x) res = max(res,cnt);
+<pre><code>    // cout &lt;&lt; t &lt;&lt; &#39; &#39; &lt;&lt; id &lt;&lt; endl;
+    // cout &lt;&lt; finish_time[t] &lt;&lt; &#39; &#39; &lt;&lt; q[t].front().deal_time &lt;&lt; endl;
+    // printf(&quot;当前队列%d 的时间为：%02d:%02d 容量为：%d\n&quot;,t,hour,minutes,q[t].size());
+    q[t].pop();
+    
+    persons[id].end_time =  finish_time[t] + persons[id].deal_time;
+    finish_time[t] = persons[id].end_time;
+    if(cnt &lt;= k)//相当于变相维护了一个黄线外的队列，只不过我们都存到数组里去了，所以拿一个cnt计数一下就好
+    &#123;
+         q[t].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
+         //printf(&quot;最小队列编号：%d 加入了一个：%d\n&quot;,t,cnt);
+         cnt ++;
     &#125;
-    printf(&quot;%d&quot;,res);
-    return 0;
 &#125;
+int id;
+while(Q --)
+&#123;
+    cin &gt;&gt; id;
+    if(persons[id].end_time &gt; 17 * 60) puts(&quot;Sorry&quot;);
+    else 
+    &#123;
+        //cout &lt;&lt; persons[id].end_time &lt;&lt; endl;
+        int hour = persons[id].end_time / 60,minutes = persons[id].end_time % 60;
+        printf(&quot;%02d:%02d\n&quot;,hour,minutes);
+    &#125;
+&#125;
+return 0;
+</code></pre>
+<p>}</p>
+<pre><code>y总的思路：简洁且正确。队列里存的是时间，比较难想到
+sum代表做完整个队列所需要的时间
+</code></pre>
+<p>#include <iostream><br>#include <cstring><br>#include <queue><br>#include <unordered_map></p>
+<p>using namespace std;</p>
+<p>const int N &#x3D; 20;</p>
+<p>int n, m, k, Q;<br>int sum[N];<br>queue<int> q[N];</p>
+<p>int main()<br>{<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;</p>
+<pre><code>unordered_map&lt;int, int&gt; hash;
+for (int i = 1; i &lt;= k; i ++ )
+&#123;
+    int s;
+    cin &gt;&gt; s;
+
+    int t = 0;
+    for (int j = 0; j &lt; n; j ++ )
+        if (i &lt;= n * m)
+        &#123;
+            if (q[j].size() &lt; q[t].size()) t = j;
+        &#125;
+        else
+        &#123;
+            if (q[j].front() &lt; q[t].front()) t = j;
+        &#125;
+
+    sum[t] += s;
+    if (i &gt; n * m) q[t].pop();
+    q[t].push(sum[t]);
+
+    if (sum[t] - s &lt; 540) hash[i] = sum[t];
+&#125;
+
+while (Q -- )
+&#123;
+    int id;
+    cin &gt;&gt; id;
+    if (hash.count(id)) printf(&quot;%02d:%02d\n&quot;, hash[id] / 60 + 8, hash[id] % 60);
+    else puts(&quot;Sorry&quot;);
+&#125;
+
+return 0;
+</code></pre>
+<p>}</p>
+<pre><code>
 </code></pre>
 
     </div>
