@@ -390,57 +390,48 @@ mjx-container[display="true"] + br {
 
 <h4>样例2解释</h4>
 <p>投入 $20$ 单位资源，恰好可将所有区域开垦耗时均缩短为 $k=2$ 天；受限于 $k$，剩余的 $10$ 单位资源无法使耗时进一步缩短。</p>
-```
-//二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。
-//这种，从答案开始出发的思考角度还是挺有趣的
-/*
-二分答案，一般是检验条件是否合理
-    计数性,枚举某个物品 出现/使用 的数量 <=限制
-    可行性,某个条件是否能够达到
-一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小
-当然，在二分前。我们要想一想答案的最大值以及最小值
-*/
-#include <iostream>
-#include <algorithm>
+
+
+<p>$思路：二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。$<br>这种，从答案开始出发的思考角度还是挺有趣的<br>二分答案，一般是检验条件是否合理<br>    计数性,枚举某个物品 出现&#x2F;使用 的数量 &lt;&#x3D;限制<br>    可行性,某个条件是否能够达到<br>一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小<br>当然，在二分前。我们要想一想答案的最大值以及最小值</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
 using namespace std;
 const int N  = 100010;
 typedef long long LL;
 int n,m,k;
 int t[N],c[N];
 bool check(int x)
-{
-    LL sum = 0;
-    for (int i = 1;i <= n;i ++)
-    {
-        if (t[i] > x)
-        {
-            sum += ((LL)t[i] - x) * c[i];
-        }
-    }
-    return sum <= m;
-}
-int main()
-{
-    cin >> n >> m >> k;
-    int mx = 0;
-    for (int i = 1;i <= n;i ++)
-    {
-        cin >> t[i] >> c[i];
-        mx = max(mx, t[i]);
-    }
-    
-<pre><code>int l = k,r = mx;
-while (l &lt; r)
 &#123;
-    int mid = l + r &gt;&gt; 1;
-    if (check(mid)) r = mid;
-    else l = mid + 1;
+    LL sum = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        if (t[i] &gt; x)
+        &#123;
+            sum += ((LL)t[i] - x) * c[i];
+        &#125;
+    &#125;
+    return sum &lt;= m;
 &#125;
-cout &lt;&lt; r;
-return 0;
-</code></pre>
-<p>}</p>
-<pre><code>
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    int mx = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        cin &gt;&gt; t[i] &gt;&gt; c[i];
+        mx = max(mx, t[i]);
+    &#125;
+    
+    int l = k,r = mx;
+    while (l &lt; r)
+    &#123;
+        int mid = l + r &gt;&gt; 1;
+        if (check(mid)) r = mid;
+        else l = mid + 1;
+    &#125;
+    cout &lt;&lt; r;
+    return 0;
+&#125;
 </code></pre>
 
             
@@ -455,7 +446,7 @@ return 0;
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -726,7 +717,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -818,7 +809,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00bcd4">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ffa2c4">数学</a>
         </span>
         
     </div>
@@ -1012,7 +1003,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00a596">大模拟</a>
         </span>
         
     </div>
@@ -1104,7 +1095,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ffa2c4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
         </span>
         
     </div>
@@ -1181,7 +1172,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
         </span>
         
     </div>
