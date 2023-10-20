@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Tags: 数学 | 金冠小熊猫</title>
+        <title>1的个数 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="Hope be happy everyday" />
         <meta name="keywords" content="菜狗大学生" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -146,142 +150,105 @@
 
             <transition name="into">
                 <div id="main" v-show="!loading">
-                    <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        <span>
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                数学
-            </a>
+                    <div class="article">
+    <div>
+        <h1>1的个数</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/19
         </span>
         
         
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                大模拟
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ffa2c4">数学</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B0%8FTips/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                小Tips
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                CSP习题
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                硬件知识
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                并查集
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                动态规划
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/5/11</div>
-            <a href="/2023/05/11/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
-                <h3>矩阵乘法 + 快速幂求解经典斐波那契数列</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>一道经典习题<br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1535/">https://www.acwing.com/problem/content/1535/</a></p>
+<p>给定一个数字 $N$，请你计算 $1 \sim N$ 中一共出现了多少个数字 $1$。</p>
+<p>例如，$N = 12$ 时，一共出现了 $5$ 个数字 $1$，分别出现在 $1,10,11,12$ 中。</p>
+<h4>输入格式</h4>
+<p>包含一个整数 $N$。</p>
+<h4>输出格式</h4>
+<p>输出一个整数，表示 $1$ 的个数。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 2^{30}$</p>
+<h4>输入样例：</h4>
+<pre><code>12
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>5
+</code></pre>
+
+<pre><code>/*
+基本思路是看一下数字1在每一个数位会出现多少次
+讨论数字：abcdefg(其中每一个字母代表给出的每一个数位上的数字)
+做的过程是从前到后看一下给定的n的每一个数位，讨论该数位d &lt; 1?(即d=0,每个数位必是0~9) d = 1? d &gt; 1?
+    1.如果d &lt; 1,即给定数字n的该数位为0，那么在这个位置上，《在保证数值不超过n》还能出现1的情况是：（先考虑高位）
+        高位为000~abc-1，低位就随便取000~999
+    2.如果d = 1,即给定数字n的该数位为1，如果想保证数值不超过n该数位还能是1的话：
+        高位就要取000~abc-1,此时低位取000~999随便取，高位要取abc的话，低位只能取000~efg;
+    3.如果d &gt; 1，如果想保证数值不超过n，且该数位还能是1的话：
+        高位取000~abc，（注意不能取到abc更多了，因为比大小从高位开始看起，不应该让高位的数字超过给定的n高位）
+        在保证了高位一定小于n的情况下，低位000~999随便取
+三种情况，利用计数原理(中的乘法原理)，计算，求得数量。
+*/
+</code></pre>
+<hr>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+using namespace std;
+int n;
+int cal(int x)
+&#123;
+    vector&lt;int&gt; nums;
+    while(x) nums.push_back(x % 10),x /= 10;//这里先存的是低位
+    int sum = 0;
+    for(int i = nums.size() - 1;i &gt;= 0;i --)//从高位往低位看
+    &#123;
+        int d = nums[i]; //取出这个数位
+        int left = 0,right = 0,power = 1;
+        for(int j = nums.size() - 1;j &gt; i;j --) left = left * 10 + nums[j];//抠出来每一个数位连续起来的值都要统一从高位开始做起
+        for(int j = i - 1;j &gt;= 0;j --) right = right * 10 + nums[j],power *= 10;
+        
+        if(d == 0) sum += left * power;
+        else if(d == 1) sum += left * power + right + 1;//000~efg一共right + 1个数
+        else sum += (left + 1) * power;
+    &#125;
+    return sum;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    int res = cal(n);
+    cout &lt;&lt; res;
+    return 0;
+&#125;
+</code></pre>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/11/19</div>
-            <a href="/2022/11/19/1%E7%9A%84%E4%B8%AA%E6%95%B0/">
-                <h3>1的个数</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00bcd4">数学</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -314,6 +281,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>
