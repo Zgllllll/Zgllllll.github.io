@@ -169,6 +169,153 @@
         
 
 <div class="post">
+    <a href="/2022/11/30/%E5%B9%B6%E6%9F%A5%E9%9B%86%E4%B8%89%E9%A2%98/">
+        <h2 class="post-title">并查集三题</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/30
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1610/">https://www.acwing.com/problem/content/1610/</a><br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1599/">https://www.acwing.com/problem/content/1599/</a><br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/838/">https://www.acwing.com/problem/content/838/</a><br>以1597题：社会集群举例</p>
+<p>在一些社交网络平台上注册账号时，平台总是会要求你填写自己的兴趣爱好，以便找到一些具有相同兴趣爱好的潜在朋友。 </p>
+<p>社会集群是指一群有共同爱好的人。</p>
+<p>给定社交网络中所有人的兴趣爱好，请你找到所有社会群集。</p>
+<h4>输入格式</h4>
+<p>第一行包含一个正整数 $N$，表示社交网络的人数。</p>
+<p>所有人的编号为 $1 \sim N$。</p>
+<p>接下来 $N$ 行，每行包含一个人的爱好信息，格式如下：</p>
+<p>$K_i:$ $h_i[1]$ $h_i[2]$ &hellip; $h_i[K_i]$</p>
+<p>$K_i$ 表示爱好数量，$h_i[j]$ 表示第 $j$ 个爱好的编号。</p>
+<h4>输出格式</h4>
+<p>第一行输出总集群数量。</p>
+<p>第二行按非递增顺序输出每个集群的人数。</p>
+<p>数字之间空格隔开，行尾不得有多余空格。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 1000$,<br />
+$K_i &gt; 0$,<br />
+爱好种类最多 $1000$ 种，编号范围 $[1,1000]$。</p>
+<h4>输入样例：</h4>
+<pre><code>8
+3: 2 7 10
+1: 4
+2: 5 3
+1: 4
+1: 3
+1: 4
+4: 6 8 1 5
+1: 4
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>3
+4 3 1
+</code></pre>
+
+<h4>样例解释</h4>
+<p>共 $3$ 个集群：</p>
+<ul>
+<li>$4$ 人集群 $\lbrace 2,4,6,8 \rbrace$，他们都有共同的爱好 $4$。</li>
+<li>$3$ 人集群 $\lbrace 3,5,7 \rbrace$，其中 $3$ 和 $5$ 有共同的爱好 $3$，$3$ 和 $7$ 有共同的爱好 $5$。</li>
+<li>$1$ 人集群 $\lbrace 1 \rbrace$。</li>
+
+<p>本质上就是处理连通性的问题<br>超简单合并模板。（不包含按秩合并，递归回来会进行路径压缩）</p>
+<pre><code>int find(int x)
+&#123;
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
+&#125;
+</code></pre>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+using namespace std;
+const int N = 1010;
+int n,m;
+vector&lt;int&gt; hobby[N];
+int p[N],cnt[N];
+int find(int x)
+&#123;
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        scanf(&quot;%d: &quot;,&amp;m);
+        while(m --)
+        &#123;
+            int h;
+            cin &gt;&gt; h;
+            hobby[h].push_back(i);
+        &#125;
+    &#125;
+    for(int i = 0;i &lt;= n;i ++) p[i] = i,cnt[i] = 1;
+    for(int i = 1;i &lt;= 1000;i ++)
+    &#123;
+        for(int j = 1;j &lt; hobby[i].size();j ++)
+        &#123;
+            //到了这一步，其实就是有好多人，然后要把它们合并
+            int a = hobby[i][0],b = hobby[i][j];
+            int pa = find(a),pb = find(b);
+            if(pa != pb)
+            &#123;
+                //cout &lt;&lt; a &lt;&lt; &#39; &#39; &lt;&lt; b &lt;&lt; endl;
+                p[pa] = pb;
+                cnt[pb] += cnt[pa];
+            &#125;
+        &#125;
+    &#125;
+    int cnt_set = 0;
+    vector&lt;int&gt; output;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        if(p[i] == i)
+        &#123;
+            //cout &lt;&lt; i &lt;&lt; endl;
+            cnt_set ++;
+            output.push_back(cnt[i]);
+        &#125;
+    &#125;
+    cout &lt;&lt; cnt_set &lt;&lt; endl;
+    sort(output.begin(),output.end());
+    for(int i = output.size() - 1;i &gt;= 0;i --)
+        cout &lt;&lt; output[i] &lt;&lt; &#39; &#39;;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #ffa2c4">并查集</a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/30/%E5%B9%B6%E6%9F%A5%E9%9B%86%E4%B8%89%E9%A2%98/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/11/28/PAT%E8%AE%A1%E6%95%B0/">
         <h2 class="post-title">PAT计数</h2>
     </a>
@@ -349,7 +496,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00a596">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
         </span>
         
     </div>
@@ -509,7 +656,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ff7d73">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
         </span>
         
     </div>
@@ -643,7 +790,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
         </span>
         
     </div>
@@ -983,7 +1130,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -1121,7 +1268,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00a596">数据结构</a>
         </span>
         
     </div>
@@ -1336,143 +1483,6 @@ public:
         
     </div>
     <a href="/2022/09/27/%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/09/26/%E9%80%9A%E4%BF%A1%E7%BA%BF%E8%B7%AF/">
-        <h2 class="post-title">通信线路</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/9/26
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/342/">https://www.acwing.com/problem/content/342/</a></p>
-<p>在郊区有 $N$ 座通信基站，$P$ 条 <strong>双向</strong> 电缆，第 $i$ 条电缆连接基站 $A_i$ 和 $B_i$。</p>
-<p>特别地，$1$ 号基站是通信公司的总站，$N$ 号基站位于一座农场中。</p>
-<p>现在，农场主希望对通信线路进行升级，其中升级第 $i$ 条电缆需要花费 $L_i$。</p>
-<p>电话公司正在举行优惠活动。</p>
-<p>农产主可以指定一条从 $1$ 号基站到 $N$ 号基站的路径，并指定路径上不超过 $K$ 条电缆，由电话公司免费提供升级服务。</p>
-<p>农场主只需要支付在该路径上剩余的电缆中，升级价格最贵的那条电缆的花费即可。</p>
-<p>求至少用多少钱可以完成升级。</p>
-<h4>输入格式</h4>
-<p>第 $1$ 行：三个整数 $N，P，K$。</p>
-<p>第 $2..P+1$ 行：第 $i+1$ 行包含三个整数 $A_i,B_i,L_i$。</p>
-<h4>输出格式</h4>
-<p>包含一个整数表示最少花费。</p>
-<p>若 $1$ 号基站与 $N$ 号基站之间不存在路径，则输出 $-1$。</p>
-<h4>数据范围</h4>
-<p>$0 \le K &lt; N \le 1000$,<br />
-$1 \le P \le 10000$,<br />
-$1 \le L_i \le 1000000$</p>
-<h4>输入样例：</h4>
-<pre><code>5 7 1
-1 2 5
-3 1 4
-2 4 8
-3 2 3
-5 2 9
-3 4 7
-4 5 6
-</code></pre>
-
-<h4>输出样例：</h4>
-<pre><code>4
-</code></pre>
-
-<p><strong>1：</strong>这里一条路径的权值定义为路径当中的第k + 1大值。<br>    我们要求第k + 1大值最小，求一个什么什么最小，<strong>可以很自然想到二分</strong>。<br>    想用二分要证明，看是否能找到一个性质满足以答案为基点划分，使得区间左右一个命题为真，一个命题为假。<br>    这里我们分析限制条件，来用作命题：<strong>是否存在一个x，<em>使得存在这样一条路径_：_从1走到n，经过大于等于x的边的数量小于等于k</em></strong></p>
-<p><strong>2：</strong>接下来我们的问题变成了：**<em>给定一个权值x，如何测得是否存在一条路径，使得路径中边权值大于等于x的边的数量小于等于K。</em>**<br>    直接在图里面跑一遍最短路，重新**<em>记边权大于等于x的边的边权为1，否则为0</em><strong>.求一个</strong>最少<strong>大于等于边权x的边的数量。<br>    求出来之后，就算是</strong>求出来了一条1~n的路径**。满足该路径下，边权大于等于x的边的数量小于等于k。</p>
-<p><strong>3：</strong>一点疑惑：同样都是<strong>“要求出来一条路径”</strong>，为什么我们挑选<strong>“这样的边最少的路径”</strong>也符合答案呢？（毕竟跑的是最短路径）如果稍微扰动一下，考虑另外一条路径B，这里的大于x的边的数量稍微多一些，会怎么样？<br>我们刚才求出来的是“最少的边数”小于等于k，稍微大一点了，可能仍然小于等于k啊。<br><strong>3.1</strong>解答：确实是这样。但是回头看看<strong>我们要证明的是一个存在性性质</strong>。<strong>只要说明有一条就好了</strong>，这样的话我们就找最短路径就OK。</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;queue&gt;
-#include &lt;cstring&gt;
-using namespace std;
-const int N = 1010,M = 20010;
-int n,p,k;
-int h[N],e[M],ne[M],w[M],idx;
-deque&lt;int&gt; q;
-int dist[N];
-bool st[N];
-void add(int a,int b,int c)
-&#123;
-    e[idx] = b,ne[idx] = h[a],w[idx] = c,h[a] = idx ++;
-&#125;
-bool check(int x)
-&#123;
-    memset(dist,0x3f,sizeof dist);
-    memset(st,0,sizeof st);
-    q.push_back(1);
-    dist[1] = 0;
-    while(q.size())
-    &#123;
-        auto t = q.front();
-        q.pop_front();
-        if(st[t]) continue;
-        st[t] = true;
-        for(int i = h[t];~i;i = ne[i])
-        &#123;
-            int j = e[i],weight = w[i] &gt; x;
-            if(dist[j] &gt; dist[t] + weight)
-            &#123;
-                dist[j] = dist[t] + weight;
-                if(!weight) q.push_front(j);
-                else q.push_back(j);
-            &#125;
-            
-        &#125;
-    &#125;
-    return dist[n] &lt;= k;
-&#125;
-int main()
-&#123;
-    cin &gt;&gt; n &gt;&gt; p &gt;&gt; k;
-    memset(h,-1,sizeof h);
-    for(int i = 0;i &lt; p;i ++)
-    &#123;
-        int a,b,c;
-        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
-        add(a,b,c),add(b,a,c);
-    &#125;
-    int l = 0,r = 1e6 + 1;//设置r为1e6+1是为了辨析两种情况：出现不存在“最小值”的情况返回1e6+1，如果最小值就是1e6那就返回1e6
-    while(l &lt; r)
-    &#123;
-        int mid = l + r &gt;&gt; 1;
-        if(check(mid))  r = mid;
-        else l = mid + 1;
-    &#125;
-    if(l == 1e6 + 1) printf(&quot;-1&quot;);
-    else printf(&quot;%d&quot;,l);
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
-        </span>
-        
-    </div>
-    <a href="/2022/09/26/%E9%80%9A%E4%BF%A1%E7%BA%BF%E8%B7%AF/" class="go-post">阅读全文</a>
 </div>
 
 
