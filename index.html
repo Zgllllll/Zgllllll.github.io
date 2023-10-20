@@ -281,6 +281,246 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2023/06/20/%E6%9C%80%E5%A4%A7%E6%95%B0/">
+        <h2 class="post-title">最大数</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/20
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1277/">https://www.acwing.com/problem/content/1277/</a></p>
+<p>给定一个正整数数列 $a_1,a_2,&hellip;,a_n$，每一个数都在 $0 \sim p-1$ 之间。</p>
+<p>可以对这列数进行两种操作：</p>
+<ol>
+<li>添加操作：向序列后添加一个数，序列长度变成 $n+1$；</li>
+<li>询问操作：询问这个序列中最后 $L$ 个数中最大的数是多少。</li>
+</ol>
+<p>程序运行的最开始，整数序列为空。</p>
+<p>一共要对整数序列进行 $m$ 次操作。</p>
+<p>写一个程序，读入操作的序列，并输出询问操作的答案。</p>
+<h4>输入格式</h4>
+<p>第一行有两个正整数 $m,p$，意义如题目描述；</p>
+<p>接下来 $m$ 行，每一行表示一个操作。</p>
+<p>如果该行的内容是 <code>Q L</code>，则表示这个操作是询问序列中最后 $L$ 个数的最大数是多少；</p>
+<p>如果是 <code>A t</code>，则表示向序列后面加一个数，加入的数是 $(t+a)\ mod\ p$。其中，$t$ 是输入的参数，$a$ 是在这个添加操作之前最后一个询问操作的答案（如果之前没有询问操作，则 $a=0$）。</p>
+<p>第一个操作一定是添加操作。对于询问操作，$L&gt;0$ 且不超过当前序列的长度。</p>
+<h4>输出格式</h4>
+<p>对于每一个询问操作，输出一行。该行只有一个数，即序列中最后 $L$ 个数的最大数。</p>
+<h4>数据范围</h4>
+<p>$1 \le m \le 2 \times 10^5$,<br />
+$1 \le p \le 2 \times 10^9$,<br />
+$0 \le t &lt; p$</p>
+<h4>输入样例：</h4>
+<pre><code>10 100
+A 97
+Q 1
+Q 1
+A 17
+Q 2
+A 63
+Q 1
+Q 1
+Q 3
+A 99
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>97
+97
+97
+60
+60
+97
+</code></pre>
+
+<h4>样例解释</h4>
+<p>最后的序列是 $97,14,60,96$。</p>
+
+<p>线段树的模板</p>
+</blockquote>
+<h1>线段树</h1>
+<ol>
+<li>
+<p>线段树的每个节点都代表一个区间。</p>
+</li>
+<li>
+<p>线段树具有唯一的根结点，代表的区间是整个统计范围，如 $[1, N]$。</p>
+</li>
+<li>
+<p>线段树的每个叶结点都代表一个长度为 $1$ 的元区间 $[x, x]$。</p>
+</li>
+<li>
+<p>对于每个内部结点 $[l,r]$，他的左子结点是 $[l, mid]$，右子结点是 $[mid + 1, r]$，其中$mid = \lfloor\dfrac{l + r}{2} \rfloor$。</p>
+</li>
+</ol>
+<h3>线段树Tip</h3>
+<ol>
+<li>
+<p>线段树是一棵非常漂亮二叉树，（除了最后一层外，是一棵满二叉树），因此我们采用<strong>堆</strong>的思想来存整棵树</p>
+<ol>
+<li>
+<p>编号 $x$ 的父节点：$\lfloor\dfrac{x}{2} \rfloor$ ，常书写的代码：<code>x &gt;&gt; 1</code></p>
+</li>
+<li>
+<p>编号 $x$ 的左儿子：$2x$  ，常书写的代码：<code>x &lt;&lt; 1</code></p>
+</li>
+<li>
+<p>编号 $x$ 的右儿子：$2x + 1$ ，常书写的代码：<code>x &lt;&lt; 1 | 1</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>线段树的下一层都是把当前层进行平分 $mid = \lfloor\dfrac{l + r}{2} \rfloor$</p>
+<ol>
+<li>
+<p>左区间为 $[l, mid]$</p>
+</li>
+<li>
+<p>右区间为 $[mid + 1, r]$</p>
+<p><strong>注意，线段树的两个子区间是不允许相交的</strong></p>
+<p><strong>这也决定了许多题的分块要进行额外的操作，使之区间不能相交</strong></p>
+</li>
+</ol>
+</li>
+<li>
+<p>线段树一般开长度为 $4N$ 的空间</p>
+<ol>
+<li>
+<p>一个长度为 $N$ 的区间，最终的叶结点，为 $N$ 个</p>
+</li>
+<li>
+<p>先考虑理想状态下（包含最后一层，整个二叉树都是满二叉树），$N$ 个叶结点的满二叉树有 $N + \dfrac{N}{2} + \dfrac{N}{4} + ··· + 2 + 1 = 2N - 1$ 个结点。</p>
+</li>
+<li>
+<p>但是线段树的存储方式下，最后一层还会有盈余，最坏情况下，最后一层是倒数第二层（也就是满二叉树的倒数第一层）两倍的点，所以所以保存线段树的数组长度要不小于 $4N$ 才能保证不会越界</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3>线段树的模版</h3>
+<ol>
+<li>
+<p><code>pushup()</code>：由子结点的信息来计算父结点的信息</p>
+</li>
+<li>
+<p><code>build()</code>：将一段区间初始化为线段树</p>
+</li>
+<li>
+<p><code>modify()</code>：修改</p>
+<ol>
+<li>
+<p>单点修改（easy）</p>
+</li>
+<li>
+<p>区间修改（hard）：用到pushdown操作，懒标记思想</p>
+</li>
+</ol>
+</li>
+<li>
+<p><code>query()</code>：区间询问（例如：查询 $[a, b]$ 区间）$O(\log n)$最多是$4\log n$的时间，因为最坏有两条链</p>
+<ol>
+<li>
+<p>$[l, r] \supset [T_l, T_r]$，直接返回</p>
+</li>
+<li>
+<p>$[l,r] \cap [T_l, T_r] \ne \varnothing$，递归下去</p>
+<ol>
+<li>
+<p>$l \le T_l \le r \le T_r$：</p>
+<ol>
+<li>
+<p>$r \le T_{mid}$：只递归左半边</p>
+</li>
+<li>
+<p>$T_{mid} \lt r$：递归左半边 + 递归右半边（但右子树完全包含，只递归一层就返回了）</p>
+</li>
+</ol>
+</li>
+<li>
+<p>$T_l \le l \le T_r \le r$ 与上述对称，类比即可</p>
+</li>
+<li>
+<p>$T_l \le l \le r \le T_r$：</p>
+<ol>
+<li>
+<p>$r \le T_{mid}$：只递归左半边</p>
+</li>
+<li>
+<p>$T_{mid} \lt l$：只递归右半边</p>
+</li>
+<li>
+<p>$l \le T_{mid} \lt r$：递归左半边 + 递归右半边</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>$[l,r] \cap [T_l, T_r] = \varnothing$，不存在这种可能，因为初始区间包含了合法的所有范围。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h1>以下为本题代码</h1>
+<pre><code>#include &lt;iostream&gt;
+
+<p>using namespace std;</p>
+<p>const int N &#x3D; 2e5 + 10;</p>
+<p>int m, p;<br>struct Node &#123;<br>    int l, r;<br>    int v;  &#x2F;&#x2F;区间的最大值<br>&#125;tr[N * 4];</p>
+<p>void pushup(int u) &#123;<br>    tr[u].v &#x3D; max(tr[u &lt;&lt; 1].v, tr[u &lt;&lt; 1 | 1].v);<br>&#125;<br>void build(int u, int l, int r) &#123;<br>    tr[u] &#x3D; &#123;l, r&#125;;<br>    if (l &#x3D;&#x3D; r) return;<br>    int mid &#x3D; l + r &gt;&gt; 1;<br>    build(u &lt;&lt; 1, l, mid), build(u &lt;&lt; 1 | 1, mid + 1, r);<br>&#125;<br>int query(int u, int l, int r) &#123;<br>    if (l &lt;&#x3D; tr[u].l &amp;&amp; tr[u].r &lt;&#x3D; r) return tr[u].v; &#x2F;&#x2F;区间完全包含在内部</p>
+<pre><code>int mid = tr[u].l + tr[u].r &amp;gt;&amp;gt; 1;
+int v = 0;
+if (l &amp;lt;= mid) v = query(u &amp;lt;&amp;lt; 1, l, r);
+if (r &amp;gt; mid) v = max(v, query(u &amp;lt;&amp;lt; 1 | 1, l, r));
+return v;
+</code></pre>
+<p>}<br>void modify(int u, int x, int v) {<br>    if (tr[u].l &#x3D;&#x3D; tr[u].r) tr[u].v &#x3D; v;<br>    else {<br>        int mid &#x3D; tr[u].l + tr[u].r &gt;&gt; 1;<br>        if (x &lt;&#x3D; mid) modify(u &lt;&lt; 1, x, v);<br>        else modify(u &lt;&lt; 1 | 1, x, v);<br>        pushup(u);<br>    }<br>}<br>int main() {<br>    int n &#x3D; 0, last &#x3D; 0;<br>    scanf(&quot;%d%d&quot;, &amp;m, &amp;p);<br>    build(1, 1, m);</p>
+<pre><code>char op[2];
+int a;
+while (m--) &#123;
+    scanf(&amp;quot;%s%d&amp;quot;, op, &amp;amp;a);
+    if (*op == &#39;Q&#39;) &#123;
+        last = query(1, n - a + 1, n);
+        printf(&amp;quot;%d\n&amp;quot;, last);
+    &#125; else &#123;
+        modify(1, n + 1, (a + last) % p);
+        ++n;
+    &#125;
+&#125;
+return 0;
+</code></pre>
+<p>}<br></code></pre></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/20/%E6%9C%80%E5%A4%A7%E6%95%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/05/25/CSP%E5%9E%A6%E7%94%B0%E8%AE%A1%E5%88%92/">
         <h2 class="post-title">垦田计划</h2>
     </a>
@@ -446,7 +686,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
         </span>
         
     </div>
@@ -717,7 +957,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
         </span>
         
     </div>
@@ -822,7 +1062,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
         </span>
         
     </div>
@@ -914,7 +1154,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00a596">数学</a>
         </span>
         
     </div>
@@ -1108,7 +1348,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
         </span>
         
     </div>
@@ -1178,7 +1418,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">硬件知识</a>
+            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #ff7d73">硬件知识</a>
         </span>
         
     </div>
@@ -1392,7 +1632,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00a596">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ffa2c4">大模拟</a>
         </span>
         
     </div>
@@ -1539,7 +1779,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #ff7d73">并查集</a>
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #ffa2c4">并查集</a>
         </span>
         
     </div>
@@ -1626,112 +1866,11 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
     <a href="/2022/11/28/PAT%E8%AE%A1%E6%95%B0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/11/19/1%E7%9A%84%E4%B8%AA%E6%95%B0/">
-        <h2 class="post-title">1的个数</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/11/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>一道经典习题<br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1535/">https://www.acwing.com/problem/content/1535/</a></p>
-<p>给定一个数字 $N$，请你计算 $1 \sim N$ 中一共出现了多少个数字 $1$。</p>
-<p>例如，$N = 12$ 时，一共出现了 $5$ 个数字 $1$，分别出现在 $1,10,11,12$ 中。</p>
-<h4>输入格式</h4>
-<p>包含一个整数 $N$。</p>
-<h4>输出格式</h4>
-<p>输出一个整数，表示 $1$ 的个数。</p>
-<h4>数据范围</h4>
-<p>$1 \le N \le 2^{30}$</p>
-<h4>输入样例：</h4>
-<pre><code>12
-</code></pre>
-
-<h4>输出样例：</h4>
-<pre><code>5
-</code></pre>
-
-<pre><code>/*
-基本思路是看一下数字1在每一个数位会出现多少次
-讨论数字：abcdefg(其中每一个字母代表给出的每一个数位上的数字)
-做的过程是从前到后看一下给定的n的每一个数位，讨论该数位d &lt; 1?(即d=0,每个数位必是0~9) d = 1? d &gt; 1?
-    1.如果d &lt; 1,即给定数字n的该数位为0，那么在这个位置上，《在保证数值不超过n》还能出现1的情况是：（先考虑高位）
-        高位为000~abc-1，低位就随便取000~999
-    2.如果d = 1,即给定数字n的该数位为1，如果想保证数值不超过n该数位还能是1的话：
-        高位就要取000~abc-1,此时低位取000~999随便取，高位要取abc的话，低位只能取000~efg;
-    3.如果d &gt; 1，如果想保证数值不超过n，且该数位还能是1的话：
-        高位取000~abc，（注意不能取到abc更多了，因为比大小从高位开始看起，不应该让高位的数字超过给定的n高位）
-        在保证了高位一定小于n的情况下，低位000~999随便取
-三种情况，利用计数原理(中的乘法原理)，计算，求得数量。
-*/
-</code></pre>
-<hr>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
-using namespace std;
-int n;
-int cal(int x)
-&#123;
-    vector&lt;int&gt; nums;
-    while(x) nums.push_back(x % 10),x /= 10;//这里先存的是低位
-    int sum = 0;
-    for(int i = nums.size() - 1;i &gt;= 0;i --)//从高位往低位看
-    &#123;
-        int d = nums[i]; //取出这个数位
-        int left = 0,right = 0,power = 1;
-        for(int j = nums.size() - 1;j &gt; i;j --) left = left * 10 + nums[j];//抠出来每一个数位连续起来的值都要统一从高位开始做起
-        for(int j = i - 1;j &gt;= 0;j --) right = right * 10 + nums[j],power *= 10;
-        
-        if(d == 0) sum += left * power;
-        else if(d == 1) sum += left * power + right + 1;//000~efg一共right + 1个数
-        else sum += (left + 1) * power;
-    &#125;
-    return sum;
-&#125;
-int main()
-&#123;
-    cin &gt;&gt; n;
-    int res = cal(n);
-    cout &lt;&lt; res;
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
-        </span>
-        
-    </div>
-    <a href="/2022/11/19/1%E7%9A%84%E4%B8%AA%E6%95%B0/" class="go-post">阅读全文</a>
 </div>
 
 

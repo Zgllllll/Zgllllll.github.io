@@ -169,6 +169,107 @@
         
 
 <div class="post">
+    <a href="/2022/11/19/1%E7%9A%84%E4%B8%AA%E6%95%B0/">
+        <h2 class="post-title">1的个数</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>一道经典习题<br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1535/">https://www.acwing.com/problem/content/1535/</a></p>
+<p>给定一个数字 $N$，请你计算 $1 \sim N$ 中一共出现了多少个数字 $1$。</p>
+<p>例如，$N = 12$ 时，一共出现了 $5$ 个数字 $1$，分别出现在 $1,10,11,12$ 中。</p>
+<h4>输入格式</h4>
+<p>包含一个整数 $N$。</p>
+<h4>输出格式</h4>
+<p>输出一个整数，表示 $1$ 的个数。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 2^{30}$</p>
+<h4>输入样例：</h4>
+<pre><code>12
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>5
+</code></pre>
+
+<pre><code>/*
+基本思路是看一下数字1在每一个数位会出现多少次
+讨论数字：abcdefg(其中每一个字母代表给出的每一个数位上的数字)
+做的过程是从前到后看一下给定的n的每一个数位，讨论该数位d &lt; 1?(即d=0,每个数位必是0~9) d = 1? d &gt; 1?
+    1.如果d &lt; 1,即给定数字n的该数位为0，那么在这个位置上，《在保证数值不超过n》还能出现1的情况是：（先考虑高位）
+        高位为000~abc-1，低位就随便取000~999
+    2.如果d = 1,即给定数字n的该数位为1，如果想保证数值不超过n该数位还能是1的话：
+        高位就要取000~abc-1,此时低位取000~999随便取，高位要取abc的话，低位只能取000~efg;
+    3.如果d &gt; 1，如果想保证数值不超过n，且该数位还能是1的话：
+        高位取000~abc，（注意不能取到abc更多了，因为比大小从高位开始看起，不应该让高位的数字超过给定的n高位）
+        在保证了高位一定小于n的情况下，低位000~999随便取
+三种情况，利用计数原理(中的乘法原理)，计算，求得数量。
+*/
+</code></pre>
+<hr>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+using namespace std;
+int n;
+int cal(int x)
+&#123;
+    vector&lt;int&gt; nums;
+    while(x) nums.push_back(x % 10),x /= 10;//这里先存的是低位
+    int sum = 0;
+    for(int i = nums.size() - 1;i &gt;= 0;i --)//从高位往低位看
+    &#123;
+        int d = nums[i]; //取出这个数位
+        int left = 0,right = 0,power = 1;
+        for(int j = nums.size() - 1;j &gt; i;j --) left = left * 10 + nums[j];//抠出来每一个数位连续起来的值都要统一从高位开始做起
+        for(int j = i - 1;j &gt;= 0;j --) right = right * 10 + nums[j],power *= 10;
+        
+        if(d == 0) sum += left * power;
+        else if(d == 1) sum += left * power + right + 1;//000~efg一共right + 1个数
+        else sum += (left + 1) * power;
+    &#125;
+    return sum;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    int res = cal(n);
+    cout &lt;&lt; res;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/19/1%E7%9A%84%E4%B8%AA%E6%95%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/11/19/Dijkstra%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF/">
         <h2 class="post-title">Dijkstra求最短路</h2>
     </a>
@@ -667,7 +768,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -795,7 +896,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
         </span>
         
     </div>
@@ -933,7 +1034,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00a596">数据结构</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
         </span>
         
     </div>
@@ -1069,7 +1170,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #ff7d73">排序</a>
+            <a href="/tags/%E6%8E%92%E5%BA%8F/" style="color: #ffa2c4">排序</a>
         </span>
         
     </div>
@@ -1143,7 +1244,7 @@ public:
         
         <span class="tag">
             
-            <a href="/tags/LeetCode/" style="color: #03a9f4">LeetCode</a>
+            <a href="/tags/LeetCode/" style="color: #00a596">LeetCode</a>
         </span>
         
     </div>
@@ -1280,7 +1381,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
         </span>
         
     </div>
@@ -1406,166 +1507,11 @@ printf(&quot;size of a long is %d\n&quot;, sizeof(long));
         
         <span class="tag">
             
-            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">语言知识</a>
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #00bcd4">语言知识</a>
         </span>
         
     </div>
     <a href="/2022/08/01/pointer/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/">
-        <h2 class="post-title">能量石</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/6/6
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">https://www.acwing.com/problem/content/736/</a></p>
-<p>岩石怪物杜达生活在魔法森林中，他在午餐时收集了 $N$ 块能量石准备开吃。 </p>
-<p>由于他的嘴很小，所以一次只能吃一块能量石。 </p>
-<p>能量石很硬，吃完需要花不少时间。</p>
-<p>吃完第 $i$ 块能量石需要花费的时间为 $S_i$ 秒。</p>
-<p>杜达靠吃能量石来获取能量。 </p>
-<p>不同的能量石包含的能量可能不同。 </p>
-<p>此外，能量石会随着时间流逝逐渐失去能量。 </p>
-<p>第 $i$ 块能量石最初包含 $E_i$ 单位的能量，并且每秒将失去 $L_i$ 单位的能量。 </p>
-<p>当杜达开始吃一块能量石时，他就会立即获得该能量石所含的全部能量（无论实际吃完该石头需要多少时间）。 </p>
-<p>能量石中包含的能量最多降低至 $0$。</p>
-<p>请问杜达通过吃能量石可以获得的最大能量是多少？</p>
-<h4>输入格式</h4>
-<p>第一行包含整数 $T$，表示共有 $T$ 组测试数据。</p>
-<p>每组数据第一行包含整数 $N$，表示能量石的数量。</p>
-<p>接下来 $N$ 行，每行包含三个整数 $S_i,E_i,L_i$。</p>
-<h3>输出格式</h3>
-<p>每组数据输出一个结果，每个结果占一行。</p>
-<p>结果表示为 <code>Case #x: y</code>，其中 $x$ 是组别编号（从 $1$ 开始），$y$ 是可以获得的最大能量值。</p>
-<h4>数据范围</h4>
-<p>$1 \le T \le 10$,<br />
-$1 \le N \le 100$,<br />
-$1 \le S_i \le 100$,<br />
-$1 \le E_i \le 10^5$,<br />
-$0 \le L_i \le 10^5$</p>
-<h4>输入样例：</h4>
-<pre><code>3
-4
-20 10 1
-5 30 5
-100 30 1
-5 80 60
-3
-10 4 1000
-10 3 1000
-10 8 1000
-2
-12 300 50
-5 200 0
-</code></pre>
-
-<h4>输出样例：</h4>
-<pre><code>Case #1: 105
-Case #2: 8
-Case #3: 500
-</code></pre>
-
-<h4>样例解释</h4>
-<p>在样例＃1中，有 $N = 4$ 个宝石。杜达可以选择的一个吃石头顺序是：</p>
-<ul>
-<li>吃第四块石头。这需要 $5$ 秒，并给他 $80$ 单位的能量。</li>
-<li>吃第二块石头。这需要 $5$ 秒，并给他 $5$ 单位的能量（第二块石头开始时具有 $30$ 单位能量，$5$ 秒后失去了 $25$ 单位的能量）。</li>
-<li>吃第三块石头。这需要 $100$ 秒，并给他 $20$ 单位的能量（第三块石头开始时具有 $30$ 单位能量，$10$ 秒后失去了 $10$ 单位的能量）。</li>
-<li>吃第一块石头。这需要 $20$ 秒，并给他 $0$ 单位的能量（第一块石头以 $10$ 单位能量开始，$110$ 秒后已经失去了所有的能量）。</li>
-</ul>
-<p>他一共获得了 $105$ 单位的能量，这是能获得的最大值，所以答案是 $105$。</p>
-<p>在样本案例＃2中，有 $N = 3$ 个宝石。</p>
-<p>无论杜达选择吃哪块石头，剩下的两个石头的能量都会耗光。</p>
-<p>所以他应该吃第三块石头，给他提供 $8$ 单位的能量。</p>
-<p>在样本案例＃3中，有 $N = 2$ 个宝石。杜达可以：</p>
-<ul>
-<li>吃第一块石头。这需要 $12$ 秒，并给他 $300$ 单位的能量。</li>
-<li>吃第二块石头。这需要 $5$ 秒，并给他 $200$ 单位的能量（第二块石头随着时间的推移不会失去任何能量！）。</li>
-</ul>
-<p>所以答案是 $500$。</p>
-
-<p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;cstring&gt;
-#include &lt;algorithm&gt;
-using namespace std;
-const int N = 10010,M = 110;
-int T,n;
-struct Stone
-&#123;
-    int s,e,l;
-&#125;stone[M];
-bool cmp(Stone a,Stone b)
-&#123;
-    int S = a.s, SS = b.s,L = a.l,LL = b.l;
-    return S * LL &lt; SS * L;
-&#125;
-int f[N];
-
-int main()
-&#123;
-    cin &gt;&gt; T;
-    for(int C = 1;C &lt;= T;C ++)
-    &#123;
-        cin &gt;&gt; n;
-        int m = 0;
-        for(int i = 1;i &lt;= n;i ++)
-        &#123;
-            cin &gt;&gt; stone[i].s &gt;&gt; stone[i].e &gt;&gt; stone[i].l;
-            m += stone[i].s;//记录下最多用多少时间方便下面决策
-        &#125;
-        
-        sort(stone + 1,stone + n + 1,cmp);
-        
-        memset(f,-1,sizeof f);//把f[0][i]等都初始化成不可达的状态
-        f[0] = 0;//起点为f[0]
-        
-        for(int i = 1;i &lt;= n;i ++)
-        &#123;
-            for(int j = m;j &gt;= stone[i].s;j --)
-            &#123;
-                int e = stone[i].e,l = stone[i].l,s = stone[i].s;
-                f[j] = max(f[j],f[j - s] + e - l * (j - s));
-            &#125;
-        &#125;
-        int res = 0;
-        for(int j = 0;j &lt;= m;j ++) res = max(res,f[j]);
-        printf(&quot;Case #%d: %d\n&quot;,C,res);
-    &#125;
-    return 0;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
-        </span>
-        
-    </div>
-    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/" class="go-post">阅读全文</a>
 </div>
 
 

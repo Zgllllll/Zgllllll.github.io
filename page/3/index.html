@@ -169,6 +169,161 @@
         
 
 <div class="post">
+    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/">
+        <h2 class="post-title">能量石</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/6/6
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">https://www.acwing.com/problem/content/736/</a></p>
+<p>岩石怪物杜达生活在魔法森林中，他在午餐时收集了 $N$ 块能量石准备开吃。 </p>
+<p>由于他的嘴很小，所以一次只能吃一块能量石。 </p>
+<p>能量石很硬，吃完需要花不少时间。</p>
+<p>吃完第 $i$ 块能量石需要花费的时间为 $S_i$ 秒。</p>
+<p>杜达靠吃能量石来获取能量。 </p>
+<p>不同的能量石包含的能量可能不同。 </p>
+<p>此外，能量石会随着时间流逝逐渐失去能量。 </p>
+<p>第 $i$ 块能量石最初包含 $E_i$ 单位的能量，并且每秒将失去 $L_i$ 单位的能量。 </p>
+<p>当杜达开始吃一块能量石时，他就会立即获得该能量石所含的全部能量（无论实际吃完该石头需要多少时间）。 </p>
+<p>能量石中包含的能量最多降低至 $0$。</p>
+<p>请问杜达通过吃能量石可以获得的最大能量是多少？</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $T$，表示共有 $T$ 组测试数据。</p>
+<p>每组数据第一行包含整数 $N$，表示能量石的数量。</p>
+<p>接下来 $N$ 行，每行包含三个整数 $S_i,E_i,L_i$。</p>
+<h3>输出格式</h3>
+<p>每组数据输出一个结果，每个结果占一行。</p>
+<p>结果表示为 <code>Case #x: y</code>，其中 $x$ 是组别编号（从 $1$ 开始），$y$ 是可以获得的最大能量值。</p>
+<h4>数据范围</h4>
+<p>$1 \le T \le 10$,<br />
+$1 \le N \le 100$,<br />
+$1 \le S_i \le 100$,<br />
+$1 \le E_i \le 10^5$,<br />
+$0 \le L_i \le 10^5$</p>
+<h4>输入样例：</h4>
+<pre><code>3
+4
+20 10 1
+5 30 5
+100 30 1
+5 80 60
+3
+10 4 1000
+10 3 1000
+10 8 1000
+2
+12 300 50
+5 200 0
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>Case #1: 105
+Case #2: 8
+Case #3: 500
+</code></pre>
+
+<h4>样例解释</h4>
+<p>在样例＃1中，有 $N = 4$ 个宝石。杜达可以选择的一个吃石头顺序是：</p>
+<ul>
+<li>吃第四块石头。这需要 $5$ 秒，并给他 $80$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $5$ 单位的能量（第二块石头开始时具有 $30$ 单位能量，$5$ 秒后失去了 $25$ 单位的能量）。</li>
+<li>吃第三块石头。这需要 $100$ 秒，并给他 $20$ 单位的能量（第三块石头开始时具有 $30$ 单位能量，$10$ 秒后失去了 $10$ 单位的能量）。</li>
+<li>吃第一块石头。这需要 $20$ 秒，并给他 $0$ 单位的能量（第一块石头以 $10$ 单位能量开始，$110$ 秒后已经失去了所有的能量）。</li>
+</ul>
+<p>他一共获得了 $105$ 单位的能量，这是能获得的最大值，所以答案是 $105$。</p>
+<p>在样本案例＃2中，有 $N = 3$ 个宝石。</p>
+<p>无论杜达选择吃哪块石头，剩下的两个石头的能量都会耗光。</p>
+<p>所以他应该吃第三块石头，给他提供 $8$ 单位的能量。</p>
+<p>在样本案例＃3中，有 $N = 2$ 个宝石。杜达可以：</p>
+<ul>
+<li>吃第一块石头。这需要 $12$ 秒，并给他 $300$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $200$ 单位的能量（第二块石头随着时间的推移不会失去任何能量！）。</li>
+</ul>
+<p>所以答案是 $500$。</p>
+
+<p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 10010,M = 110;
+int T,n;
+struct Stone
+&#123;
+    int s,e,l;
+&#125;stone[M];
+bool cmp(Stone a,Stone b)
+&#123;
+    int S = a.s, SS = b.s,L = a.l,LL = b.l;
+    return S * LL &lt; SS * L;
+&#125;
+int f[N];
+
+int main()
+&#123;
+    cin &gt;&gt; T;
+    for(int C = 1;C &lt;= T;C ++)
+    &#123;
+        cin &gt;&gt; n;
+        int m = 0;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            cin &gt;&gt; stone[i].s &gt;&gt; stone[i].e &gt;&gt; stone[i].l;
+            m += stone[i].s;//记录下最多用多少时间方便下面决策
+        &#125;
+        
+        sort(stone + 1,stone + n + 1,cmp);
+        
+        memset(f,-1,sizeof f);//把f[0][i]等都初始化成不可达的状态
+        f[0] = 0;//起点为f[0]
+        
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            for(int j = m;j &gt;= stone[i].s;j --)
+            &#123;
+                int e = stone[i].e,l = stone[i].l,s = stone[i].s;
+                f[j] = max(f[j],f[j - s] + e - l * (j - s));
+            &#125;
+        &#125;
+        int res = 0;
+        for(int j = 0;j &lt;= m;j ++) res = max(res,f[j]);
+        printf(&quot;Case #%d: %d\n&quot;,C,res);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2022/06/05/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/">
         <h2 class="post-title">无线网络</h2>
     </a>
@@ -283,7 +438,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #00a596">枚举</a>
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #ffa2c4">枚举</a>
         </span>
         
     </div>
@@ -558,7 +713,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #ff7d73">思维题</a>
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #00a596">思维题</a>
         </span>
         
     </div>
@@ -656,7 +811,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
@@ -739,7 +894,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">动态规划</a>
         </span>
         
     </div>
@@ -861,7 +1016,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -985,7 +1140,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
         </span>
         
     </div>
@@ -1084,7 +1239,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
         </span>
         
     </div>
@@ -1190,103 +1345,11 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
         </span>
         
     </div>
     <a href="/2022/04/16/%E7%8E%A9%E6%B8%B8%E6%88%8F/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2022/04/14/ICS-1-C%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/">
-        <h2 class="post-title">ICS-1-C语言机制</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2022/4/14
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="C程序执行的两个视角"><a href="#C程序执行的两个视角" class="headerlink" title="C程序执行的两个视角  "></a><strong>C程序执行的两个视角</strong>  </h2><p>静态:  <strong>C代码的连续一段</strong> 总能对应到 <strong>一段连续的机器指令</strong><br>动态： <strong>C代码执行的状态</strong>总能对应到 <strong>机器的状态</strong><br>●源代码视角                                                                       </p>
-<pre><code>◾函数、变量、指针...
-</code></pre>
-<p>●机器指令视角</p>
-<pre><code>◾ 寄存器、内存、地址...
-</code></pre>
-<h2 id="两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型"><a href="#两个视角共同之处：-内存◾-代码、变量（源代码视角）-x3D-地址-长度（机器指令视角）◾-内存-x3D-代码-数据-堆栈-因此理解C程序执行最重要的就是内存模型" class="headerlink" title="两个视角共同之处： 内存◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）◾ 内存 &#x3D; 代码 + 数据 + 堆栈 因此理解C程序执行最重要的就是内存模型 "></a>两个视角共同之处： <strong>内存</strong><br>◾ 代码、变量（源代码视角） &#x3D; 地址 + 长度（机器指令视角）<br>◾ 内存 &#x3D; 代码 + 数据 + 堆栈<br> <strong>因此理解C程序执行最重要的就是内存模型</strong> </h2><p><strong>C语言中一切皆是地址</strong><br> <strong>指针都是纯粹的，类型声明只不过是对一段内存的解读方式</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
-void printptr(void *p)//空指针是非常纯粹的，它就是一个纯粹的地址，强制类型转换更改了内存的解读方式
-&#123;
-    printf(&quot;*p = %p       *p = %016lx\n&quot;,p,*(long *)p);//对于p来说，首先它是一个指针，剩下的那个long代表对指针指向的内存的一个解读
-&#125;
-int x;
-int main(int argc,char *argv[])
-&#123;
-    printptr(main);//代码
-    printptr(&amp;main);
-    printptr(&amp;x);//数据
-    printptr(&amp;argc);//堆栈
-    printptr(argv);
-    printptr(&amp;argv);
-    printptr(argv[0]);
-&#125;
-</code></pre>
-<p>Linux系统下执行结果如图<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_e9e0953dbb-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="运行结果.png"><br> <strong>可以看出数据的存放位置是比代码还要高的，而且数据和代码距离堆栈都有一定的距离</strong><br>然后将 <strong>a.o文件</strong>进行反汇编之后<br><img src="https://cdn.acwing.com/media/article/image/2022/04/14/142088_1cbec4f3bb-%E5%8F%8D%E6%B1%87%E7%BC%96.png" alt="反汇编.png"><br> <strong>惊奇的可以发现当我们用一个指针指向代码之后，它就真的把那个二进制代码直接读出来了</strong> </p>
-<hr>
-<p> <strong>C Type System</strong><br> <strong>类型：对一段内存的解读方式。C里所有的数据都可以理解成是地址（指针）+ 类型（对地址的解读）</strong> </p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;assert.h&gt;
-int main(int argc,char *argv[])
-&#123;
-    int (*f)(int,char *[]) = main;
-    ////利用f可以直接调用函数，刚才上面看过了它能够执行的原因，利用一个指针就可以直接把main的代码读出来
-    if(argc != 0)
-    &#123;
-        char ***a = &amp;argv, *first = argv[0], ch = argv[0][0];
-        printf(&quot;arg = \&quot;%s\&quot;;    ch = &#39;%c&#39;\n&quot;,first, ch);//输出结果：arg = &quot;./a.out&quot;;    ch = &#39;.&#39;
-        assert(***a == ch);
-        /*
-        assert(***a == ch)等价于
-        if(***a == ch)
-        &#123;
-            
-        &#125;
-        else
-        &#123;
-            printf(&quot;ERROR\n&quot;);
-            exit(1);
-        &#125;如果程序出现bug能够直接中断
-        */
-        f(argc - 1,argv + 1);
-    &#125;
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
-        </span>
-        
-    </div>
-    <a href="/2022/04/14/ICS-1-C%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/" class="go-post">阅读全文</a>
 </div>
 
 
