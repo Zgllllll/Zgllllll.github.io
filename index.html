@@ -446,7 +446,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
         </span>
         
     </div>
@@ -717,7 +717,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
@@ -1003,7 +1003,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00a596">大模拟</a>
         </span>
         
     </div>
@@ -1104,7 +1104,6 @@ int main()
 <pre><code>7094396</pre>
 
 
-<p>$理解题意后的等价描述$</p>
 <p>任意两个障碍物之间可以有美观的插树方案，且该插树方案不能插在障碍物上。n个障碍物任选m个作为端点形成m+1个区间0，在区间进行插树，区间端点和树的位置形成等差数列，且保证树不插在没有选为端点的障碍物上（选为端点的障碍物当然不能插树）。区间内至少插一颗树。<br />
 对于计数问题大多是DP问题。我们假设先假设DP问题是一维的，发现一维解决不了问题（不能表示状态或无法完成状态计算）时再把条件作为状态新添维度。</p>
 <h2>DP</h2>
@@ -1124,18 +1123,19 @@ int main()
 如果命题成立，等价于证明从$a_j$开始以d为间距插树必然会插到$a_k$上，即$\exists{n}\in{N^+},a_j + n * d = a_k$，即$d|a_k-a_j$，而$a_k-a_j=g_j-g_k$，由$d|g_k|g_j$可知必然有$d|g_j-g_k|a_k-a_j$，命题得证</p>
 <p>注意 j 需要倒着枚举，这样保证每一个$g_k$的约数都枚举过了从而排除对于 j 来说不合法的插树方案。</p>
 ```
+#include <bits/stdc++.h>
 #define int long long
 #define mod 1000000007
 using namespace std;
 int n, a[1005], dp[1005];//a数组是单调递增的
-set&lt;int&gt; st;
-vector&lt;int&gt; f[100005];
+set<int> st;
+vector<int> f[100005];
 int calc(int p, int q) {//从a[x]到a[y]的可能的方案数（中间可能有障碍
     int x = a[q] - a[p];
     int ans = 0;
     //!
     st.insert(x);
-    for(int i = 0; i &lt; f[x].size(); i++) {
+    for(int i = 0; i < f[x].size(); i++) {
         if(st.find(f[x][i]) != st.end()) {
             continue;
         } else {
@@ -1147,23 +1147,23 @@ int calc(int p, int q) {//从a[x]到a[y]的可能的方案数（中间可能有�
 }
 signed main() {
     ios::sync_with_stdio(false);
-    cin &gt;&gt; n;
-    for(int i = 1; i &lt;= n; i++) {
-        cin &gt;&gt; a[i];
+    cin >> n;
+    for(int i = 1; i <= n; i++) {
+        cin >> a[i];
     }
-    for(int i = 1; i &lt;= a[n] / 2; i++) {
-        for(int j = 2 * i; j &lt;= a[n]; j += i) {
+    for(int i = 1; i <= a[n] / 2; i++) {
+        for(int j = 2 * i; j <= a[n]; j += i) {
             f[j].push_back(i);
         }
     }
     dp[1] = 1;
-    for(int i = 1; i &lt;= n; i++) {
+    for(int i = 1; i <= n; i++) {
         st.clear();
-        for(int j = i - 1; j &gt;= 1; j--) {
+        for(int j = i - 1; j >= 1; j--) {
             dp[i] = (dp[i] + dp[j] * calc(j, i) % mod) % mod;
         }
     }
-    cout &lt;&lt; dp[n] % mod;
+    cout << dp[n] % mod;
     return 0;
 }
 ```
@@ -1179,7 +1179,7 @@ signed main() {
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00bcd4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -1271,7 +1271,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
         </span>
         
     </div>
@@ -1348,7 +1348,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
         </span>
         
     </div>
