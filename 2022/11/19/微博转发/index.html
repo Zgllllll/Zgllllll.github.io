@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>微博转发 | 金冠小熊猫</title>
+        <meta name="author" content="金冠小熊猫" />
+        <meta name="description" content="温故而知新" />
+        <meta name="keywords" content="菜狗大学生" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>金冠小熊猫</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;金冠小熊猫</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>微博转发</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/19
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1564/">https://www.acwing.com/problem/content/1564/</a></p>
+<p>微博被称为中文版的 Twitter。 </p>
+<p>微博上的用户既可能有很多关注者，也可能关注很多其他用户。 </p>
+<p>因此，形成了一种基于这些关注关系的社交网络。 </p>
+<p>当用户在微博上发布帖子时，他/她的所有关注者都可以查看并转发他/她的帖子，然后这些人的关注者可以对内容再次转发&hellip;</p>
+<p>现在给定一个社交网络，假设只考虑 $L$ 层关注者，请你计算某些用户的帖子的最大可能转发量。</p>
+<h4>补充</h4>
+<p>如果 $B$ 是 $A$ 的关注者，$C$ 是 $B$ 的关注者，那么 $A$ 的第一层关注者是 $B$，第二层关注者是 $C$。</p>
+<h4>输入格式</h4>
+<p>第一行包含两个整数，$N$ 表示用户数量，$L$ 表示需要考虑的关注者的层数。</p>
+<p>假设，所有的用户的编号为 $1 \sim N$。</p>
+<p>接下来 $N$ 行，每行包含一个用户的关注信息，格式如下：</p>
+<pre><code>M[i] user_list[i]
+</code></pre>
+
+<p><code>M[i]</code> 是第 $i$ 名用户关注的总人数，<code>user_list[i]</code> 是第 $i$ 名用户关注的 <code>M[i]</code> 个用户的编号列表。</p>
+<p>最后一行首先包含一个整数 $K$，表示询问次数，然后包含 $K$ 个用户编号，表示询问这些人的帖子的最大可能转发量。</p>
+<h4>输出格式</h4>
+<p>按顺序，每行输出一个被询问人的帖子最大可能转发量。</p>
+<p>假设每名用户初次看到帖子时，都会转发帖子，只考虑 $L$ 层关注者。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 1000$,<br />
+$1 \le L \le 6$,<br />
+$1 \le M[i] \le 100$,<br />
+$1 \le K \le N$</p>
+<h4>输入样例：</h4>
+<pre><code>7 3
+3 2 3 4
+0
+2 5 6
+2 3 1
+2 3 4
+1 4
+1 5
+2 2 6
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>4
+5
+</code></pre>
+
+<p><img src="https://cdn.acwing.com/media/article/image/2022/11/19/142088_dfadffd167-QQ%E5%9B%BE%E7%89%8720221119152150.png" alt="QQ图片20221119152150.png"><br>这道题就可以深刻体会到，BFS能够直接求边权为1的最短路的好处了。<br>这道题也要走最短的一条路，怪不得DFS半天过不去，在DFS的过程当中还要<strong>维护一个每个点的最短路径</strong><br>当然，最好直接用BFS做就行了….</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+using namespace std;
+const int N = 1010;
+vector&lt;int&gt; g[N];
+int n,depth;
+bool st[N];
+int cnt;
+int dist[N];
+void dfs(int u,int curlen) 
+&#123;
+    if(curlen &gt;= dist[u]) return;
+    if(curlen &gt; depth) return;
+    dist[u] = curlen;
+    for(auto j : g[u])
+    &#123;
+        dfs(j,curlen + 1);
+    &#125;
+    return;
+&#125;
+
+int main()
+&#123;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;depth);
+    int num,b;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;num);
+        while(num --)
+        &#123;
+            scanf(&quot;%d&quot;,&amp;b);
+            g[b].push_back(i);
+        &#125;
+    &#125;
+    int k,id;
+    scanf(&quot;%d&quot;,&amp;k);
+    while(k --)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;id);
+        cnt = 0;
+        //cout &lt;&lt; id &lt;&lt; endl;
+        memset(st,0,sizeof st);
+        memset(dist,0x3f,sizeof dist);
+        dfs(id,0);
+        for(int i = 1;i &lt;= n;i ++)
+            if(dist[i] != 0x3f3f3f3f) cnt ++;
+        printf(&quot;%d\n&quot;,cnt - 1);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 金冠小熊猫
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;金冠小熊猫
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>

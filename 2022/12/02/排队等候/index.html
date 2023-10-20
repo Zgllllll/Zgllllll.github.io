@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>排队等候 | 金冠小熊猫</title>
+        <meta name="author" content="金冠小熊猫" />
+        <meta name="description" content="温故而知新" />
+        <meta name="keywords" content="菜狗大学生" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>金冠小熊猫</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;金冠小熊猫</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>排队等候</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/12/2
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1488/">https://www.acwing.com/problem/content/1488/</a></p>
+<p>假设一家银行有 $N$ 个服务窗口。</p>
+<p>窗户前面有一条黄线，将等候区分为两部分。</p>
+<p>客户排队等候的规则是：</p>
+<ul>
+<li>在黄线以内的区域，每个窗口前都可以排一队人，每队最多可以排 $M$ 个人，当 $N$ 个窗口前的队伍都排满时，第 $NM+1$ 个顾客以及以后的顾客只能在黄线以外的区域等候。黄线外的所有客户统一排成一个长队。</li>
+<li>每当客户进入黄线以内时，他会选择到当前排队人数最少的窗口处排队等待办理业务。当多个窗口前排队人数最少时，客户会选择窗口编号更小的窗口处排队等待办理业务。</li>
+<li>第 $i$ 名客户的办理业务时长为 $T_i$。</li>
+<li>最开始的 $N$ 名客户将于早上 <code>08:00</code> 被受理业务。</li>
+</ul>
+<p>现在，给定所有客户办理业务所需的时间，并对你进行若干次询问，每次询问一名客户办理完自身业务时的确切时间。</p>
+<p>例如，假设银行共有 $2$ 个服务窗口，每个窗口内可以有两名客户排在黄线以内。</p>
+<p>现在共有 $5$ 名客户等待办理业务，他们的业务时长分别为 $1,2,6,4,3$ 分钟。</p>
+<p>早上 <code>08:00</code> 时，客户 $1$ 在窗口 $1$ 接受服务，客户 $2$ 在窗口 $2$ 接受服务，客户 $3$ 在窗口 $1$ 前等待，客户 $4$ 在窗口 $2$ 前等待，客户 $5$ 在黄线以外等待。</p>
+<p>在 <code>08:01</code>，客户 $1$ 办完业务，客户 $5$ 进入黄线以内，并于窗口 $1$ 前等待。</p>
+<p>客户 $2$ 将于 <code>08:02</code> 办完业务，客户 $4$ 将于 <code>08:06</code> 办完业务，客户 $3$ 将于 <code>08:07</code> 办完业务，客户 $5$ 将于 <code>08:10</code> 办完业务。</p>
+<h4>输入格式</h4>
+<p>第一行包含 $4$ 个整数，$N,M,K,Q$，分别表示窗口总数，黄线内每个队伍的最大长度，客户总数，询问次数。</p>
+<p>第二行包含 $K$ 个整数，表示每个客户办理业务的所需时长（单位：分钟）。</p>
+<p>第三行包含 $Q$ 个整数，表示询问的所有客户的编号。</p>
+<p>客户编号从 $1$ 到 $K$。</p>
+<h4>输出格式</h4>
+<p>对于每个询问的客户，输出其办理完业务的确切时间，格式为 <code>HH:MM</code>。</p>
+<p>注意，银行 <code>17:00</code> 就会停止受理新的业务，所以对于<strong>不能在 17:00 之前（即最晚可以开始服务的时间是16:59）</strong>开始办理业务的客户，要输出 <code>Sorry</code>。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 20$,<br />
+$1 \le M \le 10$,<br />
+$1 \le K \le 1000$,<br />
+$1 \le Q \le K$</p>
+<h4>输入样例：</h4>
+<pre><code>2 2 7 5
+1 2 6 4 3 534 2
+3 4 5 6 7
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>08:07
+08:06
+08:10
+17:00
+Sorry
+</code></pre>
+
+<p>讨厌大模拟QAQ<br>自己的最初的思路：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+using namespace std;
+const int N = 21,M = 1010,INF = 0x3f3f3f3f;
+int n,m,k,Q;
+struct Person
+&#123;
+    int id,deal_time,end_time;
+&#125;persons[M];
+queue&lt;Person&gt; q[N];
+int finish_time[N];//我们要记录一下每个队列队首元素的当前结束时间
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;
+    for(int i = 1;i &lt;= k;i ++)
+    &#123;
+        int time;
+        cin &gt;&gt; time;
+        persons[i] = &#123;i,time,0&#125;;
+    &#125;
+    //咱先把窗口前的队列填满喽，然后每次只需要找所有队列队首最早结束的那一位，让后面的人上去就好了。
+    //在更新的时候，我们队首元素的结束时间应该是前面的一个人的结束时间 + 他的deal_time
+    //那么如果队首就是第一个进来的人怎么办呢？
+    //所以我们还需要一个finish数组，来额外维护一下上一个元素结束的时间的时间，默认如果是第一位，则上一位的结束时间是8:00
+    int cnt = 1;
+    while(cnt &lt;= n * m)
+    &#123;
+        for(int i = 1;i &lt;=  m;i ++) 
+        &#123;
+            q[i].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
+            cnt ++;
+        &#125;
+    &#125;
+    //cout &lt;&lt; cnt - 1 &lt;&lt; endl;
+    //先前一共加了cnt个人，如果再加正好编号正好从cnt开始，（因为末尾有一个+1）
+    for(int i = 1;i &lt;= m;i ++) finish_time[i] = 8 * 60;//默认上一个对象的结束时间是8点
+    for(int i = 1;i &lt;= k;i ++)//肯定要为k个人每个人都计算一次啊
+    &#123;
+        int t = -1;
+        for(int j = 1;j &lt;= n;j ++)
+        &#123;
+            //这里改了，我们是想找到最先处理完的，一个先决条件就是队列不空
+            if(q[j].size() &amp;&amp; (t == -1 || finish_time[j] + q[j].front().deal_time &lt; finish_time[t] + q[t].front().deal_time))
+                t = j;
+        &#125;
+        int id = q[t].front().id;
+        int hour = (finish_time[t] + q[t].front().deal_time) / 60;
+        int minutes = (finish_time[t] + q[t].front().deal_time) % 60;
+        
+        // cout &lt;&lt; t &lt;&lt; &#39; &#39; &lt;&lt; id &lt;&lt; endl;
+        // cout &lt;&lt; finish_time[t] &lt;&lt; &#39; &#39; &lt;&lt; q[t].front().deal_time &lt;&lt; endl;
+        // printf(&quot;当前队列%d 的时间为：%02d:%02d 容量为：%d\n&quot;,t,hour,minutes,q[t].size());
+        q[t].pop();
+        
+        persons[id].end_time =  finish_time[t] + persons[id].deal_time;
+        finish_time[t] = persons[id].end_time;
+        if(cnt &lt;= k)//相当于变相维护了一个黄线外的队列，只不过我们都存到数组里去了，所以拿一个cnt计数一下就好
+        &#123;
+             q[t].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
+             //printf(&quot;最小队列编号：%d 加入了一个：%d\n&quot;,t,cnt);
+             cnt ++;
+        &#125;
+    &#125;
+    int id;
+    while(Q --)
+    &#123;
+        cin &gt;&gt; id;
+        if(persons[id].end_time &gt; 17 * 60) puts(&quot;Sorry&quot;);
+        else 
+        &#123;
+            //cout &lt;&lt; persons[id].end_time &lt;&lt; endl;
+            int hour = persons[id].end_time / 60,minutes = persons[id].end_time % 60;
+            printf(&quot;%02d:%02d\n&quot;,hour,minutes);
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+<p>y总的思路：简洁且正确。队列里存的是时间，比较难想到<br>sum代表做完整个队列所需要的时间</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#include &lt;unordered_map&gt;
+
+using namespace std;
+
+const int N = 20;
+
+int n, m, k, Q;
+int sum[N];
+queue&lt;int&gt; q[N];
+
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;
+
+    unordered_map&lt;int, int&gt; hash;
+    for (int i = 1; i &lt;= k; i ++ )
+    &#123;
+        int s;
+        cin &gt;&gt; s;
+
+        int t = 0;
+        for (int j = 0; j &lt; n; j ++ )
+            if (i &lt;= n * m)
+            &#123;
+                if (q[j].size() &lt; q[t].size()) t = j;
+            &#125;
+            else
+            &#123;
+                if (q[j].front() &lt; q[t].front()) t = j;
+            &#125;
+
+        sum[t] += s;
+        if (i &gt; n * m) q[t].pop();
+        q[t].push(sum[t]);
+
+        if (sum[t] - s &lt; 540) hash[i] = sum[t];
+    &#125;
+
+    while (Q -- )
+    &#123;
+        int id;
+        cin &gt;&gt; id;
+        if (hash.count(id)) printf(&quot;%02d:%02d\n&quot;, hash[id] / 60 + 8, hash[id] % 60);
+        else puts(&quot;Sorry&quot;);
+    &#125;
+
+    return 0;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 金冠小熊猫
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;金冠小熊猫
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>

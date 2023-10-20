@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>通信线路 | 金冠小熊猫</title>
+        <meta name="author" content="金冠小熊猫" />
+        <meta name="description" content="温故而知新" />
+        <meta name="keywords" content="菜狗大学生" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>金冠小熊猫</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;金冠小熊猫</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>通信线路</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/9/26
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/342/">https://www.acwing.com/problem/content/342/</a></p>
+<p>在郊区有 $N$ 座通信基站，$P$ 条 <strong>双向</strong> 电缆，第 $i$ 条电缆连接基站 $A_i$ 和 $B_i$。</p>
+<p>特别地，$1$ 号基站是通信公司的总站，$N$ 号基站位于一座农场中。</p>
+<p>现在，农场主希望对通信线路进行升级，其中升级第 $i$ 条电缆需要花费 $L_i$。</p>
+<p>电话公司正在举行优惠活动。</p>
+<p>农产主可以指定一条从 $1$ 号基站到 $N$ 号基站的路径，并指定路径上不超过 $K$ 条电缆，由电话公司免费提供升级服务。</p>
+<p>农场主只需要支付在该路径上剩余的电缆中，升级价格最贵的那条电缆的花费即可。</p>
+<p>求至少用多少钱可以完成升级。</p>
+<h4>输入格式</h4>
+<p>第 $1$ 行：三个整数 $N，P，K$。</p>
+<p>第 $2..P+1$ 行：第 $i+1$ 行包含三个整数 $A_i,B_i,L_i$。</p>
+<h4>输出格式</h4>
+<p>包含一个整数表示最少花费。</p>
+<p>若 $1$ 号基站与 $N$ 号基站之间不存在路径，则输出 $-1$。</p>
+<h4>数据范围</h4>
+<p>$0 \le K &lt; N \le 1000$,<br />
+$1 \le P \le 10000$,<br />
+$1 \le L_i \le 1000000$</p>
+<h4>输入样例：</h4>
+<pre><code>5 7 1
+1 2 5
+3 1 4
+2 4 8
+3 2 3
+5 2 9
+3 4 7
+4 5 6
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>4
+</code></pre>
+
+<p><strong>1：</strong>这里一条路径的权值定义为路径当中的第k + 1大值。<br>    我们要求第k + 1大值最小，求一个什么什么最小，<strong>可以很自然想到二分</strong>。<br>    想用二分要证明，看是否能找到一个性质满足以答案为基点划分，使得区间左右一个命题为真，一个命题为假。<br>    这里我们分析限制条件，来用作命题：<strong>是否存在一个x，<em>使得存在这样一条路径_：_从1走到n，经过大于等于x的边的数量小于等于k</em></strong></p>
+<p><strong>2：</strong>接下来我们的问题变成了：**<em>给定一个权值x，如何测得是否存在一条路径，使得路径中边权值大于等于x的边的数量小于等于K。</em>**<br>    直接在图里面跑一遍最短路，重新**<em>记边权大于等于x的边的边权为1，否则为0</em><strong>.求一个</strong>最少<strong>大于等于边权x的边的数量。<br>    求出来之后，就算是</strong>求出来了一条1~n的路径**。满足该路径下，边权大于等于x的边的数量小于等于k。</p>
+<p><strong>3：</strong>一点疑惑：同样都是<strong>“要求出来一条路径”</strong>，为什么我们挑选<strong>“这样的边最少的路径”</strong>也符合答案呢？（毕竟跑的是最短路径）如果稍微扰动一下，考虑另外一条路径B，这里的大于x的边的数量稍微多一些，会怎么样？<br>我们刚才求出来的是“最少的边数”小于等于k，稍微大一点了，可能仍然小于等于k啊。<br><strong>3.1</strong>解答：确实是这样。但是回头看看<strong>我们要证明的是一个存在性性质</strong>。<strong>只要说明有一条就好了</strong>，这样的话我们就找最短路径就OK。</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int N = 1010,M = 20010;
+int n,p,k;
+int h[N],e[M],ne[M],w[M],idx;
+deque&lt;int&gt; q;
+int dist[N];
+bool st[N];
+void add(int a,int b,int c)
+&#123;
+    e[idx] = b,ne[idx] = h[a],w[idx] = c,h[a] = idx ++;
+&#125;
+bool check(int x)
+&#123;
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    q.push_back(1);
+    dist[1] = 0;
+    while(q.size())
+    &#123;
+        auto t = q.front();
+        q.pop_front();
+        if(st[t]) continue;
+        st[t] = true;
+        for(int i = h[t];~i;i = ne[i])
+        &#123;
+            int j = e[i],weight = w[i] &gt; x;
+            if(dist[j] &gt; dist[t] + weight)
+            &#123;
+                dist[j] = dist[t] + weight;
+                if(!weight) q.push_front(j);
+                else q.push_back(j);
+            &#125;
+            
+        &#125;
+    &#125;
+    return dist[n] &lt;= k;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; p &gt;&gt; k;
+    memset(h,-1,sizeof h);
+    for(int i = 0;i &lt; p;i ++)
+    &#123;
+        int a,b,c;
+        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+        add(a,b,c),add(b,a,c);
+    &#125;
+    int l = 0,r = 1e6 + 1;//设置r为1e6+1是为了辨析两种情况：出现不存在“最小值”的情况返回1e6+1，如果最小值就是1e6那就返回1e6
+    while(l &lt; r)
+    &#123;
+        int mid = l + r &gt;&gt; 1;
+        if(check(mid))  r = mid;
+        else l = mid + 1;
+    &#125;
+    if(l == 1e6 + 1) printf(&quot;-1&quot;);
+    else printf(&quot;%d&quot;,l);
+    return 0;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 金冠小熊猫
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;金冠小熊猫
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>

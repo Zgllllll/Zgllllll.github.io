@@ -1,0 +1,1582 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>金冠小熊猫</title>
+        <meta name="author" content="金冠小熊猫" />
+        <meta name="description" content="温故而知新" />
+        <meta name="keywords" content="菜狗大学生" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>金冠小熊猫</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;金冠小熊猫</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div id="home-head">
+    <div id="home-background" ref="homeBackground" data-images="/images/background.jpg"></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>金冠小熊猫</h1>
+                <h3>金冠小熊猫</h3>
+                <h5>温故而知新</h5>
+            </div>
+        </span>
+    </div>
+</div>
+<div id="home-posts-wrap"  ref="homePostsWrap">
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2022/09/26/%E9%80%9A%E4%BF%A1%E7%BA%BF%E8%B7%AF/">
+        <h2 class="post-title">通信线路</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/9/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/342/">https://www.acwing.com/problem/content/342/</a></p>
+<p>在郊区有 $N$ 座通信基站，$P$ 条 <strong>双向</strong> 电缆，第 $i$ 条电缆连接基站 $A_i$ 和 $B_i$。</p>
+<p>特别地，$1$ 号基站是通信公司的总站，$N$ 号基站位于一座农场中。</p>
+<p>现在，农场主希望对通信线路进行升级，其中升级第 $i$ 条电缆需要花费 $L_i$。</p>
+<p>电话公司正在举行优惠活动。</p>
+<p>农产主可以指定一条从 $1$ 号基站到 $N$ 号基站的路径，并指定路径上不超过 $K$ 条电缆，由电话公司免费提供升级服务。</p>
+<p>农场主只需要支付在该路径上剩余的电缆中，升级价格最贵的那条电缆的花费即可。</p>
+<p>求至少用多少钱可以完成升级。</p>
+<h4>输入格式</h4>
+<p>第 $1$ 行：三个整数 $N，P，K$。</p>
+<p>第 $2..P+1$ 行：第 $i+1$ 行包含三个整数 $A_i,B_i,L_i$。</p>
+<h4>输出格式</h4>
+<p>包含一个整数表示最少花费。</p>
+<p>若 $1$ 号基站与 $N$ 号基站之间不存在路径，则输出 $-1$。</p>
+<h4>数据范围</h4>
+<p>$0 \le K &lt; N \le 1000$,<br />
+$1 \le P \le 10000$,<br />
+$1 \le L_i \le 1000000$</p>
+<h4>输入样例：</h4>
+<pre><code>5 7 1
+1 2 5
+3 1 4
+2 4 8
+3 2 3
+5 2 9
+3 4 7
+4 5 6
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>4
+</code></pre>
+
+<p><strong>1：</strong>这里一条路径的权值定义为路径当中的第k + 1大值。<br>    我们要求第k + 1大值最小，求一个什么什么最小，<strong>可以很自然想到二分</strong>。<br>    想用二分要证明，看是否能找到一个性质满足以答案为基点划分，使得区间左右一个命题为真，一个命题为假。<br>    这里我们分析限制条件，来用作命题：<strong>是否存在一个x，<em>使得存在这样一条路径_：_从1走到n，经过大于等于x的边的数量小于等于k</em></strong></p>
+<p><strong>2：</strong>接下来我们的问题变成了：**<em>给定一个权值x，如何测得是否存在一条路径，使得路径中边权值大于等于x的边的数量小于等于K。</em>**<br>    直接在图里面跑一遍最短路，重新**<em>记边权大于等于x的边的边权为1，否则为0</em><strong>.求一个</strong>最少<strong>大于等于边权x的边的数量。<br>    求出来之后，就算是</strong>求出来了一条1~n的路径**。满足该路径下，边权大于等于x的边的数量小于等于k。</p>
+<p><strong>3：</strong>一点疑惑：同样都是<strong>“要求出来一条路径”</strong>，为什么我们挑选<strong>“这样的边最少的路径”</strong>也符合答案呢？（毕竟跑的是最短路径）如果稍微扰动一下，考虑另外一条路径B，这里的大于x的边的数量稍微多一些，会怎么样？<br>我们刚才求出来的是“最少的边数”小于等于k，稍微大一点了，可能仍然小于等于k啊。<br><strong>3.1</strong>解答：确实是这样。但是回头看看<strong>我们要证明的是一个存在性性质</strong>。<strong>只要说明有一条就好了</strong>，这样的话我们就找最短路径就OK。</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int N = 1010,M = 20010;
+int n,p,k;
+int h[N],e[M],ne[M],w[M],idx;
+deque&lt;int&gt; q;
+int dist[N];
+bool st[N];
+void add(int a,int b,int c)
+&#123;
+    e[idx] = b,ne[idx] = h[a],w[idx] = c,h[a] = idx ++;
+&#125;
+bool check(int x)
+&#123;
+    memset(dist,0x3f,sizeof dist);
+    memset(st,0,sizeof st);
+    q.push_back(1);
+    dist[1] = 0;
+    while(q.size())
+    &#123;
+        auto t = q.front();
+        q.pop_front();
+        if(st[t]) continue;
+        st[t] = true;
+        for(int i = h[t];~i;i = ne[i])
+        &#123;
+            int j = e[i],weight = w[i] &gt; x;
+            if(dist[j] &gt; dist[t] + weight)
+            &#123;
+                dist[j] = dist[t] + weight;
+                if(!weight) q.push_front(j);
+                else q.push_back(j);
+            &#125;
+            
+        &#125;
+    &#125;
+    return dist[n] &lt;= k;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; p &gt;&gt; k;
+    memset(h,-1,sizeof h);
+    for(int i = 0;i &lt; p;i ++)
+    &#123;
+        int a,b,c;
+        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+        add(a,b,c),add(b,a,c);
+    &#125;
+    int l = 0,r = 1e6 + 1;//设置r为1e6+1是为了辨析两种情况：出现不存在“最小值”的情况返回1e6+1，如果最小值就是1e6那就返回1e6
+    while(l &lt; r)
+    &#123;
+        int mid = l + r &gt;&gt; 1;
+        if(check(mid))  r = mid;
+        else l = mid + 1;
+    &#125;
+    if(l == 1e6 + 1) printf(&quot;-1&quot;);
+    else printf(&quot;%d&quot;,l);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
+        </span>
+        
+    </div>
+    <a href="/2022/09/26/%E9%80%9A%E4%BF%A1%E7%BA%BF%E8%B7%AF/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/08/01/pointer/">
+        <h2 class="post-title">What is a pointer?</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                计算机知识
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/8/1
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>先贴一个解释指针很好的博客<a href="https://">https://www.cnblogs.com/zhangrxiang/articles/8465678.html</a> </p>
+<hr>
+<p>再分享一篇看到的文章：<br><strong>本文从编译器的角度解释了变量即对象，解析了变量的rvalue和lvalue，从lvalue的角度引出了对指针的看法</strong></p>
+<hr>
+<p><strong><em>One of those things beginners in C find difficult is the concept of pointers. The purpose of this tutorial is to provide an introduction to pointers and their use to these beginners.One of those things beginners in C find difficult is the concept of pointers. The purpose of this tutorial is to provide an introduction to pointers and their use to these beginners.</em></strong></p>
+<p><strong><em>I have found that often the main reason beginners have a problem with pointers is that they have a weak or minimal feeling for variables, (as they are used in C). Thus we start with a discussion of C variables in general.</em></strong></p>
+<p><strong><em>A variable in a program is something with a name, the value of which can vary. The way the compiler and linker handles this is that it assigns a specific block of memory within the computer to hold the value of that variable. The size of that block depends on the range over which the variable is allowed to vary. For example, on 32 bit PC’s the size of an integer variable is 4 bytes. On older 16 bit PCs integers were 2 bytes.  In C the size of a variable type such as an integer need not be the same on all types of machines.  Further more there is more than one type of integer variable in C.  We have integers, long integers and short integers which you can read up on in any basic text on C.  This document assumes the use of a 32 bit system with 4 byte integers.</em></strong></p>
+<p><strong><em>If you want to know the size of the various types of integers on your system, running the following code will give you that information.</em></strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+&#123;
+printf(&quot;size of a short is %d\n&quot;, sizeof(short));
+printf(&quot;size of a int is %d\n&quot;, sizeof(int));
+printf(&quot;size of a long is %d\n&quot;, sizeof(long));
+&#125;
+</code></pre>
+<hr>
+<p><strong><em>When we declare a variable we inform the compiler of two things, the name of the variable and the type of the variable. For example, we declare a variable of type integer with the name k by writing:</em></strong></p>
+<pre><code>int k; 
+</code></pre>
+<p>**<em>On seeing the “int” part of this statement the compiler sets aside 4 bytes of memory (on a PC) to hold the value of the integer. It also sets up a symbol table. In that table it adds the symbol k and the relative address in memory where those 4 bytes were set aside.</em>**（变量的构成）</p>
+<p><strong><em>Thus, later if we write:</em></strong></p>
+<pre><code>k = 2; 
+</code></pre>
+<p>**<em>we expect that, at run time when this statement is executed, the value 2 will be placed in that memory location reserved for the storage of the value of k. In C we refer to a variable such as the integer k as an “object”.</em> **（在C中，变量，即可以看作一个对象）</p>
+<hr>
+<p>对于一个对象的加深理解：一个对象具有两个值(“are value” 和 “lvalue”)<br><strong><em>In a sense there are two “values” associated with the object k. One is the value of the integer stored there (2 in the above example) and the other the “value” of the memory location, i.e., the address of k. Some texts refer to these two values with the nomenclature rvalue (right value, pronounced “are value”) and lvalue (left value, pronounced “el value”) respectively.</em></strong></p>
+<p><strong><em>In some languages, the lvalue is the value permitted on the left side of the assignment operator ‘&#x3D;’ (i.e. the address where the result of evaluation of the right side ends up). The rvalue is that which is on the right side of the assignment statement, the 2 above. Rvalues cannot be used on the left side of the assignment statement. Thus: 2 &#x3D; k; is illegal.</em></strong></p>
+<p><strong><em>Actually, the above definition of “lvalue” is somewhat modified for C. According to K&amp;R II (page 197): [1]</em></strong></p>
+<p><strong><em>“An object is a named region of storage; an lvalue is an expression referring to an object.”</em></strong><br>(对象是命名的存储区域；左值是对“对象引用”的表达)<br><strong><em>However, at this point, the definition originally cited above is sufficient. As we become more familiar with pointers we will go into more detail on this.</em></strong></p>
+<p><strong><em>Okay, now consider:</em></strong></p>
+<pre><code>   int j, k; 
+
+    k = 2; 
+    j = 7;    &lt;-- line 1 
+    k = j;    &lt;-- line 2 
+</code></pre>
+<p>（从编译器的角度解释变量(object)，提出address的必要性）<br><strong><em>In the above, the compiler interprets the j in line 1 as the address of the variable j (its lvalue) and creates code to copy the value 7 to that address. In line 2, however, the j is interpreted as its rvalue (since it is on the right hand side of the assignment operator ‘&#x3D;’). That is, here the j refers to the value stored at the memory location set aside for j, in this case 7. So, the 7 is copied to the address designated by the lvalue of k.</em></strong></p>
+<p><strong><em>In all of these examples, we are using 4 byte integers so all copying of rvalues from one storage location to the other is done by copying 4 bytes. Had we been using two byte integers, we would be copying 2 bytes.</em></strong></p>
+<hr>
+<p>（引出了指针的概念）：得到对象的左值</p>
+<p><strong><em>Now, let’s say that we have a reason for wanting a variable designed to hold an lvalue (an address). The size required to hold such a value depends on the system. On older desk top computers with 64K of memory total, the address of any point in memory can be contained in 2 bytes. Computers with more memory would require more bytes to hold an address.  The actual size required is not too important so long as we have a way of informing the compiler that what we want to store is an address.</em></strong></p>
+<p><strong><em>Such a variable is called a pointer variable (for reasons which hopefully will become clearer a little later). In C when we define a pointer variable we do so by preceding its name with an asterisk. In C we also give our pointer a type which, in this case, refers to the type of data stored at the address we will be storing in our pointer. For example, consider the variable declaration:</em></strong></p>
+<pre><code>int *ptr;
+</code></pre>
+<p>(核心句：However many bytes is required to store an address in memory)<br><strong><em>ptr is the name of our variable (just as k was the name of our integer variable). The ‘*’ informs the compiler that we want a pointer variable, i.e. to set aside however many bytes is required to store an address in memory. 《The int says that we intend to “use our pointer variable（工具人）” to store the address of an integer. Such a pointer is said to “point to” an integer.（打工人） 》However, note that when we wrote int k; we did not give k a value. If this definition is made outside of any function ANSI compliant compilers will initialize it to zero. Similarly, ptr has no value, that is we haven’t stored an address in it in the above declaration. In this case, again if the declaration is outside of any function, it is initialized to a value guaranteed in such a way that it is guaranteed to not point to any C object or function. A pointer initialized in this manner is called a “null” pointer.</em></strong></p>
+<hr>
+<p>（对于空指针的定义不同系统是不一样的，不一定都是“0”，但是无论如何我们把<strong>空指针用宏写成NULL</strong>，就可以方便代码做移植，这里做了一层抽象）</p>
+<p><strong><em>The actual bit pattern used for a null pointer may or may not evaluate to zero since it depends on the specific system on which the code is developed. To make the source code compatible between various compilers on various systems, a macro is used to represent a null pointer. That macro goes under the name NULL. Thus, setting the value of a pointer using the NULL macro, as with an assignment statement such as ptr &#x3D; NULL, guarantees that the pointer has become a null pointer. Similarly, just as one can test for an integer value of zero, as in if(k &#x3D;&#x3D; 0), we can test for a null pointer using if (ptr &#x3D;&#x3D; NULL).</em></strong></p>
+<p><strong><em>But, back to using our new variable ptr. Suppose now that we want to store in ptr the address of our integer variable k. To do this we use the unary（单元运算符） &amp; operator and write:</em></strong></p>
+<pre><code>ptr = &amp;k; 
+</code></pre>
+<p><strong><em>What the &amp; operator does is retrieve the lvalue (address) of k, even though k is on the right hand side of the assignment operator ‘&#x3D;’, and copies that to the contents of our pointer ptr. Now, ptr is said to “point to” k. Bear with us now, there is only one more operator we need to discuss.</em></strong></p>
+<p><strong><em>The “dereferencing operator”(解引用) is the asterisk and it is used as follows:</em></strong></p>
+<pre><code>*ptr = 7; 
+</code></pre>
+<p><strong><em>will copy 7 to the address pointed to by ptr. Thus if ptr “points to” (contains the address of) k, the above statement will set the value of k to 7. That is, when we use the ‘*’ this way we are referring to the value of that which ptr is pointing to, not the value of the pointer itself.</em></strong></p>
+<p><strong><em>Similarly, we could write:</em></strong></p>
+<pre><code> printf(&quot;%d\n&quot;,*ptr); 
+</code></pre>
+<p><strong><em>to print to the screen the integer value stored at the address pointed to by ptr;.</em></strong></p>
+<p><strong><em>One way to see how all this stuff fits together would be to run the following program and then review the code and the output carefully.</em></strong></p>
+<p>———— Program 1.1 ———————————</p>
+<pre><code> 1 /* Program 1.1 from PTRTUT10.TXT   6/10/97 */
+ 2 
+ 3 #include &lt;stdio.h&gt;
+ 4 
+ 5 int j, k;
+ 6 int *ptr;
+ 7 
+ 8 int main(void)
+ 9 &#123;
+10     j = 1;
+11     k = 2;
+12     ptr = &amp;k;
+13     printf(&quot;\n&quot;);
+14     printf(&quot;j has the value %d and is stored at %p\n&quot;, j, (void *)&amp;j);
+15     printf(&quot;k has the value %d and is stored at %p\n&quot;, k, (void *)&amp;k);
+16     printf(&quot;ptr has the value %p and is stored at %p\n&quot;, ptr, (void *)&amp;ptr);
+17     printf(&quot;The value of the integer pointed to by ptr is %d\n&quot;, *ptr);
+18 
+19     return 0;
+20 &#125;
+</code></pre>
+<p>**<em>Note: We have yet to discuss those aspects of C which require the use of the (void *) expression used here. For now, include it in your test code. We’ll explain the reason behind this expression later.</em>**</p>
+<p><strong><em>To review:</em></strong></p>
+<p><strong><em>A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br>**<em>A pointer variable is declared by giving it a type and a name (e.g. int *ptr) where the asterisk tells the compiler that the variable named ptr is a pointer variable and the type tells the compiler what type the pointer is to point to (integer in this case).</em>**<br><strong><em>Once a variable is declared, we can get its address by preceding its name with the unary &amp; operator, as in &amp;k.</em></strong><br>**<em>We can “dereference” a pointer, i.e. refer to the value of that which it points to, by using the unary ‘*’ operator as in *ptr.</em>**<br><strong><em>An “lvalue” of a variable is the value of its address, i.e. where it is stored in memory. The “rvalue” of a variable is the value stored in that variable (at that address).</em></strong><br><strong><em>References for Chapter 1:</em></strong><br><strong><em>“The C Programming Language” 2nd Edition</em></strong><br><strong>_B. Kernighan and D. Ritchie _</strong><br><strong>_Prentice Hall _</strong><br><strong><em>ISBN 0-13-110362-8 A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br><strong><em>A variable is declared by giving it a type and a name (e.g. int k;)</em></strong><br>**<em>A pointer variable is declared by giving it a type and a name (e.g. int *ptr) where the asterisk tells the compiler that the variable named ptr is a pointer variable and the type tells the compiler what type the pointer is to point to (integer in this case).</em>**</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%9F%A5%E8%AF%86/" style="color: #ff7d73">语言知识</a>
+        </span>
+        
+    </div>
+    <a href="/2022/08/01/pointer/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/">
+        <h2 class="post-title">能量石</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/6/6
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">https://www.acwing.com/problem/content/736/</a></p>
+<p>岩石怪物杜达生活在魔法森林中，他在午餐时收集了 $N$ 块能量石准备开吃。 </p>
+<p>由于他的嘴很小，所以一次只能吃一块能量石。 </p>
+<p>能量石很硬，吃完需要花不少时间。</p>
+<p>吃完第 $i$ 块能量石需要花费的时间为 $S_i$ 秒。</p>
+<p>杜达靠吃能量石来获取能量。 </p>
+<p>不同的能量石包含的能量可能不同。 </p>
+<p>此外，能量石会随着时间流逝逐渐失去能量。 </p>
+<p>第 $i$ 块能量石最初包含 $E_i$ 单位的能量，并且每秒将失去 $L_i$ 单位的能量。 </p>
+<p>当杜达开始吃一块能量石时，他就会立即获得该能量石所含的全部能量（无论实际吃完该石头需要多少时间）。 </p>
+<p>能量石中包含的能量最多降低至 $0$。</p>
+<p>请问杜达通过吃能量石可以获得的最大能量是多少？</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $T$，表示共有 $T$ 组测试数据。</p>
+<p>每组数据第一行包含整数 $N$，表示能量石的数量。</p>
+<p>接下来 $N$ 行，每行包含三个整数 $S_i,E_i,L_i$。</p>
+<h3>输出格式</h3>
+<p>每组数据输出一个结果，每个结果占一行。</p>
+<p>结果表示为 <code>Case #x: y</code>，其中 $x$ 是组别编号（从 $1$ 开始），$y$ 是可以获得的最大能量值。</p>
+<h4>数据范围</h4>
+<p>$1 \le T \le 10$,<br />
+$1 \le N \le 100$,<br />
+$1 \le S_i \le 100$,<br />
+$1 \le E_i \le 10^5$,<br />
+$0 \le L_i \le 10^5$</p>
+<h4>输入样例：</h4>
+<pre><code>3
+4
+20 10 1
+5 30 5
+100 30 1
+5 80 60
+3
+10 4 1000
+10 3 1000
+10 8 1000
+2
+12 300 50
+5 200 0
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>Case #1: 105
+Case #2: 8
+Case #3: 500
+</code></pre>
+
+<h4>样例解释</h4>
+<p>在样例＃1中，有 $N = 4$ 个宝石。杜达可以选择的一个吃石头顺序是：</p>
+<ul>
+<li>吃第四块石头。这需要 $5$ 秒，并给他 $80$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $5$ 单位的能量（第二块石头开始时具有 $30$ 单位能量，$5$ 秒后失去了 $25$ 单位的能量）。</li>
+<li>吃第三块石头。这需要 $100$ 秒，并给他 $20$ 单位的能量（第三块石头开始时具有 $30$ 单位能量，$10$ 秒后失去了 $10$ 单位的能量）。</li>
+<li>吃第一块石头。这需要 $20$ 秒，并给他 $0$ 单位的能量（第一块石头以 $10$ 单位能量开始，$110$ 秒后已经失去了所有的能量）。</li>
+</ul>
+<p>他一共获得了 $105$ 单位的能量，这是能获得的最大值，所以答案是 $105$。</p>
+<p>在样本案例＃2中，有 $N = 3$ 个宝石。</p>
+<p>无论杜达选择吃哪块石头，剩下的两个石头的能量都会耗光。</p>
+<p>所以他应该吃第三块石头，给他提供 $8$ 单位的能量。</p>
+<p>在样本案例＃3中，有 $N = 2$ 个宝石。杜达可以：</p>
+<ul>
+<li>吃第一块石头。这需要 $12$ 秒，并给他 $300$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $200$ 单位的能量（第二块石头随着时间的推移不会失去任何能量！）。</li>
+</ul>
+<p>所以答案是 $500$。</p>
+
+<p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 10010,M = 110;
+int T,n;
+struct Stone
+&#123;
+    int s,e,l;
+&#125;stone[M];
+bool cmp(Stone a,Stone b)
+&#123;
+    int S = a.s, SS = b.s,L = a.l,LL = b.l;
+    return S * LL &lt; SS * L;
+&#125;
+int f[N];
+
+int main()
+&#123;
+    cin &gt;&gt; T;
+    for(int C = 1;C &lt;= T;C ++)
+    &#123;
+        cin &gt;&gt; n;
+        int m = 0;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            cin &gt;&gt; stone[i].s &gt;&gt; stone[i].e &gt;&gt; stone[i].l;
+            m += stone[i].s;//记录下最多用多少时间方便下面决策
+        &#125;
+        
+        sort(stone + 1,stone + n + 1,cmp);
+        
+        memset(f,-1,sizeof f);//把f[0][i]等都初始化成不可达的状态
+        f[0] = 0;//起点为f[0]
+        
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            for(int j = m;j &gt;= stone[i].s;j --)
+            &#123;
+                int e = stone[i].e,l = stone[i].l,s = stone[i].s;
+                f[j] = max(f[j],f[j - s] + e - l * (j - s));
+            &#125;
+        &#125;
+        int res = 0;
+        for(int j = 0;j &lt;= m;j ++) res = max(res,f[j]);
+        printf(&quot;Case #%d: %d\n&quot;,C,res);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/06/06/%E8%83%BD%E9%87%8F%E7%9F%B3/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/06/05/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/">
+        <h2 class="post-title">无线网络</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/6/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/4432/">https://www.acwing.com/problem/content/4432/</a></p>
+ <p>农夫约翰的农场可以看作一个二维平面。</p>
+<p>农场中散布着 $n$ 头奶牛，每头奶牛的位置坐标已知。</p>
+<p>农场中还建有 $2$ 个 wifi 基站，每个基站的位置坐标已知。</p>
+<p>这 $n+2$ 个位置坐标两两不同。</p>
+<p>第一个基站的有效覆盖范围 $r_1$ 和第二个基站的有效覆盖范围 $r_2$ 均可由约翰自由设定。</p>
+<p>因为奶牛喜欢保持电子邮件联系，所以约翰希望所有奶牛都能被无线网络覆盖。</p>
+<p>如果一头奶牛满足以下两个条件中的<strong>至少</strong>一个：</p>
+<ul>
+<li>它到第一个基站的距离不超过 $r_1$</li>
+<li>它到第二个基站的距离不超过 $r_2$</li>
+</ul>
+<p>那么就视为它已被无线网络覆盖。</p>
+<p>同时为了降低成本，约翰希望 ${r_1}^2+{r_2}^2$ 尽可能小。</p>
+<p>请你计算 ${r_1}^2+{r_2}^2$ 的最小可能值。</p>
+<h4>输入格式</h4>
+<p>第一行包含 $5$ 个整数 $n,x_1,y_1,x_2,y_2$，其中 $n$ 为奶牛数量，$(x_1,y_1)$ 为第一个基站的坐标，$(x_2,y_2)$ 为第二个基站的坐标。</p>
+<p>接下来 $n$ 行，每行包含两个整数 $x_i,y_i$，表示一头奶牛的位置坐标 $(x_i,y_i)$。</p>
+<h4>输出格式</h4>
+<p>输出 ${r_1}^2+{r_2}^2$ 的最小可能值，答案四舍五入到个位。</p>
+<h4>数据范围</h4>
+<p>前 $4$ 个测试点满足 $1 \le n \le 10$。<br />
+所有测试点满足 $1 \le n \le 2000$，$-10^7 \le x_i,y_i \le 10^7$。</p>
+<h4>输入样例1：</h4>
+<pre><code>2 -1 0 5 3
+0 2
+5 2
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>6
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>4 0 0 5 0
+9 4
+8 3
+-1 0
+1 4
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>33
+</code></pre>
+
+<p>这题还是挺难想的…..朴素的想法是枚举一下r1，枚举一下r2，然后再循环一遍看是否所有点都被覆盖。这是$O(n^3)$(TLE)<br>但是我们可以发现：1、圆的边界一定是至少有一个点的(假设没有，那么我们可以缩小圆的面积而不会使得结果变差)<br>2、我们可以通过更改枚举顺序进行优化。我们<strong>从大到小</strong>枚举r1距离，“从大到小保证了，每次只会从r1覆盖的点集中一次<strong>只抛出一个点</strong>，而在r2的点集中<strong>只加入一个点</strong>”。这样我们就可以<strong>在线性的时间内完成枚举所有r1和r2的选法</strong><br>顺带一提这题不需要用堆进行优化，因为它在处理集合的最值过程中，对于一个集合只有“加入”而没有“删除”操作，所以用一个变量动态维护一下就可以了</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+#define x first
+#define y second
+const int N = 2010;
+typedef pair&lt;int, int&gt; PII;
+typedef long long LL;
+int n;
+PII s1,s2;
+PII q[N];
+LL get_dist(PII a,PII b)
+&#123;
+    LL dx = a.x - b.x,dy = a.y - b.y;
+    return dx * dx + dy * dy;
+&#125;
+bool cmp(PII a,PII b)
+&#123;
+    return get_dist(a,s1) &lt; get_dist(b,s1);  
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; s1.x &gt;&gt; s1.y &gt;&gt; s2.x &gt;&gt; s2.y;
+    for(int i = 0;i &lt; n;i ++) cin &gt;&gt; q[i].x &gt;&gt; q[i].y;
+    
+    sort(q,q + n,cmp);
+    LL res = 1e18,r = 0;
+    for(int i = n - 1;i &gt;= 0;i --)
+    &#123;
+        res = min(res,r + get_dist(q[i],s1));
+        r = max(r,get_dist(q[i],s2));
+    &#125;
+    res = min(res,r);
+    cout &lt;&lt; res;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #03a9f4">枚举</a>
+        </span>
+        
+    </div>
+    <a href="/2022/06/05/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/24/%E8%B4%A7%E5%B8%81%E7%B3%BB%E7%BB%9F/">
+        <h2 class="post-title">货币系统</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/3512573/">https://www.acwing.com/activity/content/code/content/3512573/</a></p>
+<p>在网友的国度中共有 $n$ 种不同面额的货币，第 $i$ 种货币的面额为 $a[i]$，你可以假设每一种货币都有无穷多张。</p>
+<p>为了方便，我们把货币种数为 $n$、面额数组为 $a[1..n]$ 的货币系统记作 $(n,a)$。 </p>
+<p>在一个完善的货币系统中，每一个非负整数的金额 $x$ 都应该可以被表示出，即对每一个非负整数 $x$，都存在 $n$ 个非负整数 $t[i]$ 满足 $a[i] × t[i]$ 的和为 $x$。</p>
+<p>然而，在网友的国度中，货币系统可能是不完善的，即可能存在金额 $x$ 不能被该货币系统表示出。</p>
+<p>例如在货币系统 $n=3, a=[2,5,9]$ 中，金额 $1,3$ 就无法被表示出来。 </p>
+<p>两个货币系统 $(n,a)$ 和 $(m,b)$ 是等价的，当且仅当对于任意非负整数 $x$，它要么均可以被两个货币系统表出，要么不能被其中任何一个表出。 </p>
+<p>现在网友们打算简化一下货币系统。</p>
+<p>他们希望找到一个货币系统 $(m,b)$，满足 $(m,b)$ 与原来的货币系统 $(n,a)$ 等价，且 $m$ 尽可能的小。</p>
+<p>他们希望你来协助完成这个艰巨的任务：找到最小的 $m$。</p>
+<h4>输入格式</h4>
+<p>输入文件的第一行包含一个整数 $T$，表示数据的组数。</p>
+<p>接下来按照如下格式分别给出 $T$ 组数据。 </p>
+<p>每组数据的第一行包含一个正整数 $n$。</p>
+<p>接下来一行包含 $n$ 个由空格隔开的正整数 $a[i]$。</p>
+<h4>输出格式</h4>
+<p>输出文件共有 $T$ 行，对于每组数据，输出一行一个正整数，表示所有与 $(n,a)$ 等价的货币系统 $(m,b)$ 中，最小的 $m$。</p>
+<h4>数据范围</h4>
+<p>$1 \le n \le 100$,<br />
+$1 \le a[i] \le 25000$,<br />
+$1 \le T \le 20$</p>
+<h4>输入样例：</h4>
+<pre><code>2 
+4 
+3 19 10 6 
+5 
+11 29 13 19 17 
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>2
+5
+</code></pre>
+
+<p>本题是在寻找<strong>最大线性无关组</strong>，基本思路就是<strong>从小到大，看每一个数是否能被比较小的数线性表示</strong><br>那么对于每一个数的线性表示前的系数都会对应它的一个选法，系数可以无限大，这是一个完全背包问题</p>
+<p><strong>朴素版</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 110,M = 25010;
+bool f[N][M];//考虑前i个货币，凑起来的面值恰好为j
+int T,n,m;//可行性背包问题
+int v[N];
+int main()
+&#123;
+    cin &gt;&gt; T;
+    while(T --)
+    &#123;
+        cin &gt;&gt; n;
+        for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i];
+        sort(v + 1,v + n + 1);
+        memset(f, 0, sizeof f);//初始化表示所有数字还没有被线性表示
+        //DP的起点是f[0][0]，如果没有初始化起点，f的矩阵是不会变的
+        f[0][0] = true;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            for(int j = 0;j &lt;= v[n];j ++)//对于每一个数字，尝试进行线性表示以筛掉后面的数字，所以最大j要看到v[n]，这是一个完全背包问题。
+            &#123;
+                for(int k = 0;k * v[i] &lt;= j;k ++)
+                &#123;
+                    f[i][j] |= f[i - 1][j - k * v[i]];
+                &#125;
+            &#125;
+        &#125;
+        //构造完矩阵后看一下每一个数是否能被前面的数表示
+        int res = 1;
+        for(int i = 2;i &lt;= n;i ++)
+        &#123;
+            bool flag = false;
+            int t = v[i];
+            for(int row = 1;row &lt; i;row ++)//row &lt; i从第二个数开始看，第一个数一定是无法被前面的数线性表示的
+            &#123;
+                if(f[row][t] == true)//如果这个数字可以被前面的数表示
+                &#123;
+                     flag = true;
+                     break;
+                &#125;
+            &#125;
+            if(flag == false)//如果这个数不能被前面的数字线性表示，那么res ++
+            &#123;
+                res ++;
+            &#125;
+        &#125;
+        printf(&quot;%d\n&quot;,res);
+     &#125;
+    return 0;
+&#125;
+</code></pre>
+<p><strong>优化版</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 110,M = 25010;
+bool f[M];//考虑前i个货币，凑起来的面值恰好为j
+int T,n,m;//可行性背包问题
+int v[N];
+int main()
+&#123;
+    cin &gt;&gt; T;
+    while(T --)
+    &#123;
+        cin &gt;&gt; n;
+        for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i];
+        sort(v + 1,v + n + 1);
+        memset(f, 0, sizeof f);
+        f[0] = true;
+        int res = 0;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            if(f[v[i]]) continue;//如果当前货币被前面的凑出来了直接continue
+            res ++;//否则答案加1，即当前数字不能被前面线性表示
+            for(int j = v[i];j &lt;= v[n];j ++)//对于每一个数字，尝试进行线性表示以筛掉后面的数字，所以最大j要看到v[n]，这是一个完全背包问题。
+            &#123;
+                f[j] |= f[j - v[i]];
+            &#125;
+        &#125;
+        printf(&quot;%d\n&quot;,res);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/24/%E8%B4%A7%E5%B8%81%E7%B3%BB%E7%BB%9F/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/21/%E4%B8%89%E6%9D%A1%E7%BA%BF/">
+        <h2 class="post-title">三条线</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/2015/">https://www.acwing.com/problem/content/2015/</a></p>
+<p>农夫约翰想用他购买的新监视系统监视他的 $N$ 头奶牛。</p>
+<p>第 $i$ 头奶牛位于具有整数坐标的位置 $(x_i,y_i)$。</p>
+<p>没有两头奶牛占据相同的位置。</p>
+<p>约翰的监视系统包含三个特殊的摄像头，每个摄像头都能够沿垂直或水平线观察一条线上所有的奶牛。</p>
+<p>请确定约翰是否可以通过合理设置三个摄像头的摆放位置，以便他可以监视所有 $N$ 头奶牛。</p>
+<p>也就是说，请确定是否可以通过三条垂直或水平摆放的线将所有 $N$ 个奶牛所在位置全部覆盖。</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $N$。</p>
+<p>接下来 $N$ 行，每行包含两个整数 $x_i,y_i$，表示一头奶牛所在位置的横纵坐标。</p>
+<h4>输出格式</h4>
+<p>如果可以通过三条垂直或水平摆放的线将所有 $N$ 个奶牛所在位置全部覆盖，请输出 $1$，否则输出 $0$。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 50000$,<br />
+$0 \le x_i,y_i \le 10^9$</p>
+<h4>输入样例：</h4>
+<pre><code>6
+1 7
+0 0
+1 2
+2 0
+1 4
+3 4
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>1
+</code></pre>
+
+<h4>样例解释</h4>
+<p>$y = 0,x = 1,y = 4$ 可满足将所有奶牛位置覆盖。</p>
+
+<p>暴力枚举思路是枚举每一条线，这样就是Cn3种情况，三层for循环复杂度立方级别(TLE)。<br>更精巧的想法是换了一个枚举思路。类似于“最小圆覆盖”问题<br>先枚举每一个点，然后每个点其实只有两种情况(被横线覆盖或者被竖线覆盖)，这样就是一个DFS问题了<br>搜索深度是三(只有三条线)，所以复杂度为O(8n)可以过</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;unordered_set&gt;
+#define x first
+#define y second
+using namespace std;
+const int N = 50010;
+typedef pair&lt;int, int&gt; PII;
+PII q[N];
+int n;
+unordered_set&lt;int&gt; row,col;
+int dfs(int u,int cnt)
+&#123;
+    if(u == n + 1) return 1;
+    if(cnt &gt; 3) return 0;
+    if(row.count(q[u].y) || col.count(q[u].x)) return dfs(u + 1,cnt);//如果这个点被覆盖了直接跳过
+    //如果这个点没有被覆盖过枚举两种情况：是被横线覆盖还是竖线覆盖  
+    
+    row.insert(q[u].y);//被横线覆盖，选定了当前直线加入集合中
+    if(dfs(u + 1,cnt + 1)) return 1;//多了一条直线，如果有解的话就return 1
+    row.erase(q[u].y);//恢复现场
+    
+    col.insert(q[u].x);
+    if(dfs(u + 1,cnt + 1)) return 1;
+    col.erase(q[u].x);
+    
+    return 0;
+&#125;
+
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        int a,b;
+        cin &gt;&gt; a &gt;&gt; b;
+        q[i] = &#123;a,b&#125;;
+    &#125;
+    printf(&quot;%d&quot;,dfs(1,0));
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%80%9D%E7%BB%B4%E9%A2%98/" style="color: #00a596">思维题</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/21/%E4%B8%89%E6%9D%A1%E7%BA%BF/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/18/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B1%82%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88/">
+        <h2 class="post-title">背包问题求具体方案</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+             <p>有 $N$ 件物品和一个容量是 $V$ 的背包。每件物品只能使用一次。</p>
+<p>第 $i$ 件物品的体积是 $v_i$，价值是 $w_i$。</p>
+<p>求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。</p>
+<p>输出 <strong>字典序最小的方案</strong>。这里的字典序是指：所选物品的编号所构成的序列。物品的编号范围是 $1 &hellip; N$。</p>
+<h4>输入格式</h4>
+<p>第一行两个整数，$N，V$，用空格隔开，分别表示物品数量和背包容积。</p>
+<p>接下来有 $N$ 行，每行两个整数 $v_i, w_i$，用空格隔开，分别表示第 $i$ 件物品的体积和价值。</p>
+<h4>输出格式</h4>
+<p>输出一行，包含若干个用空格隔开的整数，表示最优解中所选物品的编号序列，且该编号序列的字典序最小。</p>
+<p>物品编号范围是 $1 &hellip; N$。</p>
+<h4>数据范围</h4>
+<p>$0 \lt N, V \le 1000$<br />
+$0\lt v_i, w_i \le 1000$</p>
+<h4>输入样例</h4>
+<pre><code>4 5
+1 2
+2 4
+3 4
+4 6
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>1 4
+</code></pre>
+
+<p><strong>本题是求具体方案，求方案的思路根据图的转移过程从后往前倒推一遍，看一下每一个状态由哪一个状态转移而来</strong><br>如图所示:<br><img src="https://cdn.acwing.com/media/article/image/2022/05/18/142088_efcc3465d6-%E8%83%8C%E5%8C%85%E5%80%92%E6%8E%A8%E6%B1%82%E6%96%B9%E6%A1%88.png" alt="背包倒推求方案.png"><br>看<strong>f[i][j]与f[i - 1][j]和f[i - 1][j - v[i]] + w[i]在数值上与哪一个相等</strong>，从而决定是由哪一个转移过来，从而判断第i个物品选没选<br>但是本题要求字典序输出，那么我们使用贪心的思想。<strong>从前往后对于任意一个物品x，有三种选择S : {(只能选,必选)，(只能不选，必不选),(可选可不选，一定要选)}</strong><br>一个朴素的想法就是我们<strong>先从后往前进行物品的决策</strong>，然后这样的“倒推”就是从前往后的正序了。(体现在图上就是边的方向要改变一下)</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 1010;
+int v[N],w[N];
+int f[N][N];
+int n,m;
+
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m;
+    for(int i = 1;i &lt;= n;i ++) cin &gt;&gt; v[i] &gt;&gt; w[i];
+    
+    for(int i = n;i &gt;= 1;i --)//从后往前进行决策
+    &#123;
+        for(int j = 0;j &lt;= m;j ++)
+        &#123;
+            f[i][j] = f[i + 1][j];
+            if(j &gt;= v[i]) f[i][j] = max(f[i][j],f[i + 1][j - v[i]] + w[i]);
+        &#125;
+    &#125;
+    int t = m;
+    for(int i = 1;i &lt;= n;i ++)//求具体方案是一个图上的倒推的过程
+    &#123;
+        if(t &gt;= v[i] &amp;&amp; f[i][t] == f[i + 1][t - v[i]] + w[i])//如果能转移过来并且选了这个物品的话
+        &#123;
+            printf(&quot;%d &quot;,i);
+            t -= v[i];//选完这个物品后剩下的背包体积
+        &#125;
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/18/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B1%82%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/17/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/">
+        <h2 class="post-title">数字组合</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>给定 $N$ 个正整数 $A_1,A_2,&hellip;,A_N$，从中选出若干个数，使它们的和为 $M$，求有多少种选择方案。</p>
+<h4>输入格式</h4>
+<p>第一行包含两个整数 $N$ 和 $M$。</p>
+<p>第二行包含 $N$ 个整数，表示 $A_1,A_2,&hellip;,A_N$。</p>
+<h4>输出格式</h4>
+<p>包含一个整数，表示可选方案数。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 100$,<br />
+$1 \le M \le 10000$,<br />
+$1 \le A_i \le 1000$,<br />
+答案保证在 int 范围内。</p>
+<h4>输入样例：</h4>
+<pre><code>4 4
+1 1 2 2
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>3
+</code></pre>
+
+<p><strong>此题为背包问题求方案数</strong><br>f[i][j]表示：考虑前i个正整数，且当前总和<strong>恰好为j</strong>的方案数<br>别忘记给予了一个状态表示后进行初始化的处理(一般来说“不超过”和“恰好”之所以能表示它正确的涵义就是因为初始化写出的涵义不同 —— 即编码方式不同)<br>f[0] &#x3D; 1,即当总和<strong>恰好为0</strong>的时候算是一种方案</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 10010;
+int n,m;
+int f[N];
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m;
+    f[0] = 1;//别忘了初始化，即和为0的方案数为1
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        int x;
+        cin &gt;&gt; x;
+        for(int j = m;j &gt;= x;j --)
+        &#123;
+            f[j] += f[j - x];//注意此题输出的是方案数，所以“+”
+        &#125;
+    &#125;
+    printf(&quot;%d&quot;,f[m]);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/17/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/">
+        <h2 class="post-title">宠物小精灵之收服</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1024/">https://www.acwing.com/problem/content/1024/</a></p>
+ <p>宠物小精灵是一部讲述小智和他的搭档皮卡丘一起冒险的故事。</p>
+<p>一天，小智和皮卡丘来到了小精灵狩猎场，里面有很多珍贵的野生宠物小精灵。</p>
+<p>小智也想收服其中的一些小精灵。</p>
+<p>然而，野生的小精灵并不那么容易被收服。</p>
+<p>对于每一个野生小精灵而言，小智可能需要使用很多个精灵球才能收服它，而在收服过程中，野生小精灵也会对皮卡丘造成一定的伤害（从而减少皮卡丘的体力）。</p>
+<p>当皮卡丘的体力小于等于0时，小智就必须结束狩猎（因为他需要给皮卡丘疗伤），而使得皮卡丘体力小于等于0的野生小精灵也不会被小智收服。</p>
+<p>当小智的精灵球用完时，狩猎也宣告结束。</p>
+<p>我们假设小智遇到野生小精灵时有两个选择：收服它，或者离开它。</p>
+<p>如果小智选择了收服，那么一定会扔出能够收服该小精灵的精灵球，而皮卡丘也一定会受到相应的伤害；如果选择离开它，那么小智不会损失精灵球，皮卡丘也不会损失体力。</p>
+<p>小智的目标有两个：主要目标是收服尽可能多的野生小精灵；如果可以收服的小精灵数量一样，小智希望皮卡丘受到的伤害越小（剩余体力越大），因为他们还要继续冒险。</p>
+<p>现在已知小智的精灵球数量和皮卡丘的初始体力，已知每一个小精灵需要的用于收服的精灵球数目和它在被收服过程中会对皮卡丘造成的伤害数目。</p>
+<p>请问，小智该如何选择收服哪些小精灵以达到他的目标呢？</p>
+<h4>输入格式</h4>
+<p>输入数据的第一行包含三个整数：N，M，K，分别代表小智的精灵球数量、皮卡丘初始的体力值、野生小精灵的数量。</p>
+<p>之后的K行，每一行代表一个野生小精灵，包括两个整数：收服该小精灵需要的精灵球的数量，以及收服过程中对皮卡丘造成的伤害。</p>
+<h4>输出格式</h4>
+<p>输出为一行，包含两个整数：C，R，分别表示最多收服C个小精灵，以及收服C个小精灵时皮卡丘的剩余体力值最多为R。</p>
+<h4>数据范围</h4>
+<p>$0 &lt; N \le 1000$,<br />
+$0 &lt; M \le 500$,<br />
+$0 &lt; K \le 100$</p>
+<h4>输入样例1：</h4>
+<pre><code>10 100 5
+7 10
+2 40
+2 50
+1 20
+4 20
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>3 30
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>10 100 5
+8 110
+12 10
+20 10
+5 200
+1 110
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>0 100
+</code></pre>
+
+<p><strong>二维费用背包问题</strong><br>花费1：精灵球数量<br>花费2：皮卡丘体力值<br>价值：小精灵数量</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 1010;
+int f[N][N];//精灵球数量不超过j，皮卡丘体力不超过k的方案
+int n,m,k;
+
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    for(int i = 1;i &lt;= k;i ++)
+    &#123;
+        int v,h;
+        cin &gt;&gt; v &gt;&gt; h;
+        for(int j = n;j &gt;= v;j --)
+        &#123;
+            for(int l = m - 1;l &gt;= h;l --)//注意皮卡丘体力值不能为0，所以转移到m是不合法的，最多能转移到m - 1
+            &#123;
+                f[j][l] = max(f[j][l] , f[j - v][l - h] + 1);
+            &#125;
+        &#125;
+    &#125;
+    printf(&quot;%d&quot;,f[n][m - 1]);
+    int t = f[n][m - 1],res = 0;
+    for(int i = 0;i &lt;= m - 1;i ++)
+    &#123;
+        if(f[n][i] == t) res = max(res , m - i);//枚举一下所有的皮卡丘体力值，找一个最大的R(剩余值)
+    &#125;
+    //注意f[][]表示的是收服的小精灵的“个数”，第一维表示的是精灵球数量，第二维表示的是皮卡丘体力
+    
+    printf(&quot; %d&quot;,res);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/17/%E5%AE%A0%E7%89%A9%E5%B0%8F%E7%B2%BE%E7%81%B5%E4%B9%8B%E6%94%B6%E6%9C%8D/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/01/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">
+        <h2 class="post-title">最长公共上升子序列</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/1
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/274/">https://www.acwing.com/problem/content/description/274/</a></p>
+<p>熊大妈的奶牛在小沐沐的熏陶下开始研究信息题目。</p>
+<p>小沐沐先让奶牛研究了最长上升子序列，再让他们研究了最长公共子序列，现在又让他们研究最长公共上升子序列了。</p>
+<p>小沐沐说，对于两个数列 $A$ 和 $B$，如果它们都包含一段位置不一定连续的数，且数值是严格递增的，那么称这一段数是两个数列的公共上升子序列，而所有的公共上升子序列中最长的就是最长公共上升子序列了。</p>
+<p>奶牛半懂不懂，小沐沐要你来告诉奶牛什么是最长公共上升子序列。</p>
+<p>不过，只要告诉奶牛它的长度就可以了。</p>
+<p>数列 $A$ 和 $B$ 的长度均不超过 $3000$。</p>
+<h4>输入格式</h4>
+<p>第一行包含一个整数 $N$，表示数列 $A，B$ 的长度。</p>
+<p>第二行包含 $N$ 个整数，表示数列 $A$。</p>
+<p>第三行包含 $N$ 个整数，表示数列 $B$。</p>
+<h4>输出格式</h4>
+<p>输出一个整数，表示最长公共上升子序列的长度。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 3000$,序列中的数字均不超过 $2^{31}-1$。</p>
+<h4>输入样例：</h4>
+<pre><code>4
+2 2 1 3
+2 1 2 3
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>2
+</code></pre>
+
+<p>此题为最长上升子序列和最长公共子序列的合体版本<br>先想一下最长公共子序列<br><strong>先假设一个方案看看，假设第一个序列选择到了i,第二个序列选择到了j,我们可以画出一个方案集合</strong><br> <strong>并且依据最后一个选择的不同划分为四个子集</strong><br><img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_e52fb71bc8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共子序列.png"><br>而最长公共上升子序列的集合划分，就是在此基础之上做了进一步的合并，即：<img src="https://cdn.acwing.com/media/article/image/2022/05/01/142088_86bad0d8c8-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97.png" alt="最长公共上升子序列.png"> </p>
+<p>我们将这个<strong>大方案的集合</strong>表示为f[i][j]<br>即：所有由第一个序列的前i个字母，和第二个序列的前j个字母，<strong>且以b[j]结尾</strong>的公共上升子序列<br>那么由3、4表示的<strong>不含a[i]子集就是f[i-1][j]<strong>， <strong>本题难点在于怎么算1、2这个子集</strong><br>  <strong>小Tip:</strong> 当没有一个状态可以很好的表示或者没办法转化的时候就继续把它分解，</strong>理论上来说一定是可以分解到能算为止的。最不济每一种方案都是一个状态(DP的核心就是能够用一个数表示并且处理一类状态，一次处理很多状态使得它的效率比较高)，那么我们直接用暴搜就可以做了</strong><br>所以我们继续尝试分解1、2，以<strong>倒数第二个位置不同</strong>分为，——b1，ai;——b2,ai;…..——bk,ai这些集合<br>而对于集合<strong>S：{—b1;—b2;—b3;…—bk}即等价于f[i-1][1],f[i-1][2]…f[i-1][k]</strong></p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 3010;
+int n;
+int a[N];
+int b[N];
+int f[N][N];
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for(int i = 1;i &lt;= n;i ++) scanf(&quot;%d&quot;, &amp;a[i]);
+    for(int i = 1;i &lt;= n;i ++) scanf(&quot;%d&quot;, &amp;b[i]);
+    
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        for(int j = 1;j &lt;= n;j ++)
+        &#123;
+            f[i][j] = f[i - 1][j];
+            if(a[i] == b[j])//集合1、2包含a[i]的情况
+            &#123;
+                for(int k = 0;k &lt; j;k ++)//k从0开始代表空集
+                &#123;
+                    if(b[k] &lt; b[j])
+                    &#123;
+                        f[i][j] = max(f[i][j],f[i - 1][k] + 1);
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    int res = 0;
+    for(int i = 1;i &lt;= n;i ++) res = max(res,f[n][i]);
+    printf(&quot;%d\n&quot;,res);
+    return 0;
+&#125;
+</code></pre>
+<p><strong>优化：</strong></p>
+<pre><code>for(int k = 0;k &lt; j;k ++)
+    &#123;
+        if(b[k] &lt; b[j])//b[j] == a[i]所以条件等价于if(b[k] &lt; a[i])
+        &#123;
+            f[i][j] = max(f[i][j],f[i - 1][k] + 1);
+        &#125;
+    &#125;
+</code></pre>
+<p>对于这第三层循环，<strong>它的意义在于寻找f[i-1][0~j-1]的最大值</strong>，那么我们可以不需要循环一遍k，而是直接在i,j循环的时候就可以做好这件事<br>即将代码等价变形为：</p>
+<pre><code>for(int i = 1;i &lt;= n;i ++)
+&#123;
+    int maxv = 1;
+    for(int j = 1;j &lt;= n;j ++)
+    &#123;
+        f[i][j] = f[i - 1][j];
+        if(a[i] == b[j]) f[i][j] = max(f[i][j],maxv);
+        if(a[i] &gt; b[j]) maxv = max(maxv,f[i - 1][j] + 1);//等价于变形前b[k] &lt; a[i]的情况
+    &#125;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/01/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
+    <div class="prev">
+        
+        <a class="page-num" href="/page/2/">
+            <i class="fa-solid fa-caret-left fa-fw"></i>
+        </a>
+        
+    </div>
+    <div class="page-index">
+        
+        <span>
+            
+            
+            
+            <a class="page-num" href="/">1</a>
+            
+            
+            
+            <a class="page-num" href="/page/2/">2</a>
+        </span>
+        
+        <span class="current">3</span>
+        
+        <span>
+            <a class="page-num" href="/page/4/">4</a>
+            
+            
+        </span>
+        
+    </div>
+    <div class="next">
+        
+        <a class="page-num" href="/page/4/">
+            <i class="fa-solid fa-caret-right fa-fw"></i>
+        </a>
+        
+    </div>
+</div>
+
+    </div>
+    
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">金冠小熊猫</div>
+        <div class="description">
+            <p>Emailme:<a href="mailto:&#x31;&#x37;&#x35;&#x32;&#53;&#x31;&#x38;&#x38;&#56;&#48;&#64;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#x31;&#x37;&#x35;&#x32;&#53;&#x31;&#x38;&#x38;&#56;&#48;&#64;&#113;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a><br>…</p>
+
+        </div>
+        
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 金冠小熊猫
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;金冠小熊猫
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+    </body>
+</html>

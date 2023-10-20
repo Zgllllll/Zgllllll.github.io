@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>加油站 | 金冠小熊猫</title>
+        <meta name="author" content="金冠小熊猫" />
+        <meta name="description" content="温故而知新" />
+        <meta name="keywords" content="菜狗大学生" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>金冠小熊猫</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;金冠小熊猫</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>加油站</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/19
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00bcd4">图论</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1560/">https://www.acwing.com/problem/content/1560/</a><br> <p>加油站的建造位置必须使加油站与距离它最近的房屋的距离尽可能远。 </p></p>
+<p>与此同时，它还必须保证所有房屋都在其服务范围内。</p>
+<p>现在，给出了城市地图和加油站的几个候选位置，请你提供最佳建议。 </p>
+<p>如果有多个解决方案，请输出选取位置与所有房屋的平均距离最小的解决方案。 </p>
+<p>如果这样的解决方案仍然不是唯一的，请输出选取位置编号最小的解决方案。</p>
+<h4>输入格式</h4>
+<p>第一行包含四个整数 $N$，房屋总数，$M$，加油站的候选位置总数，$K$，连接房屋或加油站的道路总数，$D_s$ 加油站的最大服务范围。</p>
+<p>所有房屋的编号从 $1$ 到 $N$，所有加油站侯选位置编号从 <code>G1</code> 到 <code>GM</code>。</p>
+<p>接下来 $K$ 行，每行格式如下：</p>
+<pre><code>P1 P2 Dist
+</code></pre>
+
+<p>其中，<code>P1</code> 和 <code>P2</code> 表示一条 <strong>无向</strong> 道路连接的两个房屋或加油站侯选位置的编号，<code>Dist</code> 是道路长度，这是一个整数。</p>
+<h4>输出格式</h4>
+<p>第一行输出所选位置的编号。</p>
+<p>第二行输出加油站与距离其最近的房屋之间的距离以及与所有房屋之间的平均距离，<strong>精确到小数后一位</strong>。</p>
+<p>如果解决方案不存在，则输出 <code>No Solution</code>。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 10^3$,<br />
+$1 \le M \le 10$,<br />
+$1 \le K \le 10^4$,<br />
+$1 \le D_s \le 200$,<br />
+$1 \le Dist \le 5000$</p>
+<h4>输入样例1：</h4>
+<pre><code>4 3 11 5
+1 2 2
+1 4 2
+1 G1 4
+1 G2 3
+2 3 2
+2 G2 1
+3 4 2
+3 G3 2
+4 G1 3
+G2 G1 1
+G3 G2 2
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>G1
+2.0 3.3
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>2 1 2 10
+1 G1 9
+2 G1 20
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>No Solution
+</code></pre>
+
+<pre><code>/*
+本来我的设计是想让函数返回很多值的，一个距离，一个总和，一个是否合法(这样就要搞一个结构体存，有些麻烦)
+然后发现其实“可以把多个参数传引用进去”，以达到同样的效果。
+printf(&quot;%.1lf %.1lf&quot;,(double)maxD,(double)sumD / n + 1e-8);
+(double)sumD / n是：《先》把类型映射成double,然后《再》进行除法运算。
+如果你不转成double就去除法运算，再以.1lf输出的话，显示的就是0.0了
+之所以要加上1e-8，是因为如果检查double 以.10lf输出，当显示是3.2500000000时，此时以答案格式.1lf输出是3.2
+理论上应该四舍五入的，为什么是3.2呢？原因就是虽然操作系统给你显示的是3.25,但它实际上内部存储的是3.24999999....
+所以当只保留一位小数的时候是3.24999999去四舍成了3.2，为了解决这种情况要加一个很小的1e-8使得内部存储真正变成3.25,
+然后让操作系统输出显示成3.3;
+
+printf(&quot;%d\n&quot;,3.24999999 / 3);   -----&gt;2147483640
+printf(&quot;%lf\n&quot;,3.24999999 / 3);  ------&gt; 1.083333
+格式化输出的时候，不给予正确的格式，在读的时候是无法正确译码的
+---------------------------------------
+        printf(&quot;%d\n&quot;,3.24999999 / 3);
+        printf(&quot;%d\n&quot;,13 / 3);
+        printf(&quot;%f\n&quot;,13 / 3);
+输出：22460624
+      4
+      1.083333
+-----------------------------------------
+如果只写   printf(&quot;%f\n&quot;,13 / 3);
+输出：    0.000000
+如果前面加上 printf(&quot;%d\n&quot;,3.24999999 / 3); 再printf(&quot;%f\n&quot;,13 / 3);
+输出：  22460624
+        1.083333
+*/
+</code></pre>
+<p>关于输出的问题解答：<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759629334">https://www.zhihu.com/question/447078607/answer/1759629334</a><br>根据 c printf 的文档：<strong>If a conversion specification is invalid, the behavior is undefined.</strong><br>所以这种代码的行为完全取决于编译器的实现，发生什么都不奇怪。做实验测试 c&#x2F;cpp 的行为是完全不可靠的，因为 c&#x2F;cpp 的 UB 实在太多了。拿实验结果&#x2F;汇编代码来倒推语言标准更是本末倒置。遇到问题最好还是查文档，实验仅用于验证。</p>
+<p>作者：lljbash<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447078607/answer/1759667992">https://www.zhihu.com/question/447078607/answer/1759667992</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+using namespace std;
+const int N = 2010,INF = 0x3f3f3f3f;
+typedef pair&lt;int,int&gt; PII;
+int n,m,k,D;
+int g[N][N];
+int get_num(string s)
+&#123;
+    if(s[0] == &#39;G&#39;) return stoi(s.substr(1)) + n;
+    return stoi(s);
+&#125;
+int dist[N];
+bool st[N];
+bool dijkstra(int S,int&amp; maxD,int&amp; sumD,int&amp; minID)
+&#123;
+    memset(st,0,sizeof st);
+    memset(dist,0x3f,sizeof dist);
+    dist[S] = 0;
+    for(int i = 1;i &lt;= n + m;i ++)
+    &#123;
+        int t = -1;
+        for(int j = 1;j &lt;= n + m;j ++)
+        &#123;
+            if(!st[j] &amp;&amp; (t == -1 || dist[j] &lt; dist[t]))
+            &#123;
+                t = j;
+            &#125;
+        &#125;
+        st[t] = true;
+        for(int j = 1;j &lt;= n + m;j ++)
+            dist[j] = min(dist[j],dist[t] + g[t][j]);
+    &#125;
+    int sum = 0,mindist = INF;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        if(dist[i] &gt; D) return false;
+        sum += dist[i];
+        mindist = min(mindist,dist[i]);
+    &#125;
+    if(mindist &gt; maxD)
+    &#123;
+        maxD = mindist;
+        sumD = sum;
+        minID = S;
+    &#125;
+    else if(mindist == maxD)
+    &#123;
+        if(sum &lt; sumD)
+        &#123;
+            sumD = sum;
+            minID = S;
+        &#125;
+        else if(sum == sumD)
+        &#123;
+            if(minID &gt; S) minID = S;
+        &#125;
+    &#125;
+    return true;
+&#125;
+int main()
+&#123;
+    memset(g,0x3f,sizeof g);    
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; D;
+    string a,b;
+    int w;
+    while(k --)
+    &#123;
+        cin &gt;&gt; a &gt;&gt; b &gt;&gt; w;
+        int x = get_num(a),y = get_num(b);
+        //cout &lt;&lt; x &lt;&lt; &#39; &#39; &lt;&lt; y &lt;&lt; &#39; &#39; &lt;&lt; w &lt;&lt; endl;
+        g[x][y] = g[y][x] = min(g[x][y],w);
+    &#125;
+    int maxD = 0,sumD = INF,minID = INF;
+    for(int i = n + 1;i &lt;= n + m;i ++)
+    &#123;
+        bool is_valid = dijkstra(i,maxD,sumD,minID);//本来我的设计是想让函数返回很多值的，一个距离，一个总和，一个是否合法
+        if(!is_valid) continue;//然后发现其实“可以把多个参数传引用进去”，以达到同样的效果。
+    &#125;
+    if(minID != INF)
+    &#123;
+        //cout &lt;&lt; minID &lt;&lt; &#39; &#39; &lt;&lt; maxD &lt;&lt; &#39; &#39; &lt;&lt; sumD &lt;&lt; endl;
+        printf(&quot;G%d\n&quot;,minID - n);
+        printf(&quot;%.1lf %.1lf&quot;,(double)maxD,(double)sumD / n + 1e-8);
+    &#125;
+    else printf(&quot;No Solution&quot;);
+    return 0;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 金冠小熊猫
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;金冠小熊猫
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>
