@@ -433,7 +433,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
         </span>
         
     </div>
@@ -779,7 +779,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
         </span>
         
     </div>
@@ -907,11 +907,149 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
         </span>
         
     </div>
     <a href="/2022/11/15/%E7%B4%A7%E6%80%A5%E6%83%85%E5%86%B5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/09/AVL%E6%A0%91%E7%9A%84%E6%A0%B9/">
+        <h2 class="post-title">AVL树的根</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/9
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1554/">https://www.acwing.com/problem/content/1554/</a></p>
+<p>AVL树是一种自平衡二叉搜索树。 </p>
+<p>在AVL树中，任何节点的两个子树的高度最多相差 $1$ 个。 </p>
+<p>如果某个时间，某节点的两个子树之间的高度差超过 $1$，则将通过树旋转进行重新平衡以恢复此属性。 </p>
+<p>图 $1-4$ 说明了旋转规则。</p>
+<p><img alt="31.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_3a941ca472-31.jpg" /> <img alt="32.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_3dd0488472-32.jpg" /> <br />
+<img alt="33.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_411c0b5472-33.jpg" /> <img alt="34.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_43ea12f472-34.jpg" /> </p>
+<p>现在，给定插入序列，请你求出 AVL 树的根是多少。</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $N$，表示总插入值数量。</p>
+<p>第二行包含 $N$ 个不同的整数，表示每个插入值。</p>
+<h4>输出格式</h4>
+<p>输出得到的 AVL 树的根是多少。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 20$</p>
+<h4>输入样例1：</h4>
+<pre><code>5
+88 70 61 96 120
+</code></pre>
+
+<h4>输出样例1：</h4>
+<pre><code>70
+</code></pre>
+
+<h4>输入样例2：</h4>
+<pre><code>7
+88 70 61 96 120 90 65
+</code></pre>
+
+<h4>输出样例2：</h4>
+<pre><code>88
+</code></pre>
+
+<p><img src="https://cdn.acwing.com/media/article/image/2022/11/09/142088_3e4c480d60-AVL.png" alt="AVL.png"> </p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 30;
+int tr[N],h[N],l[N],r[N],idx;
+int n;
+void pushup(int u)
+&#123;
+    h[u] = max(h[l[u]],h[r[u]]) + 1;
+&#125;
+void R(int&amp; u)
+&#123;
+    int p = l[u];
+    l[u] = r[p],r[p] = u;
+    pushup(u),pushup(p);
+    u = p;//更新根节点
+&#125;
+void L(int&amp; u)
+&#123;
+    int p = r[u];
+    r[u] = l[p],l[p] = u;
+    pushup(u),pushup(p);
+    u = p;
+&#125;
+int get_balance(int u)
+&#123;
+    return h[l[u]] - h[r[u]];
+&#125;
+void insert(int&amp; u,int v)
+&#123;
+    if(!u) u = ++ idx,tr[u] = v;
+    else if (v &lt; tr[u])
+    &#123;
+        insert(l[u],v);
+        if(get_balance(u) == 2)//如果左子树比右子树高
+        &#123;
+            if(get_balance(l[u]) == 1) R(u);//如果左子树的左子树更高，就右旋根节点A
+            else L(l[u]),R(u);//否则先左旋下面一层的左儿子B，再右旋根节点A
+            //这里旋转完之后因为我们传的是引用，所以就自动把更改过的根节点传给了外部的root
+        &#125;
+    &#125;
+    else
+    &#123;
+        insert(r[u],v);
+        if(get_balance(u) == -2)
+        &#123;
+            if(get_balance(r[u]) == -1) L(u);//直接左旋根节点
+            else R(r[u]),L(u);
+        &#125;
+    &#125;
+    pushup(u);//当前树插入完成后，更新一下树高，这是一个递归的定义
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    int w;
+    int root = 0;
+    for(int i = 0;i &lt; n;i ++)
+    &#123;
+        cin &gt;&gt; w;
+        insert(root,w);//我们在定义函数的时候传root的引用，这样计算完后函数外的root也会改变
+    &#125;//对于参数表里的参数需要发生改变的函数，我们就传进来一个引用
+    cout &lt;&lt; tr[root];
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00a596">数据结构</a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/09/AVL%E6%A0%91%E7%9A%84%E6%A0%B9/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -999,7 +1137,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
         </span>
         
     </div>
@@ -1076,7 +1214,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ffa2c4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
         </span>
         
     </div>
