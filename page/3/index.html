@@ -395,7 +395,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #03a9f4">枚举</a>
+            <a href="/tags/%E6%9E%9A%E4%B8%BE/" style="color: #00bcd4">枚举</a>
         </span>
         
     </div>
@@ -556,7 +556,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
         </span>
         
     </div>
@@ -768,11 +768,94 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00bcd4">动态规划</a>
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
         </span>
         
     </div>
     <a href="/2022/05/18/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E6%B1%82%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/05/17/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/">
+        <h2 class="post-title">数字组合</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/5/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>给定 $N$ 个正整数 $A_1,A_2,&hellip;,A_N$，从中选出若干个数，使它们的和为 $M$，求有多少种选择方案。</p>
+<h4>输入格式</h4>
+<p>第一行包含两个整数 $N$ 和 $M$。</p>
+<p>第二行包含 $N$ 个整数，表示 $A_1,A_2,&hellip;,A_N$。</p>
+<h4>输出格式</h4>
+<p>包含一个整数，表示可选方案数。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 100$,<br />
+$1 \le M \le 10000$,<br />
+$1 \le A_i \le 1000$,<br />
+答案保证在 int 范围内。</p>
+<h4>输入样例：</h4>
+<pre><code>4 4
+1 1 2 2
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>3
+</code></pre>
+
+<p><strong>此题为背包问题求方案数</strong><br>f[i][j]表示：考虑前i个正整数，且当前总和<strong>恰好为j</strong>的方案数<br>别忘记给予了一个状态表示后进行初始化的处理(一般来说“不超过”和“恰好”之所以能表示它正确的涵义就是因为初始化写出的涵义不同 —— 即编码方式不同)<br>f[0] &#x3D; 1,即当总和<strong>恰好为0</strong>的时候算是一种方案</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N = 10010;
+int n,m;
+int f[N];
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m;
+    f[0] = 1;//别忘了初始化，即和为0的方案数为1
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        int x;
+        cin &gt;&gt; x;
+        for(int j = m;j &gt;= x;j --)
+        &#123;
+            f[j] += f[j - x];//注意此题输出的是方案数，所以“+”
+        &#125;
+    &#125;
+    printf(&quot;%d&quot;,f[m]);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">动态规划</a>
+        </span>
+        
+    </div>
+    <a href="/2022/05/17/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -860,7 +943,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
         </span>
         
     </div>
