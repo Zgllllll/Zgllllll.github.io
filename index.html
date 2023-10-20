@@ -446,7 +446,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
@@ -717,7 +717,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
         </span>
         
     </div>
@@ -822,7 +822,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -1108,7 +1108,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
         </span>
         
     </div>
@@ -1178,7 +1178,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #03a9f4">硬件知识</a>
+            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #ff7d73">硬件知识</a>
         </span>
         
     </div>
@@ -1245,132 +1245,139 @@ $1 \le Q \le K$</p>
 17:00
 Sorry
 </code></pre>
-讨厌大模拟QAQ
-自己的最初的思路：
-```
-#include <iostream>
-#include <algorithm>
-#include <queue>
+
+<p>讨厌大模拟QAQ<br>自己的最初的思路：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;queue&gt;
 using namespace std;
 const int N = 21,M = 1010,INF = 0x3f3f3f3f;
 int n,m,k,Q;
 struct Person
-{
+&#123;
     int id,deal_time,end_time;
-}persons[M];
-queue<Person> q[N];
+&#125;persons[M];
+queue&lt;Person&gt; q[N];
 int finish_time[N];//我们要记录一下每个队列队首元素的当前结束时间
 int main()
-{
-    cin >> n >> m >> k >> Q;
-    for(int i = 1;i <= k;i ++)
-    {
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;
+    for(int i = 1;i &lt;= k;i ++)
+    &#123;
         int time;
-        cin >> time;
-        persons[i] = {i,time,0};
-    }
+        cin &gt;&gt; time;
+        persons[i] = &#123;i,time,0&#125;;
+    &#125;
     //咱先把窗口前的队列填满喽，然后每次只需要找所有队列队首最早结束的那一位，让后面的人上去就好了。
     //在更新的时候，我们队首元素的结束时间应该是前面的一个人的结束时间 + 他的deal_time
     //那么如果队首就是第一个进来的人怎么办呢？
     //所以我们还需要一个finish数组，来额外维护一下上一个元素结束的时间的时间，默认如果是第一位，则上一位的结束时间是8:00
     int cnt = 1;
-    while(cnt <= n * m)
-    {
-        for(int i = 1;i <=  m;i ++) 
-        {
-            q[i].push({cnt,persons[cnt].deal_time,0});
+    while(cnt &lt;= n * m)
+    &#123;
+        for(int i = 1;i &lt;=  m;i ++) 
+        &#123;
+            q[i].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
             cnt ++;
-        }
-    }
-    //cout << cnt - 1 << endl;
+        &#125;
+    &#125;
+    //cout &lt;&lt; cnt - 1 &lt;&lt; endl;
     //先前一共加了cnt个人，如果再加正好编号正好从cnt开始，（因为末尾有一个+1）
-    for(int i = 1;i <= m;i ++) finish_time[i] = 8 * 60;//默认上一个对象的结束时间是8点
-    for(int i = 1;i <= k;i ++)//肯定要为k个人每个人都计算一次啊
-    {
+    for(int i = 1;i &lt;= m;i ++) finish_time[i] = 8 * 60;//默认上一个对象的结束时间是8点
+    for(int i = 1;i &lt;= k;i ++)//肯定要为k个人每个人都计算一次啊
+    &#123;
         int t = -1;
-        for(int j = 1;j <= n;j ++)
-        {
+        for(int j = 1;j &lt;= n;j ++)
+        &#123;
             //这里改了，我们是想找到最先处理完的，一个先决条件就是队列不空
-            if(q[j].size() && (t == -1 || finish_time[j] + q[j].front().deal_time < finish_time[t] + q[t].front().deal_time))
+            if(q[j].size() &amp;&amp; (t == -1 || finish_time[j] + q[j].front().deal_time &lt; finish_time[t] + q[t].front().deal_time))
                 t = j;
-        }
+        &#125;
         int id = q[t].front().id;
         int hour = (finish_time[t] + q[t].front().deal_time) / 60;
         int minutes = (finish_time[t] + q[t].front().deal_time) % 60;
         
-<pre><code>    // cout &lt;&lt; t &lt;&lt; &#39; &#39; &lt;&lt; id &lt;&lt; endl;
-    // cout &lt;&lt; finish_time[t] &lt;&lt; &#39; &#39; &lt;&lt; q[t].front().deal_time &lt;&lt; endl;
-    // printf(&quot;当前队列%d 的时间为：%02d:%02d 容量为：%d\n&quot;,t,hour,minutes,q[t].size());
-    q[t].pop();
-    
-    persons[id].end_time =  finish_time[t] + persons[id].deal_time;
-    finish_time[t] = persons[id].end_time;
-    if(cnt &lt;= k)//相当于变相维护了一个黄线外的队列，只不过我们都存到数组里去了，所以拿一个cnt计数一下就好
-    &#123;
-         q[t].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
-         //printf(&quot;最小队列编号：%d 加入了一个：%d\n&quot;,t,cnt);
-         cnt ++;
-    &#125;
-&#125;
-int id;
-while(Q --)
-&#123;
-    cin &gt;&gt; id;
-    if(persons[id].end_time &gt; 17 * 60) puts(&quot;Sorry&quot;);
-    else 
-    &#123;
-        //cout &lt;&lt; persons[id].end_time &lt;&lt; endl;
-        int hour = persons[id].end_time / 60,minutes = persons[id].end_time % 60;
-        printf(&quot;%02d:%02d\n&quot;,hour,minutes);
-    &#125;
-&#125;
-return 0;
-</code></pre>
-<p>}</p>
-<pre><code>y总的思路：简洁且正确。队列里存的是时间，比较难想到
-sum代表做完整个队列所需要的时间
-</code></pre>
-<p>#include <iostream><br>#include <cstring><br>#include <queue><br>#include <unordered_map></p>
-<p>using namespace std;</p>
-<p>const int N &#x3D; 20;</p>
-<p>int n, m, k, Q;<br>int sum[N];<br>queue<int> q[N];</p>
-<p>int main()<br>{<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;</p>
-<pre><code>unordered_map&lt;int, int&gt; hash;
-for (int i = 1; i &lt;= k; i ++ )
-&#123;
-    int s;
-    cin &gt;&gt; s;
-
-    int t = 0;
-    for (int j = 0; j &lt; n; j ++ )
-        if (i &lt;= n * m)
+        // cout &lt;&lt; t &lt;&lt; &#39; &#39; &lt;&lt; id &lt;&lt; endl;
+        // cout &lt;&lt; finish_time[t] &lt;&lt; &#39; &#39; &lt;&lt; q[t].front().deal_time &lt;&lt; endl;
+        // printf(&quot;当前队列%d 的时间为：%02d:%02d 容量为：%d\n&quot;,t,hour,minutes,q[t].size());
+        q[t].pop();
+        
+        persons[id].end_time =  finish_time[t] + persons[id].deal_time;
+        finish_time[t] = persons[id].end_time;
+        if(cnt &lt;= k)//相当于变相维护了一个黄线外的队列，只不过我们都存到数组里去了，所以拿一个cnt计数一下就好
         &#123;
-            if (q[j].size() &lt; q[t].size()) t = j;
+             q[t].push(&#123;cnt,persons[cnt].deal_time,0&#125;);
+             //printf(&quot;最小队列编号：%d 加入了一个：%d\n&quot;,t,cnt);
+             cnt ++;
         &#125;
-        else
-        &#123;
-            if (q[j].front() &lt; q[t].front()) t = j;
-        &#125;
-
-    sum[t] += s;
-    if (i &gt; n * m) q[t].pop();
-    q[t].push(sum[t]);
-
-    if (sum[t] - s &lt; 540) hash[i] = sum[t];
-&#125;
-
-while (Q -- )
-&#123;
+    &#125;
     int id;
-    cin &gt;&gt; id;
-    if (hash.count(id)) printf(&quot;%02d:%02d\n&quot;, hash[id] / 60 + 8, hash[id] % 60);
-    else puts(&quot;Sorry&quot;);
+    while(Q --)
+    &#123;
+        cin &gt;&gt; id;
+        if(persons[id].end_time &gt; 17 * 60) puts(&quot;Sorry&quot;);
+        else 
+        &#123;
+            //cout &lt;&lt; persons[id].end_time &lt;&lt; endl;
+            int hour = persons[id].end_time / 60,minutes = persons[id].end_time % 60;
+            printf(&quot;%02d:%02d\n&quot;,hour,minutes);
+        &#125;
+    &#125;
+    return 0;
 &#125;
-
-return 0;
 </code></pre>
-<p>}</p>
-<pre><code>
+<p>y总的思路：简洁且正确。队列里存的是时间，比较难想到<br>sum代表做完整个队列所需要的时间</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#include &lt;unordered_map&gt;
+
+using namespace std;
+
+const int N = 20;
+
+int n, m, k, Q;
+int sum[N];
+queue&lt;int&gt; q[N];
+
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k &gt;&gt; Q;
+
+    unordered_map&lt;int, int&gt; hash;
+    for (int i = 1; i &lt;= k; i ++ )
+    &#123;
+        int s;
+        cin &gt;&gt; s;
+
+        int t = 0;
+        for (int j = 0; j &lt; n; j ++ )
+            if (i &lt;= n * m)
+            &#123;
+                if (q[j].size() &lt; q[t].size()) t = j;
+            &#125;
+            else
+            &#123;
+                if (q[j].front() &lt; q[t].front()) t = j;
+            &#125;
+
+        sum[t] += s;
+        if (i &gt; n * m) q[t].pop();
+        q[t].push(sum[t]);
+
+        if (sum[t] - s &lt; 540) hash[i] = sum[t];
+    &#125;
+
+    while (Q -- )
+    &#123;
+        int id;
+        cin &gt;&gt; id;
+        if (hash.count(id)) printf(&quot;%02d:%02d\n&quot;, hash[id] / 60 + 8, hash[id] % 60);
+        else puts(&quot;Sorry&quot;);
+    &#125;
+
+    return 0;
+&#125;
 </code></pre>
 
             
@@ -1385,7 +1392,7 @@ return 0;
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
         </span>
         
     </div>
@@ -1477,7 +1484,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
         </span>
         
     </div>
@@ -1554,7 +1561,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00a596">小Tips</a>
         </span>
         
     </div>
