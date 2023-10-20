@@ -446,7 +446,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #03a9f4">CSP习题</a>
         </span>
         
     </div>
@@ -717,11 +717,115 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #00a596">CSP习题</a>
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
         </span>
         
     </div>
     <a href="/2023/05/25/%E8%84%89%E5%86%B2%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/05/22/%E5%B2%9B/">
+        <h2 class="post-title">岛</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>每当下雨时，农夫约翰的田地总是被洪水淹没。</p>
+<p>由于田地不是完全水平的，所以一些地方充满水后，留下了许多被水隔开的“岛”。</p>
+<p>约翰的田地被描述为由 $N$ 个连续高度值 $H_1,&hellip;,H_N$ 指定的一维场景。</p>
+<p>假设该场景被无限高的围墙包围着，请考虑暴雨期间发生的情况：</p>
+<p>最低处首先被水覆盖，形成一些不连贯的岛，随着水位的不断上升，这些岛最终都会被覆盖。</p>
+<p>一旦水位等于一块田地的高度，那块田地就被认为位于水下。</p>
+<p><img alt="fig_islands.png" src="https://cdn.acwing.com/media/article/image/2020/06/24/19_8c986a0cb5-fig_islands.png" /> </p>
+<p>上图显示了一个示例：在左图中，我们只加入了刚好超过 $1$ 单位的水，此时剩下 $4$ 个岛（最大岛屿剩余数量），而在右图中，我们共加入了 $7$ 单位的水，此时仅剩下 $2$ 个岛。</p>
+<p>请计算，暴风雨期间我们能在某个时间点看到的最大岛屿数量。</p>
+<p>水会一直上升到所有田地都在水下。</p>
+<h4>输入格式</h4>
+<p>第一行包含整数 $N$。</p>
+<p>接下来 $N$ 行，每行包含一个整数表示 $H_i$。</p>
+<h4>输出格式</h4>
+<p>输出暴风雨期间我们能在某个时间点看到的最大岛屿数量。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 10^5$,<br />
+$1 \le H_i \le 10^9$</p>
+<h4>输入样例：</h4>
+<pre><code>8
+3
+5
+2
+3
+1
+4
+2
+3
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>4
+
+
+
+<p>此题和CSP：AcWing 4007. 非零段划分题目类似。不过看看那道题也可以感叹模型抽象的是真好啊<br>知识点1：离散化。一个存值，一个存下标。可以起到从中间的数，小的开始看起的效果。<br>思维1：眼睛从左向右数过去，等价于枚举的O(n)。_<strong>我们可以只看变化的部分，然后看变化的部分对答案产生的影响。</strong>_相信内部应该是存在一个数学式子在的。<br> <img src="https://cdn.acwing.com/media/article/image/2023/05/22/142088_c877f0faf8-QQ%E5%9B%BE%E7%89%8720230522161257.png" alt="QQ图片20230522161257.png"> </p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#define x first//井号define：定义x为first，即，把所有的first都替换为x。从右往左看更合理
+#define y second
+using namespace std;
+const int N = 100010;
+int n;
+int h[N];
+pair&lt;int,int&gt; q[N];
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for (int i = 1;i &lt;= n;i ++) cin &gt;&gt; h[i];
+    n = unique(h + 1,h + n + 1) - h - 1;
+    h[n + 1] = 0;
+    for (int i = 1;i &lt;= n;i ++) q[i] = &#123;h[i],i&#125;;
+    sort(q + 1,q + n + 1);
+    int res = 1,cnt = 1;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        int k = q[i].y;
+        if (h[k - 1] &lt; h[k] &amp;&amp; h[k + 1] &lt; h[k]) cnt --;
+        else if (h[k - 1] &gt; h[k] &amp;&amp; h[k + 1] &gt; h[k]) cnt ++;
+        
+        if (q[i].x != q[i + 1].x) res = max(res,cnt);
+    &#125;
+    printf(&quot;%d&quot;,res);
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/22/%E5%B2%9B/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -809,7 +913,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #00bcd4">数学</a>
         </span>
         
     </div>
@@ -1003,7 +1107,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ff7d73">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
         </span>
         
     </div>
@@ -1172,7 +1276,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
         </span>
         
     </div>
