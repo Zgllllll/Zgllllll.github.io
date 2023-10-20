@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Tags: 小Tips | 金冠小熊猫</title>
+        <title>A+B硬件解释 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="Hope be happy everyday" />
         <meta name="keywords" content="菜狗大学生" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -146,120 +150,74 @@
 
             <transition name="into">
                 <div id="main" v-show="!loading">
-                    <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        <span>
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                数学
-            </a>
+                    <div class="article">
+    <div>
+        <h1>A+B硬件解释</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/12/26
         </span>
         
         
-        
-        <span>
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                大模拟
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="color: #00a596">硬件知识</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B0%8FTips/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                小Tips
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                CSP习题
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                硬件知识
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/4/14</div>
-            <a href="/2022/04/14/ICS-1-C%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6/">
-                <h3>ICS-1-C语言机制</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E5%B0%8FTips/" style="color: #ffa2c4">小Tips</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>这个实例正好很完美的展现了，<strong>逻辑运算符与加法运算符之间，有着某种深刻的等价性。</strong></p>
+<pre><code>//逻辑运算和加法之间有某种很巧妙的联系,甚至逻辑运算可以代替加法的一部分
+//对于实现一个加法运算符来讲，我们要用AND,OR,XOR,Shift等逻辑运算
+//加法，如101 + 111，可以分成两部分算，一部分算“进位”，一部分算非进位部分。
+//如57 + 44，个位7 + 4 &gt;= 10，进位1，十位5 + 4 &lt; 10 ，进位0
+//那么进位的部分就是10(本来就是向高进位，故需要左移一位)
+//非进位部分，个位为1，十位为9，所以就是91，那么res = 91 + 10;
+//重复之前的操作，91 + 10，进位的部分是100，非进位的部分是1，所以res = 100 + 1;
+//100 + 1，进位部分为0，非进位部分为101，至此，检测到进位部分为0，则计算结束。
+//那么对于二进制来讲，计算非进位的部分我们发现其实XOR就能解决(因为1和1相加，0和0相加，结果都是0,1和0相加结果是1)
+//而进位的部分，用AND操作符就能解决(当且仅当1和1都存在时，进位才为1)
+//1011 + 11，非进位1011 XOR 11 = 1000 进位(1011 AND 11) &lt;&lt; 1 = 110;
+//1000 + 110,非进位1000 XOR 110 = 1110 进位(1000 AND 110) &lt;&lt; 1 = 0;
+//检测到进位部分为0，所以结果就是1110；
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+int getSum(int a,int b)
+&#123;
+    return b == 0 ? a : getSum(a ^ b , (a &amp; b) &lt;&lt; 1);
+&#125;
+
+int main()
+&#123;
+    int a,b;
+    cin &gt;&gt; a &gt;&gt; b;
+    int res = getSum(a,b);
+    cout &lt;&lt; res;
+    return 0;
+&#125;
+</code></pre>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2022/4/14</div>
-            <a href="/2022/04/14/C%E8%AF%AD%E8%A8%80%E6%9C%BA%E5%88%B6%E4%BD%BF%E5%BE%97%E4%BB%A3%E7%A0%81%E5%8F%AF%E8%AF%BB%E5%B9%B6%E4%B8%94%E5%8F%AF%E7%BB%B4%E6%8A%A4/">
-                <h3>C语言机制使得代码可读并且可维护</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -292,6 +250,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>
