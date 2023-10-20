@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <title>金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
-        <meta name="description" content="Hope be happy everyday" />
+        <meta name="description" content="温故而知新" />
         <meta name="keywords" content="菜狗大学生" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <link rel="icon" href="/images/favicon.png" />
@@ -271,7 +271,7 @@ mjx-container[display="true"] + br {
             <div class="wrap">
                 <h1>金冠小熊猫</h1>
                 <h3>金冠小熊猫</h3>
-                <h5>Hope be happy everyday</h5>
+                <h5>温故而知新</h5>
             </div>
         </span>
     </div>
@@ -433,11 +433,145 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #ffa2c4">图论</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #00a596">图论</a>
         </span>
         
     </div>
     <a href="/2022/11/19/Dijkstra%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2022/11/19/%E5%BE%AE%E5%8D%9A%E8%BD%AC%E5%8F%91/">
+        <h2 class="post-title">微博转发</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2022/11/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1564/">https://www.acwing.com/problem/content/1564/</a></p>
+<p>微博被称为中文版的 Twitter。 </p>
+<p>微博上的用户既可能有很多关注者，也可能关注很多其他用户。 </p>
+<p>因此，形成了一种基于这些关注关系的社交网络。 </p>
+<p>当用户在微博上发布帖子时，他/她的所有关注者都可以查看并转发他/她的帖子，然后这些人的关注者可以对内容再次转发&hellip;</p>
+<p>现在给定一个社交网络，假设只考虑 $L$ 层关注者，请你计算某些用户的帖子的最大可能转发量。</p>
+<h4>补充</h4>
+<p>如果 $B$ 是 $A$ 的关注者，$C$ 是 $B$ 的关注者，那么 $A$ 的第一层关注者是 $B$，第二层关注者是 $C$。</p>
+<h4>输入格式</h4>
+<p>第一行包含两个整数，$N$ 表示用户数量，$L$ 表示需要考虑的关注者的层数。</p>
+<p>假设，所有的用户的编号为 $1 \sim N$。</p>
+<p>接下来 $N$ 行，每行包含一个用户的关注信息，格式如下：</p>
+<pre><code>M[i] user_list[i]
+</code></pre>
+
+<p><code>M[i]</code> 是第 $i$ 名用户关注的总人数，<code>user_list[i]</code> 是第 $i$ 名用户关注的 <code>M[i]</code> 个用户的编号列表。</p>
+<p>最后一行首先包含一个整数 $K$，表示询问次数，然后包含 $K$ 个用户编号，表示询问这些人的帖子的最大可能转发量。</p>
+<h4>输出格式</h4>
+<p>按顺序，每行输出一个被询问人的帖子最大可能转发量。</p>
+<p>假设每名用户初次看到帖子时，都会转发帖子，只考虑 $L$ 层关注者。</p>
+<h4>数据范围</h4>
+<p>$1 \le N \le 1000$,<br />
+$1 \le L \le 6$,<br />
+$1 \le M[i] \le 100$,<br />
+$1 \le K \le N$</p>
+<h4>输入样例：</h4>
+<pre><code>7 3
+3 2 3 4
+0
+2 5 6
+2 3 1
+2 3 4
+1 4
+1 5
+2 2 6
+</code></pre>
+
+<h4>输出样例：</h4>
+<pre><code>4
+5
+</code></pre>
+
+<p><img src="https://cdn.acwing.com/media/article/image/2022/11/19/142088_dfadffd167-QQ%E5%9B%BE%E7%89%8720221119152150.png" alt="QQ图片20221119152150.png"><br>这道题就可以深刻体会到，BFS能够直接求边权为1的最短路的好处了。<br>这道题也要走最短的一条路，怪不得DFS半天过不去，在DFS的过程当中还要<strong>维护一个每个点的最短路径</strong><br>当然，最好直接用BFS做就行了….</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+#include &lt;vector&gt;
+using namespace std;
+const int N = 1010;
+vector&lt;int&gt; g[N];
+int n,depth;
+bool st[N];
+int cnt;
+int dist[N];
+void dfs(int u,int curlen) 
+&#123;
+    if(curlen &gt;= dist[u]) return;
+    if(curlen &gt; depth) return;
+    dist[u] = curlen;
+    for(auto j : g[u])
+    &#123;
+        dfs(j,curlen + 1);
+    &#125;
+    return;
+&#125;
+
+int main()
+&#123;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;depth);
+    int num,b;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;num);
+        while(num --)
+        &#123;
+            scanf(&quot;%d&quot;,&amp;b);
+            g[b].push_back(i);
+        &#125;
+    &#125;
+    int k,id;
+    scanf(&quot;%d&quot;,&amp;k);
+    while(k --)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;id);
+        cnt = 0;
+        //cout &lt;&lt; id &lt;&lt; endl;
+        memset(st,0,sizeof st);
+        memset(dist,0x3f,sizeof dist);
+        dfs(id,0);
+        for(int i = 1;i &lt;= n;i ++)
+            if(dist[i] != 0x3f3f3f3f) cnt ++;
+        printf(&quot;%d\n&quot;,cnt - 1);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="color: #03a9f4">图论</a>
+        </span>
+        
+    </div>
+    <a href="/2022/11/19/%E5%BE%AE%E5%8D%9A%E8%BD%AC%E5%8F%91/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -602,7 +736,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
         </span>
         
     </div>
