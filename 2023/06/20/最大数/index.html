@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
+                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #00bcd4">数据结构</a>
             </span>
             
         </span>
@@ -352,34 +352,80 @@ A 99
 </li>
 </ol>
 <h1>以下为本题代码</h1>
-<pre><code>#include &lt;iostream&gt;
 
-<p>using namespace std;</p>
-<p>const int N &#x3D; 2e5 + 10;</p>
-<p>int m, p;<br>struct Node &#123;<br>    int l, r;<br>    int v;  &#x2F;&#x2F;区间的最大值<br>&#125;tr[N * 4];</p>
-<p>void pushup(int u) &#123;<br>    tr[u].v &#x3D; max(tr[u &lt;&lt; 1].v, tr[u &lt;&lt; 1 | 1].v);<br>&#125;<br>void build(int u, int l, int r) &#123;<br>    tr[u] &#x3D; &#123;l, r&#125;;<br>    if (l &#x3D;&#x3D; r) return;<br>    int mid &#x3D; l + r &gt;&gt; 1;<br>    build(u &lt;&lt; 1, l, mid), build(u &lt;&lt; 1 | 1, mid + 1, r);<br>&#125;<br>int query(int u, int l, int r) &#123;<br>    if (l &lt;&#x3D; tr[u].l &amp;&amp; tr[u].r &lt;&#x3D; r) return tr[u].v; &#x2F;&#x2F;区间完全包含在内部</p>
-<pre><code>int mid = tr[u].l + tr[u].r &amp;gt;&amp;gt; 1;
-int v = 0;
-if (l &amp;lt;= mid) v = query(u &amp;lt;&amp;lt; 1, l, r);
-if (r &amp;gt; mid) v = max(v, query(u &amp;lt;&amp;lt; 1 | 1, l, r));
-return v;
-</code></pre>
-<p>}<br>void modify(int u, int x, int v) {<br>    if (tr[u].l &#x3D;&#x3D; tr[u].r) tr[u].v &#x3D; v;<br>    else {<br>        int mid &#x3D; tr[u].l + tr[u].r &gt;&gt; 1;<br>        if (x &lt;&#x3D; mid) modify(u &lt;&lt; 1, x, v);<br>        else modify(u &lt;&lt; 1 | 1, x, v);<br>        pushup(u);<br>    }<br>}<br>int main() {<br>    int n &#x3D; 0, last &#x3D; 0;<br>    scanf(&quot;%d%d&quot;, &amp;m, &amp;p);<br>    build(1, 1, m);</p>
-<pre><code>char op[2];
-int a;
-while (m--) &#123;
-    scanf(&amp;quot;%s%d&amp;quot;, op, &amp;amp;a);
-    if (*op == &#39;Q&#39;) &#123;
-        last = query(1, n - a + 1, n);
-        printf(&amp;quot;%d\n&amp;quot;, last);
-    &#125; else &#123;
-        modify(1, n + 1, (a + last) % p);
-        ++n;
+<pre><code class="#include">#include &lt;algorithm&gt;
+using namespace std;
+const int N = 200010;
+typedef long long LL;
+int m,p;
+struct Node
+&#123;
+    int l,r;
+    int tmax;
+&#125;tr[N * 4];
+void pushup(int u)
+&#123;
+    tr[u].tmax = max(tr[u &lt;&lt; 1].tmax,tr[u &lt;&lt; 1 | 1].tmax);
+&#125;
+void build(int u,int l,int r)//因为线段树不支持插入，所以我们直接初始化可能用到的最大长度的区间
+&#123;
+    tr[u] = &#123;l,r&#125;;
+    if(l == r) return;
+    int mid = l + r &gt;&gt; 1;
+    build(u &lt;&lt; 1,l,mid),build(u &lt;&lt; 1 | 1,mid + 1,r);//这里也是，不用套tr[ ]
+&#125;
+int query(int u,int l,int r)
+&#123;
+    if(tr[u].l &gt;= l &amp;&amp; tr[u].r &lt;= r) return tr[u].tmax;//当前位置区间被查询区间完全覆盖
+    //否则，分别看一下当前位置的左右半边区间有无被查询区间覆盖，如果有交集，则递归处理覆盖所在半部的区间
+    int mid = tr[u].l + tr[u].r &gt;&gt; 1;
+    int v = 0;
+    if (r &lt;= mid) return query(u &lt;&lt; 1, l, r);
+    else if (l &gt; mid) return query(u &lt;&lt; 1 | 1, l, r);
+    else
+    &#123;
+        v = query(u &lt;&lt; 1,l,r);
+        v = max(v,query(u &lt;&lt; 1 | 1,l,r));
+    &#125;
+    return v;
+&#125;
+void modify(int u,int x,int v)
+&#123;
+    if(tr[u].l == x &amp;&amp; tr[u].r == x) tr[u].tmax = v;
+    else
+    &#123;
+        int mid = tr[u].l + tr[u].r &gt;&gt; 1;
+        //单点修改并不需要两边都递归
+        if(x &lt;= mid) modify(u &lt;&lt; 1,x,v);//这里不用套tr[u &lt;&lt; 1]; 传进来的就是节点编号，相当于索引位置的指针，表示位置信息
+        else modify(u &lt;&lt; 1 | 1,x,v);//在逻辑上递归的时候，只需要告诉你它在哪里(递归到哪里了)，而不需要告诉你它是什么
+        pushup(u);
     &#125;
 &#125;
-return 0;
+int main()      
+&#123;
+    cin &gt;&gt; m &gt;&gt; p;
+    build(1,1,m);//比较有趣的一点是我不用for循环把数列读到数组里了就可以直接做,好好看一看取而代之的build函数做了什么
+    //build函数其实建立了一个空线段
+    int n = 0,last = 0;
+    char op[2];
+    int x;
+    while(m --)
+    &#123;
+        scanf(&quot;%s%d&quot;,op,&amp;x);        
+        if(*op == &#39;Q&#39;)
+        &#123;
+            last = query(1,n - x + 1,n);
+            printf(&quot;%d\n&quot;,last);
+        &#125;
+        else
+        &#123;
+            modify(1,n + 1,((LL)last + x) % p);
+            n ++;
+        &#125;
+    &#125;
+    return 0;
+&#125;```
 </code></pre>
-<p>}<br></code></pre></p>
 
     </div>
     
