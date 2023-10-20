@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ff7d73">数据结构</a>
+                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #03a9f4">数据结构</a>
             </span>
             
         </span>
@@ -347,7 +347,7 @@ A 99
 </li>
 </ol>
 <h1>以下为本题代码</h1>
-<pre>
+<pre><code>
 ```#include <iostream>
 #include <algorithm>
 using namespace std;
@@ -355,23 +355,23 @@ const int N = 200010;
 typedef long long LL;
 int m,p;
 struct Node
-{
+&#123;
     int l,r;
     int tmax;
-}tr[N * 4];
+&#125;tr[N * 4];
 void pushup(int u)
-{
+&#123;
     tr[u].tmax = max(tr[u << 1].tmax,tr[u << 1 | 1].tmax);
-}
+&#125;
 void build(int u,int l,int r)//因为线段树不支持插入，所以我们直接初始化可能用到的最大长度的区间
-{
-    tr[u] = {l,r};
+&#123;
+    tr[u] = &#123;l,r&#125;;
     if(l == r) return;
     int mid = l + r >> 1;
     build(u << 1,l,mid),build(u << 1 | 1,mid + 1,r);//这里也是，不用套tr[ ]
-}
+&#125;
 int query(int u,int l,int r)
-{
+&#123;
     if(tr[u].l >= l && tr[u].r <= r) return tr[u].tmax;//当前位置区间被查询区间完全覆盖
     //否则，分别看一下当前位置的左右半边区间有无被查询区间覆盖，如果有交集，则递归处理覆盖所在半部的区间
     int mid = tr[u].l + tr[u].r >> 1;
@@ -379,26 +379,26 @@ int query(int u,int l,int r)
     if (r <= mid) return query(u << 1, l, r);
     else if (l > mid) return query(u << 1 | 1, l, r);
     else
-    {
+    &#123;
         v = query(u << 1,l,r);
         v = max(v,query(u << 1 | 1,l,r));
-    }
+    &#125;
     return v;
-}
+&#125;
 void modify(int u,int x,int v)
-{
+&#123;
     if(tr[u].l == x && tr[u].r == x) tr[u].tmax = v;
     else
-    {
+    &#123;
         int mid = tr[u].l + tr[u].r >> 1;
         //单点修改并不需要两边都递归
         if(x <= mid) modify(u << 1,x,v);//这里不用套tr[u << 1]; 传进来的就是节点编号，相当于索引位置的指针，表示位置信息
         else modify(u << 1 | 1,x,v);//在逻辑上递归的时候，只需要告诉你它在哪里(递归到哪里了)，而不需要告诉你它是什么
         pushup(u);
-    }
-}
+    &#125;
+&#125;
 int main()      
-{
+&#123;
     cin >> m >> p;
     build(1,1,m);//比较有趣的一点是我不用for循环把数列读到数组里了就可以直接做,好好看一看取而代之的build函数做了什么
     //build函数其实建立了一个空线段
@@ -406,22 +406,22 @@ int main()
     char op[2];
     int x;
     while(m --)
-    {
+    &#123;
         scanf("%s%d",op,&x);        
         if(*op == 'Q')
-        {
+        &#123;
             last = query(1,n - x + 1,n);
             printf("%d\n",last);
-        }
+        &#125;
         else
-        {
+        &#123;
             modify(1,n + 1,((LL)last + x) % p);
             n ++;
-        }
-    }
+        &#125;
+    &#125;
     return 0;
-}```
-</pre>
+&#125;```
+</code></pre>
     </div>
     
     
