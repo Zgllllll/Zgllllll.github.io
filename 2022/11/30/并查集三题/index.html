@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>垦田计划 | 金冠小熊猫</title>
+        <title>并查集三题 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="Hope be happy everyday" />
         <meta name="keywords" content="菜狗大学生" />
@@ -152,14 +152,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>垦田计划</h1>
+        <h1>并查集三题</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/5/25
+            2022/11/30
         </span>
         
         
@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ff7d73">CSP习题</a>
+                <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="color: #ff7d73">并查集</a>
             </span>
             
         </span>
@@ -178,138 +178,112 @@
     </div>
     
     <div class="content" v-pre>
-        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/5020/">https://www.acwing.com/problem/content/5020/</a></p>
-<p>顿顿总共选中了 $n$ 块区域准备开垦田地，由于各块区域大小不一，开垦所需时间也不尽相同。</p>
-<p>据估算，其中第 $i$ 块（$1 \le i \le n$）区域的开垦耗时为 $t_i$ 天。</p>
-<p>这 $n$ 块区域可以同时开垦，所以总耗时 $t_{Total}$ 取决于耗时最长的区域，即：</p>
-<p>$$t_{Total} = \max\{t_1,t_2,&hellip;,t_n\}$$</p>
-<p>为了加快开垦进度，顿顿准备在部分区域投入额外资源来缩短开垦时间。</p>
-<p>具体来说：</p>
-<ul>
-<li>在第 $i$ 块区域<strong>每</strong>投入 $c_i$ 单位资源，便可将其开垦耗时缩短 $1$ 天；</li>
-<li>耗时缩短天数以整数记，即第 $i$ 块区域投入资源数量必须是 $c_i$ 的整数倍；</li>
-<li>在第 $i$ 块区域最多可投入 $c_i \times (t_i-k)$ 单位资源，将其开垦耗时缩短为 $k$ 天；</li>
-<li>这里的 $k$ 表示开垦一块区域的最少天数，满足 $0 &lt; k \le \min\{t_1,t_2,&hellip;,t_n\}$；换言之，如果无限制地投入资源，所有区域都可以用 $k$ 天完成开垦。</li>
-</ul>
-<p>现在顿顿手中共有 $m$ 单位资源可供使用，试计算开垦 $n$ 块区域最少需要多少天？</p>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1610/">https://www.acwing.com/problem/content/1610/</a><br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1599/">https://www.acwing.com/problem/content/1599/</a><br>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/838/">https://www.acwing.com/problem/content/838/</a><br>以1597题：社会集群举例</p>
+<p>在一些社交网络平台上注册账号时，平台总是会要求你填写自己的兴趣爱好，以便找到一些具有相同兴趣爱好的潜在朋友。 </p>
+<p>社会集群是指一群有共同爱好的人。</p>
+<p>给定社交网络中所有人的兴趣爱好，请你找到所有社会群集。</p>
 <h4>输入格式</h4>
-<p>输入共 $n+1$ 行。</p>
-<p>输入的第一行包含空格分隔的三个正整数 $n,m,k$，分别表示待开垦的区域总数、顿顿手上的资源数量和每块区域的最少开垦天数。</p>
-<p>接下来 $n$ 行，每行包含空格分隔的两个正整数 $t_i$ 和 $c_i$，分别表示第 $i$ 块区域开垦耗时和将耗时缩短 $1$ 天所需资源数量。</p>
+<p>第一行包含一个正整数 $N$，表示社交网络的人数。</p>
+<p>所有人的编号为 $1 \sim N$。</p>
+<p>接下来 $N$ 行，每行包含一个人的爱好信息，格式如下：</p>
+<p>$K_i:$ $h_i[1]$ $h_i[2]$ &hellip; $h_i[K_i]$</p>
+<p>$K_i$ 表示爱好数量，$h_i[j]$ 表示第 $j$ 个爱好的编号。</p>
 <h4>输出格式</h4>
-<p>输出一个整数，表示开垦 $n$ 块区域的最少耗时。</p>
+<p>第一行输出总集群数量。</p>
+<p>第二行按非递增顺序输出每个集群的人数。</p>
+<p>数字之间空格隔开，行尾不得有多余空格。</p>
 <h4>数据范围</h4>
-<p>$70\%$ 的测试数据满足：$0 &lt; n,t_i,c_i \le 100$ 且 $0 &lt; m \le 10^6$；<br />
-全部的测试数据满足：$0 &lt; n,t_i,c_i \le 10^5$ 且 $0 &lt; m \le 10^9$。</p>
-<h4>输入样例1：</h4>
-<pre><code>4 9 2
-6 1
-5 1
-6 2
-7 1
+<p>$1 \le N \le 1000$,<br />
+$K_i &gt; 0$,<br />
+爱好种类最多 $1000$ 种，编号范围 $[1,1000]$。</p>
+<h4>输入样例：</h4>
+<pre><code>8
+3: 2 7 10
+1: 4
+2: 5 3
+1: 4
+1: 3
+1: 4
+4: 6 8 1 5
+1: 4
 </code></pre>
 
-<h4>输出样例1：</h4>
-<pre><code>5
+<h4>输出样例：</h4>
+<pre><code>3
+4 3 1
 </code></pre>
 
-<h4>样例1解释</h4>
-<p>如下表所示，投入 $5$ 单位资源即可将总耗时缩短至 $5$ 天。此时顿顿手中还剩余 $4$ 单位资源，但无论如何安排，也无法使总耗时进一步缩短。</p>
-<table>
-<thead>
-<tr>
-<th align="center">$i$</th>
-<th align="center">基础耗时</th>
-<th align="center">$t_i$ 缩减 $1$ 天所需资源</th>
-<th align="center">$c_i$ 投入资源数量</th>
-<th align="center">实际耗时</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">$1$</td>
-<td align="center">$6$</td>
-<td align="center">$1$</td>
-<td align="center">$1$</td>
-<td align="center">$5$</td>
-</tr>
-<tr>
-<td align="center">$2$</td>
-<td align="center">$5$</td>
-<td align="center">$1$</td>
-<td align="center">$0$</td>
-<td align="center">$5$</td>
-</tr>
-<tr>
-<td align="center">$3$</td>
-<td align="center">$6$</td>
-<td align="center">$2$</td>
-<td align="center">$2$</td>
-<td align="center">$5$</td>
-</tr>
-<tr>
-<td align="center">$4$</td>
-<td align="center">$7$</td>
-<td align="center">$1$</td>
-<td align="center">$2$</td>
-<td align="center">$5$</td>
-</tr>
-</tbody>
-</table>
-<h4>输入样例2：</h4>
-<pre><code>4 30 2
-6 1
-5 1
-6 2
-7 1
+<h4>样例解释</h4>
+<p>共 $3$ 个集群：</p>
+<ul>
+<li>$4$ 人集群 $\lbrace 2,4,6,8 \rbrace$，他们都有共同的爱好 $4$。</li>
+<li>$3$ 人集群 $\lbrace 3,5,7 \rbrace$，其中 $3$ 和 $5$ 有共同的爱好 $3$，$3$ 和 $7$ 有共同的爱好 $5$。</li>
+<li>$1$ 人集群 $\lbrace 1 \rbrace$。</li>
+
+<p>本质上就是处理连通性的问题<br>超简单合并模板。（不包含按秩合并，递归回来会进行路径压缩）</p>
+<pre><code>int find(int x)
+&#123;
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
+&#125;
 </code></pre>
-
-<h4>输出样例2：</h4>
-<pre><code>2
-</code></pre>
-
-<h4>样例2解释</h4>
-<p>投入 $20$ 单位资源，恰好可将所有区域开垦耗时均缩短为 $k=2$ 天；受限于 $k$，剩余的 $10$ 单位资源无法使耗时进一步缩短。</p>
-
-
-<p>$思路：二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。$<br>这种，从答案开始出发的思考角度还是挺有趣的<br>二分答案，一般是检验条件是否合理<br>    计数性,枚举某个物品 出现&#x2F;使用 的数量 &lt;&#x3D;限制<br>    可行性,某个条件是否能够达到<br>一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小<br>当然，在二分前。我们要想一想答案的最大值以及最小值</p>
 <pre><code>#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
+#include &lt;vector&gt;
 using namespace std;
-const int N  = 100010;
-typedef long long LL;
-int n,m,k;
-int t[N],c[N];
-bool check(int x)
+const int N = 1010;
+int n,m;
+vector&lt;int&gt; hobby[N];
+int p[N],cnt[N];
+int find(int x)
 &#123;
-    LL sum = 0;
-    for (int i = 1;i &lt;= n;i ++)
-    &#123;
-        if (t[i] &gt; x)
-        &#123;
-            sum += ((LL)t[i] - x) * c[i];
-        &#125;
-    &#125;
-    return sum &lt;= m;
+    if(p[x] != x) p[x] = find(p[x]);
+    return p[x];
 &#125;
 int main()
 &#123;
-    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
-    int mx = 0;
-    for (int i = 1;i &lt;= n;i ++)
+    cin &gt;&gt; n;
+    for(int i = 1;i &lt;= n;i ++)
     &#123;
-        cin &gt;&gt; t[i] &gt;&gt; c[i];
-        mx = max(mx, t[i]);
+        scanf(&quot;%d: &quot;,&amp;m);
+        while(m --)
+        &#123;
+            int h;
+            cin &gt;&gt; h;
+            hobby[h].push_back(i);
+        &#125;
     &#125;
-    
-    int l = k,r = mx;
-    while (l &lt; r)
+    for(int i = 0;i &lt;= n;i ++) p[i] = i,cnt[i] = 1;
+    for(int i = 1;i &lt;= 1000;i ++)
     &#123;
-        int mid = l + r &gt;&gt; 1;
-        if (check(mid)) r = mid;
-        else l = mid + 1;
+        for(int j = 1;j &lt; hobby[i].size();j ++)
+        &#123;
+            //到了这一步，其实就是有好多人，然后要把它们合并
+            int a = hobby[i][0],b = hobby[i][j];
+            int pa = find(a),pb = find(b);
+            if(pa != pb)
+            &#123;
+                //cout &lt;&lt; a &lt;&lt; &#39; &#39; &lt;&lt; b &lt;&lt; endl;
+                p[pa] = pb;
+                cnt[pb] += cnt[pa];
+            &#125;
+        &#125;
     &#125;
-    cout &lt;&lt; r;
+    int cnt_set = 0;
+    vector&lt;int&gt; output;
+    for(int i = 1;i &lt;= n;i ++)
+    &#123;
+        if(p[i] == i)
+        &#123;
+            //cout &lt;&lt; i &lt;&lt; endl;
+            cnt_set ++;
+            output.push_back(cnt[i]);
+        &#125;
+    &#125;
+    cout &lt;&lt; cnt_set &lt;&lt; endl;
+    sort(output.begin(),output.end());
+    for(int i = output.size() - 1;i &gt;= 0;i --)
+        cout &lt;&lt; output[i] &lt;&lt; &#39; &#39;;
     return 0;
 &#125;
 </code></pre>
