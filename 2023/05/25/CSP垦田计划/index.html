@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Tags: 大模拟 | 金冠小熊猫</title>
+        <title>垦田计划 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="小熊猫的个人博客" />
         <meta name="keywords" content="菜狗大学生" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -146,83 +150,91 @@
 
             <transition name="into">
                 <div id="main" v-show="!loading">
-                    <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        <span>
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                数学
-            </a>
+                    <div class="article">
+    <div>
+        <h1>垦田计划</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/25
         </span>
         
         
-        
-        <span>
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                大模拟
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+            </span>
+            
         </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B0%8FTips/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                小Tips
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                CSP习题
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/5/11</div>
-            <a href="/2023/05/11/%E7%BB%8F%E5%85%B8%E5%A4%A7%E6%A8%A1%E6%8B%9F/">
-                <h3>大模拟乒乓球</h3>
-            </a>
-            <div class="info">
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #00bcd4">大模拟</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <pre><code>//二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。
+//这种，从答案开始出发的思考角度还是挺有趣的
+/*
+二分答案，一般是检验条件是否合理
+    计数性,枚举某个物品 出现/使用 的数量 &lt;=限制
+    可行性,某个条件是否能够达到
+一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小
+当然，在二分前。我们要想一想答案的最大值以及最小值
+*/
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N  = 100010;
+typedef long long LL;
+int n,m,k;
+int t[N],c[N];
+bool check(int x)
+&#123;
+    LL sum = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        if (t[i] &gt; x)
+        &#123;
+            sum += ((LL)t[i] - x) * c[i];
+        &#125;
+    &#125;
+    return sum &lt;= m;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    int mx = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        cin &gt;&gt; t[i] &gt;&gt; c[i];
+        mx = max(mx, t[i]);
+    &#125;
+    
+    int l = k,r = mx;
+    while (l &lt; r)
+    &#123;
+        int mid = l + r &gt;&gt; 1;
+        if (check(mid)) r = mid;
+        else l = mid + 1;
+    &#125;
+    cout &lt;&lt; r;
+    return 0;
+&#125;
+</code></pre>
+
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -255,6 +267,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>

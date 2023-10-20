@@ -281,6 +281,93 @@ mjx-container[display="true"] + br {
         
 
 <div class="post">
+    <a href="/2023/05/25/CSP%E5%9E%A6%E7%94%B0%E8%AE%A1%E5%88%92/">
+        <h2 class="post-title">垦田计划</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/25
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <pre><code>//二分答案，在过程中的check()是：检查答案合不合法。可能这是一个更加通用的想法。
+//这种，从答案开始出发的思考角度还是挺有趣的
+/*
+二分答案，一般是检验条件是否合理
+    计数性,枚举某个物品 出现/使用 的数量 &lt;=限制
+    可行性,某个条件是否能够达到
+一般都是，足够大是可以的。我们尝试让答案变小，但是肯定会存在某些条件，使得它不能无限变小
+当然，在二分前。我们要想一想答案的最大值以及最小值
+*/
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const int N  = 100010;
+typedef long long LL;
+int n,m,k;
+int t[N],c[N];
+bool check(int x)
+&#123;
+    LL sum = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        if (t[i] &gt; x)
+        &#123;
+            sum += ((LL)t[i] - x) * c[i];
+        &#125;
+    &#125;
+    return sum &lt;= m;
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
+    int mx = 0;
+    for (int i = 1;i &lt;= n;i ++)
+    &#123;
+        cin &gt;&gt; t[i] &gt;&gt; c[i];
+        mx = max(mx, t[i]);
+    &#125;
+    
+    int l = k,r = mx;
+    while (l &lt; r)
+    &#123;
+        int mid = l + r &gt;&gt; 1;
+        if (check(mid)) r = mid;
+        else l = mid + 1;
+    &#125;
+    cout &lt;&lt; r;
+    return 0;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/CSP%E4%B9%A0%E9%A2%98/" style="color: #ffa2c4">CSP习题</a>
+        </span>
+        
+    </div>
+    <a href="/2023/05/25/CSP%E5%9E%A6%E7%94%B0%E8%AE%A1%E5%88%92/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/05/11/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
         <h2 class="post-title">矩阵乘法 + 快速幂求解经典斐波那契数列</h2>
     </a>
@@ -354,7 +441,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #ff7d73">数学</a>
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" style="color: #03a9f4">数学</a>
         </span>
         
     </div>
@@ -548,7 +635,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #ffa2c4">大模拟</a>
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E6%8B%9F/" style="color: #03a9f4">大模拟</a>
         </span>
         
     </div>
@@ -640,7 +727,7 @@ int main(int argc,char *argv[])
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #00bcd4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #03a9f4">小Tips</a>
         </span>
         
     </div>
@@ -717,7 +804,7 @@ int main()
         
         <span class="tag">
             
-            <a href="/tags/%E5%B0%8FTips/" style="color: #ffa2c4">小Tips</a>
+            <a href="/tags/%E5%B0%8FTips/" style="color: #ff7d73">小Tips</a>
         </span>
         
     </div>
