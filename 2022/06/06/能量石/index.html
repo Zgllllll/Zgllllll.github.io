@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>AVL树的根 | 金冠小熊猫</title>
+        <title>能量石 | 金冠小熊猫</title>
         <meta name="author" content="金冠小熊猫" />
         <meta name="description" content="温故而知新" />
         <meta name="keywords" content="菜狗大学生" />
@@ -152,14 +152,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>AVL树的根</h1>
+        <h1>能量石</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2022/11/9
+            2022/6/6
         </span>
         
         
@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">数据结构</a>
+                <a href="/tags/DP/" style="color: #00bcd4">DP</a>
             </span>
             
         </span>
@@ -178,103 +178,120 @@
     </div>
     
     <div class="content" v-pre>
-        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1554/">https://www.acwing.com/problem/content/1554/</a></p>
-<p>AVL树是一种自平衡二叉搜索树。 </p>
-<p>在AVL树中，任何节点的两个子树的高度最多相差 $1$ 个。 </p>
-<p>如果某个时间，某节点的两个子树之间的高度差超过 $1$，则将通过树旋转进行重新平衡以恢复此属性。 </p>
-<p>图 $1-4$ 说明了旋转规则。</p>
-<p><img alt="31.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_3a941ca472-31.jpg" /> <img alt="32.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_3dd0488472-32.jpg" /> <br />
-<img alt="33.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_411c0b5472-33.jpg" /> <img alt="34.jpg" src="https://cdn.acwing.com/media/article/image/2020/03/30/19_43ea12f472-34.jpg" /> </p>
-<p>现在，给定插入序列，请你求出 AVL 树的根是多少。</p>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/736/">https://www.acwing.com/problem/content/736/</a></p>
+<p>岩石怪物杜达生活在魔法森林中，他在午餐时收集了 $N$ 块能量石准备开吃。 </p>
+<p>由于他的嘴很小，所以一次只能吃一块能量石。 </p>
+<p>能量石很硬，吃完需要花不少时间。</p>
+<p>吃完第 $i$ 块能量石需要花费的时间为 $S_i$ 秒。</p>
+<p>杜达靠吃能量石来获取能量。 </p>
+<p>不同的能量石包含的能量可能不同。 </p>
+<p>此外，能量石会随着时间流逝逐渐失去能量。 </p>
+<p>第 $i$ 块能量石最初包含 $E_i$ 单位的能量，并且每秒将失去 $L_i$ 单位的能量。 </p>
+<p>当杜达开始吃一块能量石时，他就会立即获得该能量石所含的全部能量（无论实际吃完该石头需要多少时间）。 </p>
+<p>能量石中包含的能量最多降低至 $0$。</p>
+<p>请问杜达通过吃能量石可以获得的最大能量是多少？</p>
 <h4>输入格式</h4>
-<p>第一行包含整数 $N$，表示总插入值数量。</p>
-<p>第二行包含 $N$ 个不同的整数，表示每个插入值。</p>
-<h4>输出格式</h4>
-<p>输出得到的 AVL 树的根是多少。</p>
+<p>第一行包含整数 $T$，表示共有 $T$ 组测试数据。</p>
+<p>每组数据第一行包含整数 $N$，表示能量石的数量。</p>
+<p>接下来 $N$ 行，每行包含三个整数 $S_i,E_i,L_i$。</p>
+<h3>输出格式</h3>
+<p>每组数据输出一个结果，每个结果占一行。</p>
+<p>结果表示为 <code>Case #x: y</code>，其中 $x$ 是组别编号（从 $1$ 开始），$y$ 是可以获得的最大能量值。</p>
 <h4>数据范围</h4>
-<p>$1 \le N \le 20$</p>
-<h4>输入样例1：</h4>
-<pre><code>5
-88 70 61 96 120
+<p>$1 \le T \le 10$,<br />
+$1 \le N \le 100$,<br />
+$1 \le S_i \le 100$,<br />
+$1 \le E_i \le 10^5$,<br />
+$0 \le L_i \le 10^5$</p>
+<h4>输入样例：</h4>
+<pre><code>3
+4
+20 10 1
+5 30 5
+100 30 1
+5 80 60
+3
+10 4 1000
+10 3 1000
+10 8 1000
+2
+12 300 50
+5 200 0
 </code></pre>
 
-<h4>输出样例1：</h4>
-<pre><code>70
+<h4>输出样例：</h4>
+<pre><code>Case #1: 105
+Case #2: 8
+Case #3: 500
 </code></pre>
 
-<h4>输入样例2：</h4>
-<pre><code>7
-88 70 61 96 120 90 65
-</code></pre>
+<h4>样例解释</h4>
+<p>在样例＃1中，有 $N = 4$ 个宝石。杜达可以选择的一个吃石头顺序是：</p>
+<ul>
+<li>吃第四块石头。这需要 $5$ 秒，并给他 $80$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $5$ 单位的能量（第二块石头开始时具有 $30$ 单位能量，$5$ 秒后失去了 $25$ 单位的能量）。</li>
+<li>吃第三块石头。这需要 $100$ 秒，并给他 $20$ 单位的能量（第三块石头开始时具有 $30$ 单位能量，$10$ 秒后失去了 $10$ 单位的能量）。</li>
+<li>吃第一块石头。这需要 $20$ 秒，并给他 $0$ 单位的能量（第一块石头以 $10$ 单位能量开始，$110$ 秒后已经失去了所有的能量）。</li>
+</ul>
+<p>他一共获得了 $105$ 单位的能量，这是能获得的最大值，所以答案是 $105$。</p>
+<p>在样本案例＃2中，有 $N = 3$ 个宝石。</p>
+<p>无论杜达选择吃哪块石头，剩下的两个石头的能量都会耗光。</p>
+<p>所以他应该吃第三块石头，给他提供 $8$ 单位的能量。</p>
+<p>在样本案例＃3中，有 $N = 2$ 个宝石。杜达可以：</p>
+<ul>
+<li>吃第一块石头。这需要 $12$ 秒，并给他 $300$ 单位的能量。</li>
+<li>吃第二块石头。这需要 $5$ 秒，并给他 $200$ 单位的能量（第二块石头随着时间的推移不会失去任何能量！）。</li>
+</ul>
+<p>所以答案是 $500$。</p>
 
-<h4>输出样例2：</h4>
-<pre><code>88
-</code></pre>
-
-<p><img src="https://cdn.acwing.com/media/article/image/2022/11/09/142088_3e4c480d60-AVL.png" alt="AVL.png"> </p>
+<p>本题一看像是01背包，但是有一点不一样的就是<strong>物品的价值是变化的</strong>，所以<strong>“考虑一个合理的顺序”对于这道题来说很重要</strong><br>    我们想要的目标是：<strong>我按一定顺序进食，得到的结果一定优于不按这个顺序进食的结果</strong><br>邻项交换：假设我们面对一个$Stone_i$和一个$Stone_{i+1}$，<strong>我们想要尝试构造的目标是“先吃i一定比先吃i+1要好”</strong><br>所以列出式子(令j &#x3D; i + 1)有：$$E_i+E_j−S_i×L_j≥E_j+E_i−S_j×L_i$$ $$S_j×L_i≥Si×L_j$$<br>所以说我们要按照这个公式，给所有物品排序，然后从前往后进食。按这样顺序进食的结果一定优于非这样顺序进食的结果(反证法可证)</p>
 <pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
 #include &lt;algorithm&gt;
 using namespace std;
-const int N = 30;
-int tr[N],h[N],l[N],r[N],idx;
-int n;
-void pushup(int u)
+const int N = 10010,M = 110;
+int T,n;
+struct Stone
 &#123;
-    h[u] = max(h[l[u]],h[r[u]]) + 1;
-&#125;
-void R(int&amp; u)
+    int s,e,l;
+&#125;stone[M];
+bool cmp(Stone a,Stone b)
 &#123;
-    int p = l[u];
-    l[u] = r[p],r[p] = u;
-    pushup(u),pushup(p);
-    u = p;//更新根节点
+    int S = a.s, SS = b.s,L = a.l,LL = b.l;
+    return S * LL &lt; SS * L;
 &#125;
-void L(int&amp; u)
-&#123;
-    int p = r[u];
-    r[u] = l[p],l[p] = u;
-    pushup(u),pushup(p);
-    u = p;
-&#125;
-int get_balance(int u)
-&#123;
-    return h[l[u]] - h[r[u]];
-&#125;
-void insert(int&amp; u,int v)
-&#123;
-    if(!u) u = ++ idx,tr[u] = v;
-    else if (v &lt; tr[u])
-    &#123;
-        insert(l[u],v);
-        if(get_balance(u) == 2)//如果左子树比右子树高
-        &#123;
-            if(get_balance(l[u]) == 1) R(u);//如果左子树的左子树更高，就右旋根节点A
-            else L(l[u]),R(u);//否则先左旋下面一层的左儿子B，再右旋根节点A
-            //这里旋转完之后因为我们传的是引用，所以就自动把更改过的根节点传给了外部的root
-        &#125;
-    &#125;
-    else
-    &#123;
-        insert(r[u],v);
-        if(get_balance(u) == -2)
-        &#123;
-            if(get_balance(r[u]) == -1) L(u);//直接左旋根节点
-            else R(r[u]),L(u);
-        &#125;
-    &#125;
-    pushup(u);//当前树插入完成后，更新一下树高，这是一个递归的定义
-&#125;
+int f[N];
+
 int main()
 &#123;
-    cin &gt;&gt; n;
-    int w;
-    int root = 0;
-    for(int i = 0;i &lt; n;i ++)
+    cin &gt;&gt; T;
+    for(int C = 1;C &lt;= T;C ++)
     &#123;
-        cin &gt;&gt; w;
-        insert(root,w);//我们在定义函数的时候传root的引用，这样计算完后函数外的root也会改变
-    &#125;//对于参数表里的参数需要发生改变的函数，我们就传进来一个引用
-    cout &lt;&lt; tr[root];
+        cin &gt;&gt; n;
+        int m = 0;
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            cin &gt;&gt; stone[i].s &gt;&gt; stone[i].e &gt;&gt; stone[i].l;
+            m += stone[i].s;//记录下最多用多少时间方便下面决策
+        &#125;
+        
+        sort(stone + 1,stone + n + 1,cmp);
+        
+        memset(f,-1,sizeof f);//把f[0][i]等都初始化成不可达的状态
+        f[0] = 0;//起点为f[0]
+        
+        for(int i = 1;i &lt;= n;i ++)
+        &#123;
+            for(int j = m;j &gt;= stone[i].s;j --)
+            &#123;
+                int e = stone[i].e,l = stone[i].l,s = stone[i].s;
+                f[j] = max(f[j],f[j - s] + e - l * (j - s));
+            &#125;
+        &#125;
+        int res = 0;
+        for(int j = 0;j &lt;= m;j ++) res = max(res,f[j]);
+        printf(&quot;Case #%d: %d\n&quot;,C,res);
+    &#125;
     return 0;
 &#125;
 </code></pre>
